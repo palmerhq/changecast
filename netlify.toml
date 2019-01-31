@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[template.environment]
+  GITHUB_OWNER = "owner of the repository"
+  GITHUB_NAME = "name of the repository"
+  GITHUB_ACCESS_TOKEN = "access token to fetch Github data with"
