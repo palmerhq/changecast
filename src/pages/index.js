@@ -1,4 +1,5 @@
 import React from 'react'
+import { theme } from '../theme'
 
 const IndexPage = ({
   data: {
@@ -7,7 +8,11 @@ const IndexPage = ({
 }) =>
   edges.map(({ node: { frontmatter: { tagName }, html, id } }) => (
     <React.Fragment key={id}>
-      <h1>{tagName}</h1> <div dangerouslySetInnerHTML={{ __html: html }} />
+      <h1>{tagName}</h1>
+      <div
+        css={theme.sharedStyles.markdown}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     </React.Fragment>
   ))
 
