@@ -1,16 +1,14 @@
 module.exports = {
-  siteMetadata: {
-    title: process.env.GITHUB_NAME,
-  },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'releases',
-        path: `${__dirname}/releases`,
+        name: 'data',
+        path: `${__dirname}/data`,
       },
     },
+    'gatsby-transformer-json',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
@@ -19,7 +17,6 @@ module.exports = {
         plugins: ['gatsby-remark-images'],
       },
     },
-    // @todo debug caching issues
-    // 'gatsby-plugin-offline',
+    'gatsby-plugin-offline',
   ],
 }

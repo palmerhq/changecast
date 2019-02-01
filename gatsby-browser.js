@@ -1,2 +1,2 @@
 import 'normalize.css'
-import './stylesheets/markdown.css'
+import './data/stylesheets/markdown.css'

@@ -17,6 +17,7 @@
     "gatsby-plugin-sharp": "^2.0.19",
     "gatsby-remark-images": "^3.0.3",
     "gatsby-source-filesystem": "^2.0.19",
+    "gatsby-transformer-json": "^2.1.8",
     "gatsby-transformer-remark": "^2.2.2",
     "gatsby-transformer-sharp": "^2.1.13",
     "normalize.css": "^8.0.1",
@@ -30,13 +31,12 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "npm run stylesheets && npm run data && gatsby build",
+    "build": "npm run data && gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
-    "data": "node ./scripts/getReleases.js",
-    "stylesheets": "node ./scripts/getStylesheets.js"
+    "data": "node ./scripts/getData.js"
   },
   "repository": {
     "type": "git",

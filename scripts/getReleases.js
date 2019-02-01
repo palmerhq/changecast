@@ -1,8 +1,5 @@
 const fs = require('fs-extra')
 const axios = require('axios')
-const { config } = require('dotenv')
-
-config()
 
 function createReleasesPageQuery(after) {
   return `
@@ -10,7 +7,6 @@ function createReleasesPageQuery(after) {
       repository(owner: "${process.env.GITHUB_REPO_OWNER}", name: "${
     process.env.GITHUB_REPO_NAME
   }") {
-        name
         releases(first: 5, orderBy: { field: CREATED_AT, direction: DESC }${
           after ? `, after: "${after}"` : ''
         }) {
@@ -35,8 +31,7 @@ function createReleasesPageQuery(after) {
 }
 
 async function getReleases() {
-  fs.removeSync('./releases')
-  fs.mkdirSync('./releases')
+  fs.mkdirSync('./data/releases')
 
   let hasNext = true
   let after
@@ -72,7 +67,7 @@ async function getReleases() {
       } = nodes[index]
 
       fs.writeFileSync(
-        `./releases/${id}.md`,
+        `./data/releases/${id}.md`,
         `---\ntagName: ${name}\npublishedAt: ${publishedAt}\n---\n\n${description}`
       )
     }

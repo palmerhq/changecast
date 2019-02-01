@@ -3,12 +3,13 @@ import { distanceInWordsToNow } from 'date-fns'
 
 const IndexPage = ({
   data: {
+    repository: { name, description },
     releases: { edges },
   },
 }) => (
   <React.Fragment>
-    <h1>react-beautiful-dnd</h1>
-    <p>Beautiful and accessible drag and drop for lists with React</p>
+    <h1>{name}</h1>
+    <p>{description}</p>
     {edges.map(
       ({
         node: {
@@ -37,6 +38,10 @@ const IndexPage = ({
 
 export const query = graphql`
   query IndexQuery {
+    repository: dataJson {
+      name
+      description
+    }
     releases: allMarkdownRemark(
       sort: { fields: [frontmatter___publishedAt], order: DESC }
     ) {

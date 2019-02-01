@@ -1,12 +1,8 @@
 const fs = require('fs-extra')
 const axios = require('axios')
-const { config } = require('dotenv')
-
-config()
 
 async function getStylesheets() {
-  fs.removeSync('./stylesheets')
-  fs.mkdirSync('./stylesheets')
+  fs.mkdirSync('./data/stylesheets')
 
   // @todo will someone abuse this?
   const { data } = await axios.get(
@@ -17,7 +13,7 @@ async function getStylesheets() {
     }
   )
 
-  fs.writeFileSync('./stylesheets/markdown.css', data)
+  fs.writeFileSync('./data/stylesheets/markdown.css', data)
 }
 
 getStylesheets()
