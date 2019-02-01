@@ -19,7 +19,7 @@ module.exports = {
         plugins: ['gatsby-remark-images'],
       },
     },
-
-    'gatsby-plugin-offline',
+    // @todo debug caching issues
+    // 'gatsby-plugin-offline',
   ],
 }
