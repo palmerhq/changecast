@@ -12,9 +12,14 @@ module.exports = {
       },
     },
     'gatsby-transformer-sharp',
-    'gatsby-transformer-remark',
     'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: ['gatsby-remark-images'],
+      },
+    },
+
     'gatsby-plugin-offline',
-    'gatsby-plugin-emotion',
   ],
 }

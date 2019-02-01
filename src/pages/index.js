@@ -1,20 +1,39 @@
 import React from 'react'
-import { theme } from '../theme'
+import { distanceInWordsToNow } from 'date-fns'
 
 const IndexPage = ({
   data: {
     releases: { edges },
   },
-}) =>
-  edges.map(({ node: { frontmatter: { tagName }, html, id } }) => (
-    <React.Fragment key={id}>
-      <h1>{tagName}</h1>
-      <div
-        css={theme.sharedStyles.markdown}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </React.Fragment>
-  ))
+}) => (
+  <React.Fragment>
+    <h1>react-beautiful-dnd</h1>
+    <p>Beautiful and accessible drag and drop for lists with React</p>
+    {edges.map(
+      ({
+        node: {
+          frontmatter: { tagName, publishedAt },
+          html,
+          id,
+        },
+      }) => (
+        <React.Fragment key={id}>
+          <h1 id={tagName}>
+            <a href={`#${tagName}`}>{tagName}</a>
+          </h1>
+          {typeof window !== 'undefined' && (
+            <p>
+              {distanceInWordsToNow(publishedAt, {
+                addSuffix: true,
+              })}
+            </p>
+          )}
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+        </React.Fragment>
+      )
+    )}
+  </React.Fragment>
+)
 
 export const query = graphql`
   query IndexQuery {

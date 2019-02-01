@@ -7,8 +7,8 @@ config()
 function createReleasesPageQuery(after) {
   return `
     query { 
-      repository(owner: "${process.env.GITHUB_OWNER}", name: "${
-    process.env.GITHUB_NAME
+      repository(owner: "${process.env.GITHUB_REPO_OWNER}", name: "${
+    process.env.GITHUB_REPO_NAME
   }") {
         name
         releases(first: 5, orderBy: { field: CREATED_AT, direction: DESC }${

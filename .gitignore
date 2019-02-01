@@ -68,4 +68,6 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
+# created on build
 releases
+stylesheets
