@@ -7,14 +7,10 @@ exports.createPages = ({ graphql, actions }) => {
 
     const releaseQuery = `
       {
-        releases: allMarkdownRemark(
-          sort: { fields: [frontmatter___publishedAt], order: DESC }
-        ) {
+        releases: allGithubRelease {
           edges {
             node {
-              frontmatter {
-                tagName
-              }
+              tagName
             }
           }
         }
@@ -27,21 +23,15 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        result.data.releases.edges.forEach(
-          ({
-            node: {
-              frontmatter: { tagName },
+        result.data.releases.edges.forEach(({ node: { tagName } }) => {
+          actions.createPage({
+            path: `/${tagName}`,
+            component: releaseTemplate,
+            context: {
+              tagName,
             },
-          }) => {
-            actions.createPage({
-              path: `/${tagName}`,
-              component: releaseTemplate,
-              context: {
-                tagName,
-              },
-            })
-          }
-        )
+          })
+        })
       })
     )
   })

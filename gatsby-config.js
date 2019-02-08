@@ -1,3 +1,7 @@
+const { config } = require('dotenv')
+
+config()
+
 module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -19,5 +23,11 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-source-github-releases',
+      options: {
+        url: process.env.GITHUB_REPO_URL,
+      },
+    },
   ],
 }

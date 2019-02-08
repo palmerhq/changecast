@@ -7,47 +7,56 @@ import '../styles/stylesheet.scss'
 const IndexPage = ({
   data: {
     repository: {
-      name,
-      description,
-      homepageUrl,
-      owner: { avatarUrl },
+      edges: [
+        {
+          node: {
+            name: repoName,
+            description,
+            homepage,
+            owner: { avatarUrl },
+            childrenGithubRelease,
+          },
+        },
+      ],
     },
-    releases: { edges },
   },
 }) => {
   return (
     <React.Fragment>
       <Header
-        name={name}
+        name={repoName}
         description={description}
-        homepageUrl={homepageUrl}
+        homepageUrl={homepage}
         avatarUrl={avatarUrl}
       />
-
       <main>
-        {edges.map(
-          ({
-            node: {
-              frontmatter: { title, publishedAt, tagName },
-              html,
+        {childrenGithubRelease
+          .filter(({ draft }) => !draft)
+          .map(
+            ({
               id,
-            },
-          }) => (
-            <div className="release" key={id}>
-              <h1>
-                <Link to={`/${tagName}`}>{title || tagName}</Link>
-              </h1>
-              {typeof window !== 'undefined' && (
-                <p className="date">
-                  {distanceInWordsToNow(publishedAt, {
-                    addSuffix: true,
-                  })}
-                </p>
-              )}
-              <div dangerouslySetInnerHTML={{ __html: html }} />
-            </div>
-          )
-        )}
+              name,
+              tagName,
+              publishedAt,
+              childGithubReleaseBody: {
+                childMarkdownRemark: { html },
+              },
+            }) => (
+              <div className="release" key={id}>
+                <h1>
+                  <Link to={`/${tagName}`}>{name || tagName}</Link>
+                </h1>
+                {typeof window !== 'undefined' && (
+                  <p className="date">
+                    {distanceInWordsToNow(publishedAt, {
+                      addSuffix: true,
+                    })}
+                  </p>
+                )}
+                <div dangerouslySetInnerHTML={{ __html: html }} />
+              </div>
+            )
+          )}
       </main>
     </React.Fragment>
   )
@@ -55,25 +64,26 @@ const IndexPage = ({
 
 export const query = graphql`
   query IndexQuery {
-    repository: dataJson {
-      name
-      description
-      homepageUrl
-      owner {
-        avatarUrl
-      }
-    }
-    releases: allMarkdownRemark(
-      sort: { fields: [frontmatter___publishedAt], order: DESC }
-    ) {
+    repository: allGithubRepo {
       edges {
         node {
-          id
-          html
-          frontmatter {
-            title
+          name
+          description
+          homepage
+          owner {
+            avatarUrl
+          }
+          childrenGithubRelease {
+            id
+            name
             tagName
             publishedAt
+            draft
+            childGithubReleaseBody {
+              childMarkdownRemark {
+                html
+              }
+            }
           }
         }
       }

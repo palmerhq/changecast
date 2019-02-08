@@ -7,29 +7,39 @@ import '../styles/stylesheet.scss'
 const ReleaseTemplate = ({
   data: {
     repository: {
-      name,
-      description,
-      homepageUrl,
-      owner: { avatarUrl },
+      edges: [
+        {
+          node: {
+            name: repoName,
+            description,
+            homepage,
+            owner: { avatarUrl },
+          },
+        },
+      ],
     },
     release: {
-      frontmatter: { title, tagName, publishedAt },
-      html,
-      id,
+      name,
+      tagName,
+      publishedAt,
+      draft,
+      childGithubReleaseBody: {
+        childMarkdownRemark: { html },
+      },
     },
   },
 }) => (
   <React.Fragment>
     <Header
-      name={name}
+      name={repoName}
       description={description}
-      homepageUrl={homepageUrl}
+      homepageUrl={homepage}
       avatarUrl={avatarUrl}
     />
     <main>
       <div className="release">
         <h1>
-          <Link to={`/${tagName}`}>{title || tagName}</Link>
+          <Link to={`/${tagName}`}>{name || tagName}</Link>
         </h1>
         {typeof window !== 'undefined' && (
           <p className="date">{format(publishedAt, 'MMMM Do, YYYY')}</p>
@@ -42,21 +52,27 @@ const ReleaseTemplate = ({
 
 export const query = graphql`
   query ReleaseTemplateQuery($tagName: String!) {
-    repository: dataJson {
-      name
-      description
-      homepageUrl
-      owner {
-        avatarUrl
+    repository: allGithubRepo {
+      edges {
+        node {
+          name
+          description
+          homepage
+          owner {
+            avatarUrl
+          }
+        }
       }
     }
-    release: markdownRemark(frontmatter: { tagName: { eq: $tagName } }) {
-      id
-      html
-      frontmatter {
-        title
-        tagName
-        publishedAt
+    release: githubRelease(tagName: { eq: $tagName }) {
+      name
+      tagName
+      publishedAt
+      draft
+      childGithubReleaseBody {
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }
