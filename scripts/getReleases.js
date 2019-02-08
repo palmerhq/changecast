@@ -1,12 +1,14 @@
 const fs = require('fs-extra')
 const axios = require('axios')
+const parseGitUrl = require('git-url-parse')
+const { linkify } = require('linkify-markdown')
+
+const { owner, name } = parseGitUrl(process.env.GITHUB_REPO_URL)
 
 function createReleasesPageQuery(after) {
   return `
     query { 
-      repository(owner: "${process.env.GITHUB_REPO_OWNER}", name: "${
-    process.env.GITHUB_REPO_NAME
-  }") {
+      repository(owner: "${owner}", name: "${name}") {
         releases(first: 5, orderBy: { field: CREATED_AT, direction: DESC }${
           after ? `, after: "${after}"` : ''
         }) {
@@ -18,10 +20,11 @@ function createReleasesPageQuery(after) {
           nodes {
             id
             publishedAt
+            name
+            description
             tag {
               name
             }
-            description
           }
           
            }
@@ -62,13 +65,17 @@ async function getReleases() {
       const {
         id,
         publishedAt,
-        tag: { name },
+        name,
         description,
+        tag: { name: tagName },
       } = nodes[index]
 
       fs.writeFileSync(
         `./data/releases/${id}.md`,
-        `---\ntagName: ${name}\npublishedAt: ${publishedAt}\n---\n\n${description}`
+        `---\ntitle: ${name}\ntagName: ${tagName}\npublishedAt: ${publishedAt}\n---\n\n${linkify(
+          description,
+          { repository: process.env.GITHUB_REPO_URL }
+        )}`
       )
     }
 

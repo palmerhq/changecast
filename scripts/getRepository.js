@@ -1,23 +1,28 @@
 const fs = require('fs-extra')
 const axios = require('axios')
+const parseGitUrl = require('git-url-parse')
 
 async function getRepository() {
+  const { owner, name } = parseGitUrl(process.env.GITHUB_REPO_URL)
+
   const {
     data: {
-      data: {
-        repository: { name, description },
-      },
+      data: { repository },
     },
   } = await axios.post(
     'https://api.github.com/graphql',
     {
       query: `
         query { 
-          repository(owner: "${process.env.GITHUB_REPO_OWNER}", name: "${
-        process.env.GITHUB_REPO_NAME
-      }") {
+          repository(owner: "${owner}", name: "${name}") {
             name
+            url
+            owner {
+              login
+              avatarUrl
+            }
             description
+            homepageUrl
           }
         }
       `,
@@ -29,10 +34,7 @@ async function getRepository() {
     }
   )
 
-  fs.writeFileSync(
-    './data/repository.json',
-    JSON.stringify({ name, description })
-  )
+  fs.writeFileSync('./data/repository.json', JSON.stringify(repository))
 }
 
 getRepository()

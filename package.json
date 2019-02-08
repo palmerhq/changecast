@@ -1,5 +1,5 @@
 {
-  "name": "release-notes",
+  "name": "release-notes-starter",
   "private": true,
   "description": "Release notes generated from Github releases.",
   "version": "0.1.0",
@@ -14,20 +14,27 @@
     "gatsby-plugin-manifest": "^2.0.16",
     "gatsby-plugin-offline": "^2.0.22",
     "gatsby-plugin-react-helmet": "^3.0.5",
+    "gatsby-plugin-sass": "^2.0.10",
     "gatsby-plugin-sharp": "^2.0.19",
     "gatsby-remark-images": "^3.0.3",
+    "gatsby-remark-prismjs": "^3.2.4",
     "gatsby-source-filesystem": "^2.0.19",
     "gatsby-transformer-json": "^2.1.8",
     "gatsby-transformer-remark": "^2.2.2",
     "gatsby-transformer-sharp": "^2.1.13",
+    "git-url-parse": "^11.1.2",
+    "linkify-markdown": "^1.0.0",
+    "node-sass": "^4.11.0",
     "normalize.css": "^8.0.1",
+    "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "react-helmet": "^5.2.0"
   },
   "keywords": [
-    "gatsby"
+    "release",
+    "notes"
   ],
   "license": "MIT",
   "scripts": {
@@ -35,14 +42,13 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
     "data": "node ./scripts/getData.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/crosscompile/release-notes"
+    "url": "https://github.com/palmerhq/release-notes"
   },
   "bugs": {
-    "url": "https://github.com/crosscompile/release-notes/issues"
+    "url": "https://github.com/palmerhq/release-notes/issues"
   }
 }

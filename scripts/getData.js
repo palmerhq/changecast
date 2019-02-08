@@ -36,11 +36,3 @@ exec(
   },
   logOutput
 )
-
-exec(
-  'node ./scripts/getStylesheets.js',
-  {
-    env: process.env,
-  },
-  logOutput
-)

@@ -1,0 +1,271 @@
+@import '~normalize.css';
+@import 'variables';
+
+.release {
+  position: relative;
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem 0 8rem;
+}
+
+.release > h1 {
+  padding-bottom: 1.5em;
+  padding-top: 2em;
+}
+
+.release:not(:first-child) > h1 {
+  border-top: 1px solid #d6d6d6;
+  margin-top: 2.5em;
+  color: inherit;
+}
+
+.date {
+  position: absolute;
+  top: 7rem;
+  padding-right: 2rem;
+  transform: translateX(-100%);
+  color: $accent;
+}
+
+header {
+  opacity: 0.8;
+  position: fixed;
+  background: $background;
+  border-bottom: 1px solid $accent;
+  width: 100%;
+  z-index: 1;
+  padding: 1rem 0;
+  h1 {
+    font-size: 1rem;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+  }
+  > span {
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 1rem 0 8rem;
+    display: flex;
+    align-items: center;
+  }
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 3px;
+    margin-right: 1rem;
+  }
+}
+
+main {
+  padding-top: 3rem;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: $fontFamily;
+  font-weight: 400;
+  font-size: $fontSize;
+  font-style: normal;
+  color: $text;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.58;
+}
+
+body {
+  padding-bottom: 4rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $heading;
+  > a {
+    color: $heading;
+    text-decoration: none;
+    &:hover {
+      color: $link;
+    }
+  }
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+a {
+  color: $link;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+table {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table td,
+table th {
+  border: 1px solid $accent;
+  padding: 6px 13px;
+}
+
+table tr {
+  background-color: $background;
+  border-top: 1px solid $accent;
+}
+
+table tr:nth-child(2n) {
+  background-color: $accent;
+}
+
+blockquote {
+  padding: 0 1em;
+  color: $heading;
+  border-left: 0.25em solid $accent;
+  font-size: 1.20112rem;
+  line-height: 1.75rem;
+  color: inherit;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+// prism styles
+code[class*='language-'],
+pre[class*='language-'] {
+  color: $code-color;
+  background: none;
+  text-shadow: 0 1px white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+@media print {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    text-shadow: none;
+  }
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: $code-background;
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  font-size: 0.9em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: $code-comment;
+}
+
+.token.punctuation {
+  color: $code-punctuation;
+}
+
+.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: $code-deleted;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: $code-inserted;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: $code-string;
+  background: hsla(0, 0%, 100%, 0.5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: $code-keyword;
+}
+
+.token.function,
+.token.class-name {
+  color: $code-function;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: $code-variable;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}

@@ -3,7 +3,5 @@
   publish = "public"
 
 [template.environment]
-  GITHUB_REPO_OWNER = "Github repository owner"
-  GITHUB_REPO_NAME = "Github repository name"
+  GITHUB_REPO_URL = "Github repository URL"
   GITHUB_ACCESS_TOKEN = "Github access token"
-  STYLESHEET_URL = "Stylesheet URL (optional)"

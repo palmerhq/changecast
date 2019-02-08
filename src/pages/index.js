@@ -1,46 +1,67 @@
 import React from 'react'
+import { Link, graphql } from 'gatsby'
 import { distanceInWordsToNow } from 'date-fns'
+import { Header } from '../components/Header'
+import '../styles/stylesheet.scss'
 
 const IndexPage = ({
   data: {
-    repository: { name, description },
+    repository: {
+      name,
+      description,
+      homepageUrl,
+      owner: { avatarUrl },
+    },
     releases: { edges },
   },
-}) => (
-  <React.Fragment>
-    <h1>{name}</h1>
-    <p>{description}</p>
-    {edges.map(
-      ({
-        node: {
-          frontmatter: { tagName, publishedAt },
-          html,
-          id,
-        },
-      }) => (
-        <React.Fragment key={id}>
-          <h1 id={tagName}>
-            <a href={`#${tagName}`}>{tagName}</a>
-          </h1>
-          {typeof window !== 'undefined' && (
-            <p>
-              {distanceInWordsToNow(publishedAt, {
-                addSuffix: true,
-              })}
-            </p>
-          )}
-          <div dangerouslySetInnerHTML={{ __html: html }} />
-        </React.Fragment>
-      )
-    )}
-  </React.Fragment>
-)
+}) => {
+  return (
+    <React.Fragment>
+      <Header
+        name={name}
+        description={description}
+        homepageUrl={homepageUrl}
+        avatarUrl={avatarUrl}
+      />
+
+      <main>
+        {edges.map(
+          ({
+            node: {
+              frontmatter: { title, publishedAt, tagName },
+              html,
+              id,
+            },
+          }) => (
+            <div className="release" key={id}>
+              <h1>
+                <Link to={`/${tagName}`}>{title || tagName}</Link>
+              </h1>
+              {typeof window !== 'undefined' && (
+                <p className="date">
+                  {distanceInWordsToNow(publishedAt, {
+                    addSuffix: true,
+                  })}
+                </p>
+              )}
+              <div dangerouslySetInnerHTML={{ __html: html }} />
+            </div>
+          )
+        )}
+      </main>
+    </React.Fragment>
+  )
+}
 
 export const query = graphql`
   query IndexQuery {
     repository: dataJson {
       name
       description
+      homepageUrl
+      owner {
+        avatarUrl
+      }
     }
     releases: allMarkdownRemark(
       sort: { fields: [frontmatter___publishedAt], order: DESC }
@@ -50,6 +71,7 @@ export const query = graphql`
           id
           html
           frontmatter {
+            title
             tagName
             publishedAt
           }
