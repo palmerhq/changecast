@@ -4,4 +4,4 @@
 
 [template.environment]
   GITHUB_REPO_URL = "Github repository URL"
-  GITHUB_ACCESS_TOKEN = "Github access token"
+  GITHUB_ACCESS_TOKEN = "Github access token (optional for public repos)"

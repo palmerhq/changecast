@@ -17,6 +17,7 @@
     "gatsby-remark-images": "^3.0.3",
     "gatsby-remark-prismjs": "^3.2.4",
     "gatsby-source-filesystem": "^2.0.19",
+    "gatsby-source-github-releases": "file:./plugins/gatsby-source-github-releases",
     "gatsby-transformer-json": "^2.1.8",
     "gatsby-transformer-remark": "^2.2.2",
     "gatsby-transformer-sharp": "^2.1.13",

@@ -12,8 +12,8 @@ Deploy release notes with your Netlify account using the button below.
 
 You will be prompted for the following information:
 
-- **Github repository url**: Enter the URL of a Github repository _(e.g. https://github.com/facebook/react)_.
-- **Github access token**: [Generate](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line) and enter an access token with `repo` scope if you are using a private repository, or `public_repo` scope if you are using a public repository.
+- **Github repository url**: Enter the url of a Github repository _(e.g. https://github.com/facebook/react)_.
+- **Github access token (optional for public repos)**: [Generate](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line) and enter an access token with `repo` scope.
 
 After deploying, you can assign a custom domain for your release notes [using Netlify](https://www.netlify.com/docs/custom-domains/).
 
