@@ -37,7 +37,6 @@ exports.sourceNodes = async (
         content: releaseContent,
       },
     })
-
     const releaseBodyContent = linkify(release.body)
 
     createNode({

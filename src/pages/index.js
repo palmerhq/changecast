@@ -2,7 +2,8 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { distanceInWordsToNow } from 'date-fns'
 import { Header } from '../components/Header'
-import '../styles/stylesheet.scss'
+import { markdownStyles } from '../styles/markdown'
+import { theme } from '../styles/theme'
 
 const IndexPage = ({
   data: {
@@ -29,7 +30,7 @@ const IndexPage = ({
         homepageUrl={homepage}
         avatarUrl={avatarUrl}
       />
-      <main>
+      <main css={{ paddingTop: '3rem' }}>
         {childrenGithubRelease
           .filter(({ draft }) => !draft)
           .map(
@@ -42,18 +43,56 @@ const IndexPage = ({
                 childMarkdownRemark: { html },
               },
             }) => (
-              <div className="release" key={id}>
-                <h1>
+              <div
+                key={id}
+                css={{
+                  position: 'relative',
+                  maxWidth: 800,
+                  width: '100%',
+                  margin: '0 auto',
+                  padding: '0 1rem 0 8rem',
+                  ':not(:first-child) > h1': {
+                    borderTop: '1px solid #d6d6d6',
+                    marginTop: '2.5em',
+                    color: 'inherit',
+                  },
+                }}
+              >
+                <h1
+                  css={{
+                    fontSize: '3rem',
+                    paddingBottom: '1.5em',
+                    paddingTop: '2em',
+                    '> a': {
+                      color: theme.heading,
+                      textDecoration: 'none',
+                      ':hover': {
+                        color: theme.Link,
+                      },
+                    },
+                  }}
+                >
                   <Link to={`/${tagName}`}>{name || tagName}</Link>
                 </h1>
                 {typeof window !== 'undefined' && (
-                  <p className="date">
+                  <p
+                    css={{
+                      position: 'absolute',
+                      top: '7rem',
+                      paddingRight: '2rem',
+                      transform: 'translateX(-100%)',
+                      color: theme.accent,
+                    }}
+                  >
                     {distanceInWordsToNow(publishedAt, {
                       addSuffix: true,
                     })}
                   </p>
                 )}
-                <div dangerouslySetInnerHTML={{ __html: html }} />
+                <div
+                  css={markdownStyles}
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
               </div>
             )
           )}

@@ -8,6 +8,7 @@ module.exports = {
     'gatsby-transformer-json',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-emotion',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -15,11 +16,11 @@ module.exports = {
       },
     },
     'gatsby-plugin-offline',
-    'gatsby-plugin-sass',
     {
       resolve: 'gatsby-source-github-releases',
       options: {
         url: process.env.GITHUB_REPO_URL,
+        token: process.env.GITHUB_ACCESS_TOKEN,
       },
     },
   ],
