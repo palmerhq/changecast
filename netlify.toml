@@ -2,15 +2,12 @@
   command = "cd ./widget && yarn && yarn build && cd ../ && yarn build"
   publish = "public"
 
-[build.environment]
-  YARN_VERSION = "1.13.0"
-
 [[headers]]
   for = "/*"
 
   [headers.values]
     X-Frame-Options = "ALLOW" 
-    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Origin = "'*'"
 
 [template.environment]
   GITHUB_REPO_URL = "Github repository URL"
