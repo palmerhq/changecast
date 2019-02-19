@@ -22,7 +22,7 @@ module.exports = (env, { mode }) => {
         minimize: mode === 'production',
       },
       plugins: [
-        new webpack.EnvironmentPlugin(['DEPLOY_URL']),
+        new webpack.EnvironmentPlugin(['URL']),
         ...(mode === 'development'
           ? [
               new webpack.SourceMapDevToolPlugin(),

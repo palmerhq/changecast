@@ -25,7 +25,7 @@ function toggleChangelog() {
     open = false
   } else {
     iframe = document.createElement('iframe')
-    iframe.src = `${process.env.DEPLOY_URL}/widget`
+    iframe.src = `${process.env.URL}/widget`
     iframe.allowFullscreen = true
     iframe.className = 'changelog-frame'
 
@@ -46,7 +46,7 @@ function toggleChangelog() {
 window.addEventListener(
   'message',
   event => {
-    if (event.origin !== process.env.DEPLOY_URL) {
+    if (event.origin !== process.env.URL) {
       return
     }
 
@@ -55,7 +55,7 @@ window.addEventListener(
   false
 )
 
-fetch(`${process.env.DEPLOY_URL}/dates.json`)
+fetch(`${process.env.URL}/dates.json`)
   .then(res => res.json(), err => console.log(err))
   .then(dates => {
     latestViewedDate = dates[0]
