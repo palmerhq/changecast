@@ -22,8 +22,8 @@ export const FocusStyles = () => {
     window.addEventListener('click', notUsingKeyboard)
 
     return () => {
-      window.removeEventListener(checkUsingKeyboard)
-      window.removeEventListener(notUsingKeyboard)
+      window.removeEventListener('keyup', checkUsingKeyboard)
+      window.removeEventListener('click', notUsingKeyboard)
     }
   }, [])
 

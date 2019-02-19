@@ -8,6 +8,7 @@
   padding: 0;
   border: none;
   will-change: transform;
+  transform: translateX(100%);
 }
 
 .changelog-frame__open {
