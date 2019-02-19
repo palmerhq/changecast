@@ -2,7 +2,7 @@ const path = require('path')
 const hexRgb = require('hex-rgb')
 const { config } = require('dotenv')
 
-config({ path: path.resolve('..', '.env') })
+config()
 
 module.exports = {
   siteMetadata: {
