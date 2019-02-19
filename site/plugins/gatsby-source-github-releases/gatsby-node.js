@@ -2,6 +2,7 @@ const Octokat = require('octokat')
 const md5 = require('md5')
 const parseGitUrl = require('git-url-parse')
 const { linkify } = require('linkify-markdown')
+const { getColorFromURL } = require('color-thief-node')
 
 exports.sourceNodes = async (
   { actions: { createNode }, createNodeId, createContentDigest },
@@ -37,7 +38,9 @@ exports.sourceNodes = async (
         content: releaseContent,
       },
     })
-    const releaseBodyContent = linkify(release.body)
+    const releaseBodyContent = linkify(release.body, {
+      repository: pluginOptions.url,
+    })
 
     createNode({
       id: releaseBodyId,
@@ -52,8 +55,11 @@ exports.sourceNodes = async (
     })
   })
 
+  const dominantAvatarColor = await getColorFromURL(repo.owner.avatarUrl)
+
   createNode({
     ...repo,
+    dominantAvatarColor,
     id: repoId,
     parent: null,
     children: releaseIds,

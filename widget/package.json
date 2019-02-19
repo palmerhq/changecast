@@ -1,0 +1,28 @@
+{
+  "name": "changelog-widget",
+  "private": true,
+  "description": "Embedded changelog widget.",
+  "version": "0.1.0",
+  "author": "Jack Cross <jackjocross@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "develop": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "concurrently": "^4.1.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^2.1.0",
+    "dotenv": "^6.2.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "whatwg-fetch": "^3.0.0"
+  }
+}

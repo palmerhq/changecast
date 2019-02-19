@@ -2,8 +2,12 @@ import { css } from '@emotion/core'
 import { theme } from './theme'
 
 export const globalStyles = css`
-  html {
+  * {
     box-sizing: border-box;
+  }
+
+  html,
+  body {
     font-family: ${theme.fontFamily};
     font-weight: 400;
     font-size: ${theme.fontSize};
@@ -11,14 +15,10 @@ export const globalStyles = css`
     color: ${theme.text};
     -webkit-font-smoothing: antialiased;
     line-height: 1.58;
-  }
-
-  body {
-    padding-bottom: 4rem;
+    background: #f7f7f7;
   }
 
   a {
-    color: ${theme.link};
     text-decoration: none;
 
     &:hover {
