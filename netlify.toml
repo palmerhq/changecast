@@ -7,7 +7,7 @@
 
   [headers.values]
     X-Frame-Options = "ALLOW" 
-    Access-Control-Allow-Origin = "'*'"
+    Access-Control-Allow-Origin = "*"
 
 [template.environment]
   GITHUB_REPO_URL = "Github repository URL"
