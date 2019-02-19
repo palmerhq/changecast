@@ -1,6 +1,6 @@
 [build]
-  command = "yarn install && yarn build"
-  publish = "site/public"
+  command = "yarn build"
+  publish = "./site/public"
 
 [template.environment]
   GITHUB_REPO_URL = "Github repository URL"

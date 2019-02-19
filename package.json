@@ -14,7 +14,7 @@
     "widget"
   ],
   "scripts": {
-    "build": "cd widget && yarn build && cd ../site && yarn build"
+    "build": "cd ./widget && yarn build && cd ../site && yarn build"
   },
   "license": "MIT",
   "repository": {
