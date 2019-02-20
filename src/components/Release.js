@@ -25,7 +25,7 @@ export const Release = ({
     >
       <div
         css={{
-          padding: '0.5rem 1rem',
+          padding: '1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -69,7 +69,7 @@ export const Release = ({
           </p>
         )}
       </div>
-      <div css={{ padding: '0 1rem' }}>
+      <div css={{ padding: '0 1rem', margin: '1rem 0' }}>
         <div
           css={[
             markdownStyles,

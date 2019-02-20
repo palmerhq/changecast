@@ -25,4 +25,13 @@ export const globalStyles = css`
       text-decoration: underline;
     }
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1em;
+  }
 `

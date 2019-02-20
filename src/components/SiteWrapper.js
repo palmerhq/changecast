@@ -18,8 +18,8 @@ export const SiteWrapper = ({
     <div
       css={{
         opacity: '0.90',
-        color: `rgb(${red}, ${green}, ${blue})`,
-        background: 'white',
+        background: `rgb(${red}, ${green}, ${blue})`,
+        color: 'white',
         width: '100%',
         height: 54,
         zIndex: '1',
@@ -48,6 +48,7 @@ export const SiteWrapper = ({
                 height: '35px',
                 borderRadius: '3px',
                 marginRight: '1rem',
+                background: 'white',
               }}
             />
           </Link>
@@ -64,10 +65,7 @@ export const SiteWrapper = ({
         >
           What's new with{' '}
           {homepageUrl ? (
-            <a
-              href={homepageUrl}
-              css={{ color: `rgb(${red}, ${green}, ${blue})` }}
-            >
+            <a href={homepageUrl} css={{ color: 'white' }}>
               {name}
             </a>
           ) : (
@@ -82,7 +80,7 @@ export const SiteWrapper = ({
         maxWidth: 800,
         margin: '0 auto',
         width: '100vw',
-        padding: 'calc(0.5rem + 54px) 0.5rem 4rem 0.5rem',
+        padding: 'calc(1rem + 54px) 0.5rem 4rem 0.5rem',
       }}
     >
       {children}

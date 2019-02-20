@@ -12,14 +12,14 @@ export const WidgetWrapper = ({
   primaryColor: [red, green, blue],
 }) => (
   <>
-    <Global styles={globalStyles} />
+    <Global styles={[globalStyles]} />
     <FocusStyles />
     <header
       css={{
         opacity: '0.90',
         position: 'fixed',
-        color: `rgb(${red}, ${green}, ${blue})`,
-        background: 'white',
+        background: `rgb(${red}, ${green}, ${blue})`,
+        color: 'white',
         width: '100%',
         height: 54,
         zIndex: '1',
@@ -30,38 +30,18 @@ export const WidgetWrapper = ({
         borderBottom: `1px solid rgb(${red}, ${green}, ${blue})`,
       }}
     >
-      <div
+      <h1
         css={{
-          display: 'flex',
-          alignItems: 'center',
+          fontSize: '1.2rem',
+          margin: '0',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          fontWeight: 'normal',
         }}
       >
-        {avatarUrl && (
-          <img
-            src={avatarUrl}
-            alt=""
-            css={{
-              display: 'block',
-              width: '35px',
-              height: '35px',
-              borderRadius: '3px',
-              marginRight: '1rem',
-            }}
-          />
-        )}
-        <h1
-          css={{
-            fontSize: '1.2rem',
-            margin: '0',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            fontWeight: 'normal',
-          }}
-        >
-          What's new?
-        </h1>
-      </div>
+        What's new?
+      </h1>
       <button
         css={{
           border: 'none',
@@ -76,6 +56,7 @@ export const WidgetWrapper = ({
           lineHeight: 'normal',
           WebkitApppearance: 'none',
           cursor: 'pointer',
+          marginRight: '-1rem',
         }}
         onClick={() => {
           window.parent.postMessage('close', '*')

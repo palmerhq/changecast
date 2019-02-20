@@ -1,7 +1,7 @@
 export const theme = {
   fontFamily:
     "applesystem, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sansserif",
-  fontSize: '17px',
+  fontSize: '16px',
   markdown: {
     color: {
       blockquote: '#222',
