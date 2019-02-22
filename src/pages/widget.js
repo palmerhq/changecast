@@ -17,7 +17,12 @@ const WidgetPage = ({
             description,
             homepage,
             dominantAvatarColor,
-            owner: { avatarUrl },
+            avatarImageFile: {
+              fields: { dominantColor },
+              childImageSharp: {
+                original: { src: avatarSrc },
+              },
+            },
           },
         },
       ],
@@ -25,7 +30,7 @@ const WidgetPage = ({
     releases: { edges: releases },
   },
 }) => {
-  const primaryColor = overrideColor || dominantAvatarColor
+  const primaryColor = overrideColor || dominantColor
   const [releasesShown, setReleasesShown] = React.useState(10)
 
   return (
@@ -33,7 +38,7 @@ const WidgetPage = ({
       name={repoName}
       description={description}
       homepageUrl={homepage}
-      avatarUrl={avatarUrl}
+      avatarUrl={avatarSrc}
       primaryColor={primaryColor}
     >
       {releases
@@ -81,9 +86,15 @@ export const query = graphql`
           name
           description
           homepage
-          dominantAvatarColor
-          owner {
-            avatarUrl
+          avatarImageFile: childFile {
+            fields {
+              dominantColor
+            }
+            childImageSharp {
+              original {
+                src
+              }
+            }
           }
         }
       }

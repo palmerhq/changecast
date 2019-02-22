@@ -1,12 +1,13 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import Helmet from 'react-helmet'
 import { Release } from '../components/Release'
 import { SiteWrapper } from '../components/SiteWrapper'
 
 const ReleaseTemplate = ({
   data: {
     site: {
-      siteMetadata: { overrideColor },
+      siteMetadata: { overrideColor, url },
     },
     repository: {
       edges: [
@@ -15,8 +16,15 @@ const ReleaseTemplate = ({
             name: repoName,
             description,
             homepage,
-            dominantAvatarColor,
-            owner: { avatarUrl },
+            avatarImageFile: {
+              fields: { dominantColor },
+              childImageSharp: {
+                original: { src: avatarSrc },
+              },
+              childOgImage: {
+                ogImageWithText: { src: ogSrc },
+              },
+            },
           },
         },
       ],
@@ -31,25 +39,52 @@ const ReleaseTemplate = ({
     },
   },
 }) => {
-  const primaryColor = overrideColor || dominantAvatarColor
+  const primaryColor = overrideColor || dominantColor
 
   return (
-    <SiteWrapper
-      name={repoName}
-      description={description}
-      homepageUrl={homepage}
-      avatarUrl={avatarUrl}
-      primaryColor={primaryColor}
-    >
-      <Release
-        name={name}
-        tagName={tagName}
-        publishedAt={publishedAt}
-        html={html}
-        embeddedInIframe={false}
-        primaryColor={primaryColor}
+    <>
+      <Helmet
+        title={tagName}
+        meta={[
+          { name: 'description', content: description },
+          // Facebook OpenGraph Meta Tags
+          { property: 'og:title', content: `${repoName} ${tagName}` },
+          { property: 'og:url', content: `${url}/${tagName}` },
+          {
+            property: 'og:image',
+            content: `${url}${ogSrc}`,
+          },
+
+          // Twitter Meta Tags
+          { name: 'twitter:card', content: 'summary_large_image' },
+          {
+            name: 'twitter:url',
+            content: `${url}/${tagName}`,
+          },
+          { name: 'twitter:title', content: `${repoName} ${tagName}` },
+          {
+            name: 'twitter:image',
+            content: `${url}${ogSrc}`,
+          },
+        ]}
       />
-    </SiteWrapper>
+      <SiteWrapper
+        name={repoName}
+        description={description}
+        homepageUrl={homepage}
+        avatarUrl={avatarSrc}
+        primaryColor={primaryColor}
+      >
+        <Release
+          name={name}
+          tagName={tagName}
+          publishedAt={publishedAt}
+          html={html}
+          embeddedInIframe={false}
+          primaryColor={primaryColor}
+        />
+      </SiteWrapper>
+    </>
   )
 }
 
@@ -58,6 +93,7 @@ export const query = graphql`
     site {
       siteMetadata {
         overrideColor
+        url
       }
     }
     repository: allGithubRepo {
@@ -66,9 +102,20 @@ export const query = graphql`
           name
           description
           homepage
-          dominantAvatarColor
-          owner {
-            avatarUrl
+          avatarImageFile: childFile {
+            fields {
+              dominantColor
+            }
+            childImageSharp {
+              original {
+                src
+              }
+            }
+            childOgImage {
+              ogImageWithText(text: $tagName) {
+                src
+              }
+            }
           }
         }
       }

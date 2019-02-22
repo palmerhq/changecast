@@ -3,9 +3,10 @@ const md5 = require('md5')
 const parseGitUrl = require('git-url-parse')
 const { linkify } = require('linkify-markdown')
 const { getColorFromURL } = require('color-thief-node')
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
 exports.sourceNodes = async (
-  { actions: { createNode }, createNodeId, createContentDigest },
+  { actions: { createNode }, createNodeId, createContentDigest, store, cache },
   pluginOptions
 ) => {
   const { owner, name } = parseGitUrl(pluginOptions.url)
@@ -55,14 +56,19 @@ exports.sourceNodes = async (
     })
   })
 
-  const dominantAvatarColor = await getColorFromURL(repo.owner.avatarUrl)
+  const avatarImageFile = await createRemoteFileNode({
+    url: repo.owner.avatarUrl,
+    store,
+    cache,
+    createNode,
+    createNodeId,
+  })
 
   createNode({
     ...repo,
-    dominantAvatarColor,
     id: repoId,
     parent: null,
-    children: releaseIds,
+    children: [...releaseIds, avatarImageFile.id],
     internal: {
       type: 'GithubRepo',
       contentDigest: createContentDigest(repoContent),

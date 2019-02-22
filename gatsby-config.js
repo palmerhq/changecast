@@ -9,12 +9,15 @@ module.exports = {
     overrideColor: process.env.PRIMARY_COLOR
       ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
       : false,
+    url: process.env.URL,
   },
   plugins: [
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-json',
     'gatsby-transformer-sharp',
+    'gatsby-transformer-color-thief',
+    'gatsby-transformer-og-image',
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
