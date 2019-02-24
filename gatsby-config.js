@@ -21,6 +21,7 @@ module.exports = {
           { resolve: 'gatsby-remark-images', options: { maxWidth: 800 } },
           'gatsby-remark-prismjs',
           'gatsby-remark-external-links',
+          'gatsby-remark-gemoji-to-emoji',
         ],
       },
     },
