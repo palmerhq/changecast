@@ -5,12 +5,7 @@ const { config } = require('dotenv')
 config()
 
 module.exports = {
-  siteMetadata: {
-    overrideColor: process.env.PRIMARY_COLOR
-      ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
-      : false,
-    url: process.env.URL,
-  },
+  siteMetadata: generateMetadata(),
   plugins: [
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
@@ -37,4 +32,20 @@ module.exports = {
       },
     },
   ],
+}
+
+function generateMetadata() {
+  // default to false for each since undefined fields cannot be queried
+  return {
+    title: process.env.TITLE || false,
+    primaryColor: process.env.PRIMARY_COLOR
+      ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
+      : false,
+    url:
+      process.env.URL ||
+      process.env.NOW_URL ||
+      (process.env.NODE_ENV === 'development'
+        ? 'http://localhost:8000'
+        : 'http://localhost:9000'),
+  }
 }

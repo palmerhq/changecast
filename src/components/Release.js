@@ -4,14 +4,15 @@ import { Link } from 'gatsby'
 import { distanceInWordsToNow, format } from 'date-fns'
 
 export const Release = ({
-  name,
+  releaseName,
   tagName,
   publishedAt,
   html,
   embeddedInIframe,
   primaryColor: [red, green, blue],
 }) => {
-  const title = name || tagName
+  const title = releaseName || tagName
+
   return (
     <div
       css={{
@@ -51,7 +52,7 @@ export const Release = ({
               to={`/${tagName}`}
               css={{ color: `rgb(${red}, ${green}, ${blue})` }}
             >
-              {name || tagName}
+              {title}
             </Link>
           )}
         </h1>

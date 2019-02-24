@@ -1,14 +1,12 @@
 const { getColorFromURL, getPaletteFromURL } = require('color-thief-node')
 
-async function onCreateNode({
+exports.onCreateNode = async ({
   node,
-  actions,
+  actions: { createNode, createNodeField },
   loadNodeContent,
   createNodeId,
   createContentDigest,
-}) {
-  const { createNode, createNodeField } = actions
-
+}) => {
   if (
     node.internal.mediaType !== 'image/png' &&
     node.internal.mediaType !== 'image/jpeg'
@@ -22,5 +20,3 @@ async function onCreateNode({
   createNodeField({ node, name: 'dominantColor', value: dominantColor })
   createNodeField({ node, name: 'colorPalette', value: colorPalette })
 }
-
-exports.onCreateNode = onCreateNode

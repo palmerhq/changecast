@@ -3,7 +3,9 @@ const webpack = require('webpack')
 const copyWebpackPlugin = require('copy-webpack-plugin')
 const { config } = require('dotenv')
 
-config({ path: path.resolve('..', '.env') })
+if (process.NODE_ENV === 'development') {
+  config({ path: path.resolve('..', '.env.development') })
+}
 
 const bundleOutputDir = '../static'
 
@@ -22,7 +24,7 @@ module.exports = (env, { mode }) => {
         minimize: mode === 'production',
       },
       plugins: [
-        new webpack.EnvironmentPlugin(['URL']),
+        new webpack.EnvironmentPlugin(['URL', 'NOW_URL']),
         ...(mode === 'development'
           ? [
               new webpack.SourceMapDevToolPlugin(),

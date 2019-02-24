@@ -1,19 +1,10 @@
 import React from 'react'
-import { Global } from '@emotion/core'
-import { globalStyles } from '../styles/global'
-import { FocusStyles } from './FocusStyles'
 
 export const WidgetWrapper = ({
-  children,
-  name,
-  description,
-  homepageUrl,
-  avatarUrl,
   primaryColor: [red, green, blue],
+  children,
 }) => (
   <>
-    <Global styles={[globalStyles]} />
-    <FocusStyles />
     <header
       css={{
         opacity: '0.90',

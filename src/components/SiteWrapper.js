@@ -1,20 +1,15 @@
 import React from 'react'
-import { Global } from '@emotion/core'
-import { globalStyles } from '../styles/global'
 import { Link } from 'gatsby'
-import { FocusStyles } from './FocusStyles'
 
 export const SiteWrapper = ({
-  children,
-  name,
+  title,
   description,
-  homepageUrl,
-  avatarUrl,
+  homepage,
+  logoSrc,
   primaryColor: [red, green, blue],
+  children,
 }) => (
   <>
-    <Global styles={globalStyles} />
-    <FocusStyles />
     <div
       css={{
         opacity: '0.90',
@@ -37,10 +32,10 @@ export const SiteWrapper = ({
           padding: '0 0.5rem',
         }}
       >
-        {avatarUrl && (
+        {logoSrc && (
           <Link to="/">
             <img
-              src={avatarUrl}
+              src={logoSrc}
               alt=""
               css={{
                 display: 'block',
@@ -57,21 +52,12 @@ export const SiteWrapper = ({
           css={{
             fontSize: '1.2rem',
             margin: '0',
-            overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             fontWeight: 'normal',
           }}
         >
-          What's new with{' '}
-          {homepageUrl ? (
-            <a href={homepageUrl} css={{ color: 'white' }}>
-              {name}
-            </a>
-          ) : (
-            name
-          )}
-          ?
+          What's new with {title}?
         </h1>
       </header>
     </div>

@@ -4,25 +4,16 @@ const sharp = require('sharp')
 const svg2img = require('svg2img')
 const { loadSync } = require('text-to-svg')
 const { createFileNode } = require('gatsby-source-filesystem')
-const {
-  GraphQLObjectType,
-  GraphQLList,
-  GraphQLBoolean,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLFloat,
-} = require(`gatsby/graphql`)
+const { GraphQLObjectType, GraphQLString } = require(`gatsby/graphql`)
 const crypto = require(`crypto`)
 
-async function onCreateNode({
+exports.onCreateNode = async ({
   node,
-  actions,
+  actions: { createNode, createNodeField, createParentChildLink },
   loadNodeContent,
   createNodeId,
   createContentDigest,
-}) {
-  const { createNode, createNodeField, createParentChildLink } = actions
-
+}) => {
   if (
     node.internal.mediaType !== 'image/png' &&
     node.internal.mediaType !== 'image/jpeg'
@@ -44,40 +35,14 @@ async function onCreateNode({
   createParentChildLink({ parent: node, child: ogImageNode })
 }
 
-function createTextSvg(text) {
-  return new Promise((resolve, reject) => {
-    svg2img(
-      loadSync().getSVG(text, {
-        x: 0,
-        y: 0,
-        fontSize: 150,
-        fontWeight: 'bold',
-        anchor: 'top',
-        attributes: {
-          fill: 'black',
-          stroke: 'black',
-        },
-      }),
-      function(error, buffer) {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(buffer)
-        }
-      }
-    )
-  })
-}
-
-// mostly copied from https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-plugin-sharp/src/index.js#L374
-// @todo queue these rather than running directly
-async function setFieldsOnGraphQLNodeType({
+// file system related code coped from: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-plugin-sharp/src/index.js#L374
+exports.setFieldsOnGraphQLNodeType = async ({
   type,
   pathPrefix,
   getNodeAndSavePathDependency,
   reporter,
   cache,
-}) {
+}) => {
   if (type.name !== `OGImage`) {
     return {}
   }
@@ -114,33 +79,10 @@ async function setFieldsOnGraphQLNodeType({
           argsDigestShort
         )
 
-        const filePath = path.join(dirPath, imgSrc)
+        const outputPath = path.join(dirPath, imgSrc)
         fs.ensureDirSync(dirPath)
 
-        const avatar = fs.readFileSync(file.relativePath)
-        const text = await createTextSvg(fieldArgs.text)
-
-        const logoAndText = await sharp(avatar)
-          .flatten({ background: { r: 255, g: 255, b: 255, alpha: 1 } })
-          .extend({
-            top: 0,
-            bottom: 170,
-            left: 924,
-            right: 924,
-            background: { r: 255, g: 255, b: 255, alpha: 1 },
-          })
-          .overlayWith(text, { gravity: 'south' })
-          .toBuffer()
-
-        sharp(logoAndText)
-          .extend({
-            top: 400,
-            bottom: 400,
-            left: 0,
-            right: 0,
-            background: { r: 255, g: 255, b: 255, alpha: 1 },
-          })
-          .toFile(filePath)
+        await generateOgImage(file, fieldArgs.text, outputPath)
 
         const encodedImgSrc = `/${encodeURIComponent(file.name)}.${
           file.extension
@@ -159,5 +101,61 @@ async function setFieldsOnGraphQLNodeType({
   }
 }
 
-exports.onCreateNode = onCreateNode
-exports.setFieldsOnGraphQLNodeType = setFieldsOnGraphQLNodeType
+async function generateOgImage(file, text, outputPath) {
+  const image = fs.readFileSync(file.relativePath)
+  const textSvg = await createTextSvg(text)
+
+  const resizedImage = await sharp(image)
+    .resize({
+      height: 200,
+      fit: 'contain',
+    })
+    .flatten({ background: { r: 255, g: 255, b: 255, alpha: 1 } })
+    .toBuffer()
+
+  const addText = await sharp(resizedImage)
+    .extend({
+      top: 0,
+      bottom: 170,
+      left: 924,
+      right: 924,
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    })
+    .overlayWith(textSvg, { gravity: 'south' })
+    .toBuffer()
+
+  sharp(addText)
+    .extend({
+      top: 400,
+      bottom: 400,
+      left: 0,
+      right: 0,
+      background: { r: 255, g: 255, b: 255, alpha: 1 },
+    })
+    .toFile(outputPath)
+}
+
+function createTextSvg(text) {
+  return new Promise((resolve, reject) => {
+    svg2img(
+      loadSync().getSVG(text, {
+        x: 0,
+        y: 0,
+        fontSize: 150,
+        fontWeight: 'bold',
+        anchor: 'top',
+        attributes: {
+          fill: 'black',
+          stroke: 'black',
+        },
+      }),
+      function(error, buffer) {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(buffer)
+        }
+      }
+    )
+  })
+}

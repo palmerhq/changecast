@@ -4,6 +4,8 @@ import './style.css'
 
 // @todo refactor all of this mess
 
+const url = process.env.URL || process.env.NOW_URL
+
 let open = false
 let iframe
 let latestViewedDate
@@ -25,7 +27,7 @@ function toggleChangelog() {
     open = false
   } else {
     iframe = document.createElement('iframe')
-    iframe.src = `${process.env.URL}/widget`
+    iframe.src = `${url}/widget`
     iframe.allowFullscreen = true
     iframe.className = 'changelog-frame'
 
@@ -46,7 +48,7 @@ function toggleChangelog() {
 window.addEventListener(
   'message',
   event => {
-    if (event.origin !== process.env.URL) {
+    if (event.origin !== url) {
       return
     }
 
@@ -55,7 +57,7 @@ window.addEventListener(
   false
 )
 
-fetch(`${process.env.URL}/dates.json`)
+fetch(`${url}/release-dates.json`)
   .then(res => res.json(), err => console.log(err))
   .then(dates => {
     latestViewedDate = dates[0]

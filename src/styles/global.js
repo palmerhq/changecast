@@ -1,4 +1,5 @@
 import { css } from '@emotion/core'
+import 'normalize.css'
 import { theme } from './theme'
 
 export const globalStyles = css`

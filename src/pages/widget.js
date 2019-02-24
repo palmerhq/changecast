@@ -1,104 +1,57 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import Waypoint from 'react-waypoint'
 import { Release } from '../components/Release'
 import { WidgetWrapper } from '../components/WidgetWrapper'
-import Waypoint from 'react-waypoint'
+import { Wrapper } from '../components/Wrapper'
 
 const WidgetPage = ({
   data: {
-    site: {
-      siteMetadata: { overrideColor },
-    },
-    repository: {
-      edges: [
-        {
-          node: {
-            name: repoName,
-            description,
-            homepage,
-            dominantAvatarColor,
-            avatarImageFile: {
-              fields: { dominantColor },
-              childImageSharp: {
-                original: { src: avatarSrc },
-              },
-            },
-          },
-        },
-      ],
-    },
     releases: { edges: releases },
   },
 }) => {
-  const primaryColor = overrideColor || dominantColor
   const [releasesShown, setReleasesShown] = React.useState(10)
 
   return (
-    <WidgetWrapper
-      name={repoName}
-      description={description}
-      homepageUrl={homepage}
-      avatarUrl={avatarSrc}
-      primaryColor={primaryColor}
-    >
-      {releases
-        .slice(0, releasesShown)
-        .map(
-          ({
-            node: {
-              id,
-              name,
-              tagName,
-              publishedAt,
-              childGithubReleaseBody: {
-                childMarkdownRemark: { html },
-              },
-            },
-          }) => (
-            <Release
-              key={id}
-              name={name}
-              tagName={tagName}
-              publishedAt={publishedAt}
-              html={html}
-              embeddedInIframe={true}
-              primaryColor={primaryColor}
-            />
-          )
-        )}
-      {releasesShown < releases.length && (
-        <Waypoint onEnter={() => setReleasesShown(count => count + 10)} />
+    <Wrapper>
+      {({ primaryColor }) => (
+        <WidgetWrapper primaryColor={primaryColor}>
+          {releases
+            .slice(0, releasesShown)
+            .map(
+              ({
+                node: {
+                  id,
+                  name,
+                  tagName,
+                  publishedAt,
+                  childGithubReleaseBody: {
+                    childMarkdownRemark: { html },
+                  },
+                },
+              }) => (
+                <Release
+                  key={id}
+                  name={name}
+                  tagName={tagName}
+                  publishedAt={publishedAt}
+                  html={html}
+                  embeddedInIframe={true}
+                  primaryColor={primaryColor}
+                />
+              )
+            )}
+          {releasesShown < releases.length && (
+            <Waypoint onEnter={() => setReleasesShown(count => count + 10)} />
+          )}
+        </WidgetWrapper>
       )}
-    </WidgetWrapper>
+    </Wrapper>
   )
 }
 
 export const query = graphql`
   query WidgetQuery {
-    site {
-      siteMetadata {
-        overrideColor
-      }
-    }
-    repository: allGithubRepo {
-      edges {
-        node {
-          name
-          description
-          homepage
-          avatarImageFile: childFile {
-            fields {
-              dominantColor
-            }
-            childImageSharp {
-              original {
-                src
-              }
-            }
-          }
-        }
-      }
-    }
     releases: allGithubRelease(filter: { draft: { eq: false } }) {
       edges {
         node {
