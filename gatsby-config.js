@@ -20,6 +20,7 @@ module.exports = {
         backgroundColor: '#f7f7f7',
       },
     },
+    'gatsby-transformer-favicons',
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',

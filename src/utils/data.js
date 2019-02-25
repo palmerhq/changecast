@@ -35,3 +35,12 @@ export function getTitle(data) {
 
   return data.repository.edges[0].node.name
 }
+
+export function getFaviconElements(data) {
+  if (data.logo) {
+    return data.logo.edges[0].node.childFavicon.faviconElements
+  }
+
+  return data.repository.edges[0].node.avatarImageFile.childFavicon
+    .faviconElements
+}

@@ -1,5 +1,5 @@
 [build]
-  command = "cd ./widget && yarn && yarn build && cd ../ && yarn build"
+  command = "yarn build"
   publish = "public"
 
 [[headers]]

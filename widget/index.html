@@ -1,11 +1,17 @@
 <html>
   <head>
     <title>Changelog Widget</title>
+    <script
+      src="./widget.js"
+      data-selectors="[data-redux-changelog], [data-toggle-changelog]"
+      defer
+    ></script>
   </head>
   <body>
-    <button id="changelog-trigger" style="font-size: 20px">
+    <button data-toggle-changelog style="font-size: 20px">
       Toggle Changelog
     </button>
-    <script async src="./widget.js"></script>
+
+    <button data-redux-changelog>Toggle Changelog</button>
   </body>
 </html>

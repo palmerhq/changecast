@@ -86,7 +86,7 @@ export const query = graphql`
         }
       }
     }
-    logo: allFile(filter: { name: { eq: "Logo" } }) {
+    logo: allFile(filter: { name: { eq: "logo" } }) {
       edges {
         node {
           childOgImage {

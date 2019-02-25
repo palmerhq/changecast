@@ -9,7 +9,9 @@ import {
   getOgImageSrc,
   getLogoSrc,
   getTitle,
+  getFaviconElements,
 } from '../utils/data'
+import { Favicons } from './Favicons'
 
 export const Wrapper = ({ children }) => (
   <>
@@ -45,6 +47,12 @@ export const Wrapper = ({ children }) => (
                       src
                     }
                   }
+                  childFavicon {
+                    faviconElements {
+                      props
+                      type
+                    }
+                  }
                 }
               }
             }
@@ -53,7 +61,7 @@ export const Wrapper = ({ children }) => (
             edges {
               node {
                 fields {
-                  dominantColor
+                  colorPalette
                 }
                 childOgImage {
                   ogImageWithText(text: "Changelog") {
@@ -63,6 +71,12 @@ export const Wrapper = ({ children }) => (
                 childImageSharp {
                   original {
                     src
+                  }
+                }
+                childFavicon {
+                  faviconElements {
+                    props
+                    type
                   }
                 }
               }
@@ -88,34 +102,39 @@ export const Wrapper = ({ children }) => (
         const ogImageSrc = getOgImageSrc(data)
         const logoSrc = getLogoSrc(data)
         const title = getTitle(data)
+        const faviconElements = getFaviconElements(data)
+
+        const siteTitle = `${title} Changelog`
+        const ogImage = `${url}${ogImageSrc}`
 
         return (
           <>
             <Helmet
-              title={title}
+              title={siteTitle}
               meta={[
                 { name: 'description', content: description },
-                { property: 'og:title', content: title },
+                { property: 'og:title', content: siteTitle },
                 {
                   property: 'og:url',
                   content: url,
                 },
                 {
                   property: 'og:image',
-                  content: `${url}${ogImageSrc}`,
+                  content: ogImage,
                 },
                 { name: 'twitter:card', content: 'summary_large_image' },
                 {
                   name: 'twitter:url',
                   content: url,
                 },
-                { name: 'twitter:title', content: title },
+                { name: 'twitter:title', content: siteTitle },
                 {
                   name: 'twitter:image',
-                  content: `${url}${ogImageSrc}`,
+                  content: ogImage,
                 },
               ]}
             />
+            <Favicons favicons={faviconElements} />
             {children({
               primaryColor,
               ogImageSrc,

@@ -1,0 +1,9 @@
+{
+  "name": "gatsby-transformer-favicons",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "favicons": "^5.3.0",
+    "html-react-parser": "^0.6.1"
+  }
+}

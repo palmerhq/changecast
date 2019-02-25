@@ -40,10 +40,10 @@ export const SiteWrapper = ({
                 display: 'block',
                 borderRadius: 3,
                 marginRight: '1rem',
-                background: 'white',
+                background: '#f7f7f7',
                 height: 40,
                 width: 40,
-                border: '2px solid white',
+                border: '2px solid #f7f7f7',
               }}
             />
           </Link>
@@ -51,13 +51,14 @@ export const SiteWrapper = ({
         <h1
           css={{
             fontSize: '1.3rem',
+            lineHeight: '1.3rem',
             margin: '0',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             fontWeight: 'normal',
           }}
         >
-          What's new with {title}?
+          {title} Changelog
         </h1>
       </div>
     </header>

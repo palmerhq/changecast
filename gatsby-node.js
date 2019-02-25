@@ -58,6 +58,6 @@ exports.onPostBuild = () =>
   fs.writeFileSync(
     path.resolve(process.cwd(), 'public', 'release-dates.json'),
     JSON.stringify(
-      releaseEdges.slice(0, 10).map(({ node: { publishedAt } }) => publishedAt)
+      releaseEdges.slice(0, 9).map(({ node: { publishedAt } }) => publishedAt)
     )
   )

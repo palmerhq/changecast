@@ -1,72 +1,141 @@
 import { fetch } from 'whatwg-fetch'
+import createFocusTrap from 'focus-trap'
+import {
+  changelogNotification,
+  changelogIframe,
+  changelogIframeOpen,
+  changelogIframeHidden,
+  changelogOverlay,
+  changelogOverlayOpen,
+  changelogOverlayHidden,
+} from './style.css'
 
-import './style.css'
+// configuration
+const changelogHost = process.env.URL || process.env.NOW_URL
+const CHANGELOG_LOCALSTORAGE_KEY = 'changelog'
 
-// @todo refactor all of this mess
+// find all toggles
+const toggleSelectors =
+  document.currentScript.getAttribute('data-selectors') ||
+  '[data-toggle-changelog]'
+const toggles = document.querySelectorAll(toggleSelectors)
 
-const url = process.env.URL || process.env.NOW_URL
+// add click handlers to toggles
+toggles.forEach(toggle => toggle.addEventListener('click', toggleChangelog))
 
-let open = false
-let iframe
-let latestViewedDate
-
-const trigger = document.getElementById('changelog-trigger')
-trigger.addEventListener('click', toggleChangelog)
-const initialTriggerHTML = trigger.innerHTML
-
+// create overlay
 const overlay = document.createElement('div')
-overlay.className = 'changelog-overlay'
-overlay.addEventListener('click', toggleChangelog)
+
+// create iframe
+const iframe = document.createElement('iframe')
+iframe.src = `${changelogHost}/widget`
+iframe.allowFullscreen = true
+iframe.tabIndex = 0
+iframe.setAttribute('role', 'dialog')
+iframe.setAttribute('aria-label', 'changelog')
+
+// hide overlay and iframe to start
+overlay.className = `${changelogOverlay} ${changelogOverlayHidden}`
+iframe.className = `${changelogIframe} ${changelogIframeHidden}`
+
 document.body.appendChild(overlay)
+document.body.appendChild(iframe)
+
+let focusTrap = createFocusTrap(iframe, {
+  initialFocus: iframe,
+})
+
+// shared state
+let open = false
+let mostRecentReleaseDate
+let toggleNotifications = new Map()
+
+function openChangelog() {
+  open = true
+
+  overlay.className = `${changelogOverlay} ${changelogOverlayOpen}`
+  iframe.className = `${changelogIframe} ${changelogIframeOpen}`
+
+  focusTrap.activate()
+  window.addEventListener('click', toggleChangelog, true)
+
+  window.localStorage.setItem(CHANGELOG_LOCALSTORAGE_KEY, mostRecentReleaseDate)
+  toggles.forEach(toggle => toggle.removeChild(toggleNotifications.get(toggle)))
+}
+
+function closeChangelog() {
+  open = false
+
+  focusTrap.deactivate()
+  window.removeEventListener('click', toggleChangelog, true)
+
+  overlay.className = changelogOverlay
+  iframe.className = changelogIframe
+
+  setTimeout(() => {
+    overlay.className = `${changelogOverlay} ${changelogOverlayHidden}`
+    iframe.className = `${changelogIframe} ${changelogIframeHidden}`
+  }, 500)
+}
 
 function toggleChangelog() {
   if (open) {
-    document.body.removeChild(iframe)
-    overlay.className = 'changelog-overlay'
-
-    open = false
+    closeChangelog()
   } else {
-    iframe = document.createElement('iframe')
-    iframe.src = `${url}/widget`
-    iframe.allowFullscreen = true
-    iframe.className = 'changelog-frame'
-
-    document.body.appendChild(iframe)
-
-    iframe.onload = () => {
-      overlay.className += ' changelog-overlay__open'
-      iframe.className += ' changelog-frame__open'
-
-      window.localStorage.setItem('changelog', latestViewedDate)
-      trigger.innerHTML = initialTriggerHTML
-    }
-
-    open = true
+    openChangelog()
   }
 }
 
+// listen for close events from the iframe
 window.addEventListener(
   'message',
   event => {
-    if (event.origin !== url) {
-      return
+    if (event.origin === changelogHost) {
+      closeChangelog()
     }
-
-    toggleChangelog()
   },
-  false
+  true
 )
 
-fetch(`${url}/release-dates.json`)
-  .then(res => res.json(), err => console.log(err))
+// notifications
+const notification = document.createElement('span')
+notification.setAttribute('data-changelog-notification', true)
+notification.className = changelogNotification
+
+const toggleStyle = document.createElement('style')
+document.head.appendChild(toggleStyle)
+toggleStyle.sheet.insertRule(`${toggleSelectors} { position: relative; }`)
+
+fetch(`${changelogHost}/release-dates.json`)
+  .then(
+    res => res.json(),
+    err => {
+      // swallow error
+    }
+  )
   .then(dates => {
-    latestViewedDate = dates[0]
+    mostRecentReleaseDate = dates[0]
 
-    const lastDate = window.localStorage.getItem('changelog')
-    const lastDateIndex = dates.indexOf(lastDate)
-    const count = lastDateIndex === -1 ? dates.length : lastDateIndex
+    const lastReleaseViewed = window.localStorage.getItem(
+      CHANGELOG_LOCALSTORAGE_KEY
+    )
 
-    if (count > 0) {
-      trigger.innerHTML += ` (${count})`
+    if (lastReleaseViewed) {
+      const lastViewedIndex = dates.indexOf(lastReleaseViewed)
+      const count = lastViewedIndex === -1 ? dates.length : lastViewedIndex
+
+      if (count > 0) {
+        notification.innerHTML = count === dates.length ? `${count}+` : count
+        toggles.forEach(toggle => {
+          const notificationCopy = notification.cloneNode(true)
+          toggleNotifications.set(toggle, notificationCopy)
+          toggle.appendChild(notificationCopy)
+        })
+      }
+    } else {
+      window.localStorage.setItem(
+        CHANGELOG_LOCALSTORAGE_KEY,
+        mostRecentReleaseDate
+      )
     }
   })

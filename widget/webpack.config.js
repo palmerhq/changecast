@@ -33,11 +33,19 @@ module.exports = (env, { mode }) => {
       module: {
         rules: [
           {
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
+            test: /\.css$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: true,
+                },
+              },
+            ],
           },
           {
-            test: /\.js$/i,
+            test: /\.js$/,
             exclude: /node_modules/,
             use: {
               loader: 'babel-loader',
