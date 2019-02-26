@@ -14,7 +14,7 @@ const IndexPage = ({
 
   return (
     <Wrapper>
-      {({ title, description, homepage, logoSrc, primaryColor }) => (
+      {({ title, description, homepage, logoSrc, primaryColor, url }) => (
         <SiteWrapper
           title={title}
           description={description}
@@ -38,12 +38,13 @@ const IndexPage = ({
               }) => (
                 <Release
                   key={id}
-                  name={name}
+                  releaseName={name}
                   tagName={tagName}
                   publishedAt={publishedAt}
                   html={html}
                   embeddedInIframe={false}
                   primaryColor={primaryColor}
+                  url={url}
                 />
               )
             )}

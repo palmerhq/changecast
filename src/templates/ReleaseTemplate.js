@@ -61,6 +61,7 @@ const ReleaseTemplate = ({
             html={html}
             embeddedInIframe={false}
             primaryColor={primaryColor}
+            url={url}
           />
         </SiteWrapper>
       )}

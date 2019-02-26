@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "color-thief-node": "^1.0.2"
+    "color-thief-node": "^1.0.2",
+    "relative-luminance": "^2.0.1"
   }
 }

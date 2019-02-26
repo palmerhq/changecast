@@ -2,12 +2,16 @@ export const theme = {
   fontFamily:
     "applesystem, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sansserif",
   fontSize: '16px',
+  color: {
+    text: '#24292e',
+    accent: '#586069',
+  },
   markdown: {
     color: {
-      blockquote: '#222',
+      blockquote: '#24292e',
       accent: '#d6d6d6',
       background: 'white',
-      text: '#222',
+      text: '#24292e',
     },
   },
   code: {

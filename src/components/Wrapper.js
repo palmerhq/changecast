@@ -33,7 +33,7 @@ export const Wrapper = ({ children }) => (
                 homepage
                 avatarImageFile: childFile {
                   fields {
-                    dominantColor
+                    colorPalette
                   }
                   childOgImage {
                     ogImageWithText(text: "Changelog") {

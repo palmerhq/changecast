@@ -1,6 +1,8 @@
 import { css } from '@emotion/core'
-import 'normalize.css'
 import { theme } from './theme'
+
+import 'normalize.css'
+import '@reach/menu-button/styles.css'
 
 export const globalStyles = css`
   * {
@@ -13,7 +15,7 @@ export const globalStyles = css`
     font-weight: 400;
     font-size: ${theme.fontSize};
     font-style: normal;
-    color: ${theme.text};
+    color: ${theme.color.text};
     -webkit-font-smoothing: antialiased;
     line-height: 1.58;
     background: #f7f7f7;

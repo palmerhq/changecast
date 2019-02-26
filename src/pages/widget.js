@@ -14,7 +14,7 @@ const WidgetPage = ({
 
   return (
     <Wrapper>
-      {({ primaryColor }) => (
+      {({ primaryColor, url }) => (
         <WidgetWrapper primaryColor={primaryColor}>
           {releases
             .slice(0, releasesShown)
@@ -32,12 +32,13 @@ const WidgetPage = ({
               }) => (
                 <Release
                   key={id}
-                  name={name}
+                  releaseName={name}
                   tagName={tagName}
                   publishedAt={publishedAt}
                   html={html}
                   embeddedInIframe={true}
                   primaryColor={primaryColor}
+                  url={url}
                 />
               )
             )}

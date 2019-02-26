@@ -2,6 +2,8 @@ import { css } from '@emotion/core'
 import { theme } from './theme'
 
 export const markdownStyles = css`
+  word-break: break-word;
+
   a {
     text-decoration: none;
 

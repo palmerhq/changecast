@@ -4,10 +4,10 @@ export function getPrimaryColor(data) {
   }
 
   if (data.logo) {
-    return data.logo.edges[0].node.fields.dominantColor
+    return data.logo.edges[0].node.fields.colorPalette[0]
   }
 
-  return data.repository.edges[0].node.avatarImageFile.fields.dominantColor
+  return data.repository.edges[0].node.avatarImageFile.fields.colorPalette[0]
 }
 
 export function getOgImageSrc(data) {
