@@ -8,7 +8,7 @@ import {
   format,
 } from 'date-fns'
 import VisuallyHidden from '@reach/visually-hidden'
-import { Menu, MenuButton, MenuList, MenuLink, MenuItem } from './MenuButton'
+import { Menu, MenuButton, MenuList, MenuItem } from './MenuButton'
 import { Share } from './Icon/Share'
 import { Facebook } from './Icon/Facebook'
 import { Twitter } from './Icon/Twitter'
@@ -16,6 +16,7 @@ import { Linkedin } from './Icon/Linkedin'
 import { Copy } from './Icon/Copy'
 import { theme } from '../styles/theme'
 import { copyToClipboard } from '../utils/copyToClipboard'
+import { windowPopup } from '../utils/windowPopup'
 
 export const Release = ({
   releaseName,
@@ -107,45 +108,54 @@ export const Release = ({
               },
             }}
           >
-            <MenuLink
-              component="a"
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                shareableUrl
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <MenuItem
+              onSelect={() =>
+                windowPopup(
+                  `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                    shareableUrl
+                  )}`,
+                  500,
+                  300
+                )
+              }
             >
               <Facebook
                 css={{ height: '1rem', width: '1rem', marginRight: 10 }}
               />
               Facebook
-            </MenuLink>
-            <MenuLink
-              component="a"
-              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                shareableUrl
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            </MenuItem>
+            <MenuItem
+              onSelect={() =>
+                windowPopup(
+                  `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                    shareableUrl
+                  )}`,
+                  500,
+                  300
+                )
+              }
             >
               <Twitter
                 css={{ height: '1rem', width: '1rem', marginRight: 10 }}
               />
               Twitter
-            </MenuLink>
-            <MenuLink
-              component="a"
-              href={`https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-                shareableUrl
-              )}&mini=true`}
-              target="_blank"
-              rel="noopener noreferrer"
+            </MenuItem>
+            <MenuItem
+              onSelect={() =>
+                windowPopup(
+                  `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
+                    shareableUrl
+                  )}&mini=true`,
+                  500,
+                  300
+                )
+              }
             >
               <Linkedin
                 css={{ height: '1rem', width: '1rem', marginRight: 10 }}
               />
               Linkedin
-            </MenuLink>
+            </MenuItem>
             <MenuItem onSelect={() => copyToClipboard(shareableUrl)}>
               <Copy css={{ height: '1rem', width: '1rem', marginRight: 10 }} />
               Copy link
