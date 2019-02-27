@@ -1,4 +1,6 @@
 import React from 'react'
+import { Close } from './Icon/Close'
+import VisuallyHidden from '@reach/visually-hidden'
 
 export const WidgetWrapper = ({
   primaryColor: [red, green, blue],
@@ -7,23 +9,22 @@ export const WidgetWrapper = ({
   <>
     <header
       css={{
-        opacity: '0.90',
         position: 'fixed',
         background: `rgb(${red}, ${green}, ${blue})`,
         color: 'white',
         width: '100%',
-        height: 54,
         zIndex: '1',
+        height: 54,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '0 1rem',
-        borderBottom: `1px solid rgb(${red}, ${green}, ${blue})`,
+        boxShadow: '0 1px 6px 0 rgba(32,33,36,0.28)',
       }}
     >
       <h1
         css={{
-          fontSize: '1.2rem',
+          fontSize: '1.3rem',
           margin: '0',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -53,18 +54,8 @@ export const WidgetWrapper = ({
           window.parent.postMessage('close', '*')
         }}
       >
-        <svg
-          width={28}
-          height={28}
-          viewBox="0 -2 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
+        <Close />
+        <VisuallyHidden>Close</VisuallyHidden>
       </button>
     </header>
     <main

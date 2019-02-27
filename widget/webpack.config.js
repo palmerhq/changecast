@@ -3,9 +3,7 @@ const webpack = require('webpack')
 const copyWebpackPlugin = require('copy-webpack-plugin')
 const { config } = require('dotenv')
 
-if (process.NODE_ENV === 'development') {
-  config({ path: path.resolve('..', '.env.development') })
-}
+config({ path: path.resolve('..', '.env') })
 
 const bundleOutputDir = '../static'
 

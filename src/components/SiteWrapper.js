@@ -12,68 +12,53 @@ export const SiteWrapper = ({
   <>
     <header
       css={{
-        position: 'relative',
+        background: `rgb(${red}, ${green}, ${blue})`,
+        height: 54,
         color: 'white',
         width: '100%',
-        height: 54,
         zIndex: '1',
         position: 'fixed',
+        boxShadow: '0 1px 6px 0 rgba(32,33,36,0.28)',
       }}
     >
       <div
         css={{
-          opacity: '0.9',
-          background: `rgb(${red}, ${green}, ${blue})`,
-          position: 'absolute',
-          height: '100%',
-          width: '100%',
-        }}
-      />
-      <div
-        css={{
-          position: 'absolute',
-          width: '100%',
+          maxWidth: 800,
+          margin: '0 auto',
+          height: 54,
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 0.5rem',
         }}
       >
-        <div
+        {logoSrc && (
+          <Link to="/">
+            <img
+              src={logoSrc}
+              alt=""
+              css={{
+                display: 'block',
+                borderRadius: 3,
+                marginRight: '1rem',
+                background: 'white',
+                height: 40,
+                width: 40,
+                border: '2px solid white',
+              }}
+            />
+          </Link>
+        )}
+        <h1
           css={{
-            maxWidth: 800,
-            margin: '0 auto',
-            height: 54,
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0 0.5rem',
+            fontSize: '1.3rem',
+            margin: '0',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            fontWeight: 'normal',
           }}
         >
-          {logoSrc && (
-            <Link to="/">
-              <img
-                src={logoSrc}
-                alt=""
-                css={{
-                  display: 'block',
-                  width: '35px',
-                  height: '35px',
-                  borderRadius: '3px',
-                  marginRight: '1rem',
-                  background: 'white',
-                  boxShadow: '0 3px 12px rgba(27,31,35,.35)',
-                }}
-              />
-            </Link>
-          )}
-          <h1
-            css={{
-              fontSize: '1.2rem',
-              margin: '0',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              fontWeight: 'normal',
-            }}
-          >
-            What's new with {title}?
-          </h1>
-        </div>
+          What's new with {title}?
+        </h1>
       </div>
     </header>
     <main

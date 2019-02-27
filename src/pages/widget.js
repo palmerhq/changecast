@@ -43,7 +43,10 @@ const WidgetPage = ({
               )
             )}
           {releasesShown < releases.length && (
-            <Waypoint onEnter={() => setReleasesShown(count => count + 10)} />
+            <Waypoint
+              onEnter={() => setReleasesShown(count => count + 10)}
+              bottomOffset="-100%"
+            />
           )}
         </WidgetWrapper>
       )}
