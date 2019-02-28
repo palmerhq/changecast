@@ -31,6 +31,7 @@ const IndexPage = ({
                   name,
                   tagName,
                   publishedAt,
+                  body,
                   childGithubReleaseBody: {
                     childMarkdownRemark: { html },
                   },
@@ -42,6 +43,7 @@ const IndexPage = ({
                   tagName={tagName}
                   publishedAt={publishedAt}
                   html={html}
+                  body={body}
                   embeddedInIframe={false}
                   primaryColor={primaryColor}
                   url={url}
@@ -69,7 +71,7 @@ export const query = graphql`
           name
           tagName
           publishedAt
-          draft
+          body
           childGithubReleaseBody {
             childMarkdownRemark {
               html

@@ -22,6 +22,7 @@ export const Release = ({
   releaseName,
   tagName,
   publishedAt,
+  body,
   html,
   embeddedInIframe,
   primaryColor: [red, green, blue],
@@ -164,20 +165,24 @@ export const Release = ({
         </Menu>
       </div>
       <div css={{ padding: '0 1rem', margin: '1rem 0' }}>
-        <div
-          css={[
-            markdownStyles,
-            {
-              a: {
-                color: `rgb(${red}, ${green}, ${blue})`,
+        {body ? (
+          <div
+            css={[
+              markdownStyles,
+              {
+                a: {
+                  color: `rgb(${red}, ${green}, ${blue})`,
+                },
+                [`*:not(pre) > code[class*='language-'], pre[class*='language-']`]: {
+                  background: `rgb(${red}, ${green}, ${blue}, 0.1)`,
+                },
               },
-              [`*:not(pre) > code[class*='language-'], pre[class*='language-']`]: {
-                background: `rgb(${red}, ${green}, ${blue}, 0.1)`,
-              },
-            },
-          ]}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+            ]}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        ) : (
+          <em>No release notes.</em>
+        )}
       </div>
     </div>
   )

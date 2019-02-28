@@ -13,6 +13,7 @@ const ReleaseTemplate = ({
       name: releaseName,
       tagName,
       publishedAt,
+      body,
       childGithubReleaseBody: {
         childMarkdownRemark: { html },
       },
@@ -59,6 +60,7 @@ const ReleaseTemplate = ({
             tagName={tagName}
             publishedAt={publishedAt}
             html={html}
+            body={body}
             embeddedInIframe={false}
             primaryColor={primaryColor}
             url={url}
@@ -99,7 +101,7 @@ export const query = graphql`
       name
       tagName
       publishedAt
-      draft
+      body
       childGithubReleaseBody {
         childMarkdownRemark {
           html

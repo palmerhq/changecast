@@ -25,6 +25,7 @@ const WidgetPage = ({
                   name,
                   tagName,
                   publishedAt,
+                  body,
                   childGithubReleaseBody: {
                     childMarkdownRemark: { html },
                   },
@@ -36,6 +37,7 @@ const WidgetPage = ({
                   tagName={tagName}
                   publishedAt={publishedAt}
                   html={html}
+                  body={body}
                   embeddedInIframe={true}
                   primaryColor={primaryColor}
                   url={url}
@@ -63,7 +65,7 @@ export const query = graphql`
           name
           tagName
           publishedAt
-          draft
+          body
           childGithubReleaseBody {
             childMarkdownRemark {
               html
