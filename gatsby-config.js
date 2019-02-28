@@ -12,7 +12,14 @@ module.exports = {
     'gatsby-transformer-json',
     'gatsby-transformer-sharp',
     'gatsby-transformer-color-thief',
-    'gatsby-transformer-og-image',
+    {
+      resolve: 'gatsby-transformer-og-image',
+      options: {
+        fontPath: './fonts/Inter-UI-SemiBold.woff',
+        fontColor: '#24292e',
+        backgroundColor: '#f7f7f7',
+      },
+    },
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',

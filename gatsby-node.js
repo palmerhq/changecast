@@ -12,6 +12,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         releases: allGithubRelease(filter: { draft: { eq: false } }) {
           edges {
             node {
+              name
               tagName
               publishedAt
             }
@@ -23,11 +24,12 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const result = await graphql(query)
   releaseEdges = result.data.releases.edges
 
-  result.data.releases.edges.forEach(({ node: { tagName } }) => {
+  result.data.releases.edges.forEach(({ node: { name, tagName } }) => {
     createPage({
       path: `/${tagName}`,
       component: releaseTemplate,
       context: {
+        ogText: name || tagName,
         tagName,
       },
     })

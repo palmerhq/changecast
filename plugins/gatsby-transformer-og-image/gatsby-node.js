@@ -36,13 +36,10 @@ exports.onCreateNode = async ({
 }
 
 // file system related code coped from: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-plugin-sharp/src/index.js#L374
-exports.setFieldsOnGraphQLNodeType = async ({
-  type,
-  pathPrefix,
-  getNodeAndSavePathDependency,
-  reporter,
-  cache,
-}) => {
+exports.setFieldsOnGraphQLNodeType = async (
+  { type, pathPrefix, getNodeAndSavePathDependency, reporter, cache },
+  { fontPath, fontColor, backgroundColor }
+) => {
   if (type.name !== `OGImage`) {
     return {}
   }
@@ -82,7 +79,14 @@ exports.setFieldsOnGraphQLNodeType = async ({
         const outputPath = path.join(dirPath, imgSrc)
         fs.ensureDirSync(dirPath)
 
-        await generateOgImage(file, fieldArgs.text, outputPath)
+        await generateOgImage(
+          file,
+          fieldArgs.text,
+          outputPath,
+          fontPath,
+          fontColor,
+          backgroundColor
+        )
 
         const encodedImgSrc = `/${encodeURIComponent(file.name)}.${
           file.extension
@@ -101,61 +105,83 @@ exports.setFieldsOnGraphQLNodeType = async ({
   }
 }
 
-async function generateOgImage(file, text, outputPath) {
+async function generateOgImage(
+  file,
+  text,
+  outputPath,
+  fontPath,
+  fontColor,
+  backgroundColor
+) {
   const image = fs.readFileSync(file.relativePath)
-  const textSvg = await createTextSvg(text)
+
+  const svg = generateTextSvg(text, fontPath, fontColor)
+  const width = getSvgWidth(svg)
+  const height = getSvgHeight(svg)
+  let textImage = await generateImageBuffer(svg)
+
+  if (width > 1700) {
+    textImage = await sharp(textImage)
+      .resize({ width: 1700, height, fit: 'contain' })
+      .toBuffer()
+  }
 
   const resizedImage = await sharp(image)
-    .resize({
-      height: 200,
-      fit: 'contain',
-    })
-    .flatten({ background: { r: 255, g: 255, b: 255, alpha: 1 } })
+    .resize({ height: 400 })
+    .flatten({ background: backgroundColor })
     .toBuffer()
 
   const addText = await sharp(resizedImage)
     .extend({
       top: 0,
-      bottom: 170,
-      left: 924,
-      right: 924,
-      background: { r: 255, g: 255, b: 255, alpha: 1 },
+      bottom: 270,
+      left: 824,
+      right: 824,
+      background: backgroundColor,
     })
-    .overlayWith(textSvg, { gravity: 'south' })
+    .overlayWith(textImage, { gravity: 'south' })
     .toBuffer()
 
   sharp(addText)
     .extend({
-      top: 400,
-      bottom: 400,
+      top: 230,
+      bottom: 270,
       left: 0,
       right: 0,
-      background: { r: 255, g: 255, b: 255, alpha: 1 },
+      background: backgroundColor,
     })
     .toFile(outputPath)
 }
 
-function createTextSvg(text) {
+function generateTextSvg(text, fontPath, fontColor) {
+  return loadSync(fontPath).getSVG(text, {
+    x: 0,
+    y: 0,
+    fontSize: 150,
+    anchor: 'top',
+    attributes: {
+      fill: fontColor,
+      stroke: fontColor,
+    },
+  })
+}
+
+function getSvgWidth(svg) {
+  return parseFloat(svg.match(/width="([^"]*)"/)[1])
+}
+
+function getSvgHeight(svg) {
+  return parseFloat(svg.match(/height="([^"]*)"/)[1])
+}
+
+function generateImageBuffer(svg, fontPath) {
   return new Promise((resolve, reject) => {
-    svg2img(
-      loadSync().getSVG(text, {
-        x: 0,
-        y: 0,
-        fontSize: 150,
-        fontWeight: 'bold',
-        anchor: 'top',
-        attributes: {
-          fill: 'black',
-          stroke: 'black',
-        },
-      }),
-      function(error, buffer) {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(buffer)
-        }
+    svg2img(svg, function(error, buffer) {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(buffer)
       }
-    )
+    })
   })
 }

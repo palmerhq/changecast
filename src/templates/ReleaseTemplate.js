@@ -70,13 +70,13 @@ const ReleaseTemplate = ({
 }
 
 export const query = graphql`
-  query ReleaseTemplateQuery($tagName: String!) {
+  query ReleaseTemplateQuery($tagName: String!, $ogText: String!) {
     repository: allGithubRepo {
       edges {
         node {
           avatarImageFile: childFile {
             childOgImage {
-              ogImageWithText(text: $tagName) {
+              ogImageWithText(text: $ogText) {
                 src
               }
             }
@@ -88,7 +88,7 @@ export const query = graphql`
       edges {
         node {
           childOgImage {
-            ogImageWithText(text: $tagName) {
+            ogImageWithText(text: $ogText) {
               src
             }
           }
