@@ -60,7 +60,12 @@ function openChangelog() {
   window.addEventListener('click', toggleChangelog, true)
 
   window.localStorage.setItem(CHANGELOG_LOCALSTORAGE_KEY, mostRecentReleaseDate)
-  toggles.forEach(toggle => toggle.removeChild(toggleNotifications.get(toggle)))
+  if (toggleNotifications.size) {
+    toggles.forEach(toggle => {
+      toggle.removeChild(toggleNotifications.get(toggle))
+      toggleNotifications.delete(toggle)
+    })
+  }
 }
 
 function closeChangelog() {
