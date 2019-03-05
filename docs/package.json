@@ -1,0 +1,8 @@
+{
+  "name": "changelog-docs",
+  "private": true,
+  "description": "Changelog documentation",
+  "version": "0.1.0",
+  "author": "Jack Cross <jackjocross@gmail.com>",
+  "license": "MIT"
+}

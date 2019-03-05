@@ -5,7 +5,7 @@ const { config } = require('dotenv')
 
 config({ path: path.resolve('..', '.env') })
 
-const bundleOutputDir = '../static'
+const bundleOutputDir = '../site/static'
 
 module.exports = (env, { mode }) => {
   return [

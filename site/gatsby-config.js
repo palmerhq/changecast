@@ -2,7 +2,7 @@ const path = require('path')
 const hexRgb = require('hex-rgb')
 const { config } = require('dotenv')
 
-config()
+config({ path: path.resolve('..', '.env') })
 
 module.exports = {
   siteMetadata: generateMetadata(),
@@ -15,7 +15,7 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-og-image',
       options: {
-        fontPath: './fonts/Inter-UI-SemiBold.woff',
+        fontPath: '../fonts/Inter-UI-SemiBold.woff',
         fontColor: '#24292e',
         backgroundColor: '#f7f7f7',
       },

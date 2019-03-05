@@ -4,9 +4,9 @@ Create beautiful, performant, accessible release notes from your Github releases
 
 ## Steps
 
-### 1. Deploy to Netlify
+### 1. Deploy
 
-Deploy release notes with your Netlify account using the button below.
+#### Netlify
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/palmerhq/release-notes)
 
@@ -16,6 +16,10 @@ You will be prompted for the following information:
 - **Github access token (optional for public repos)**: [Generate](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line) and enter an access token with `repo` scope.
 
 After deploying, you can assign a custom domain for your release notes [using Netlify](https://www.netlify.com/docs/custom-domains/).
+
+#### Now
+
+[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/palmerhq/release-notes&env=GITHUB_REPO_URL)
 
 ### 2. Add a Build Trigger
 

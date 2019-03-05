@@ -1,6 +1,5 @@
 [build]
-  command = "yarn build"
-  publish = "public"
+  publish = "site/public"
 
 [[headers]]
   for = "/*"
@@ -14,3 +13,6 @@
 [template.environment]
   GITHUB_REPO_URL = "Github repository URL"
   GITHUB_ACCESS_TOKEN = "Github access token (optional for public repos)"
+  TITLE = "Site title (optional, defaults to repo title)"
+  LOGO_URL = "URL of your logo (optional, defaults to repo owner avatar)"
+  PRIMARY_COLOR = "Primary theme color (optional, defaults to repo owner avatar color)"
