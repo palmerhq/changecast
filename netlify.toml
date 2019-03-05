@@ -1,5 +1,9 @@
 [build]
+  command = "yarn build"
   publish = "site/public"
+
+  [build.environment]
+    YARN_VERSION = "1.13.0"
 
 [[headers]]
   for = "/*"
@@ -10,9 +14,9 @@
 [template]
   incoming-hooks = ["Github Releases"]
 
-[template.environment]
-  GITHUB_REPO_URL = "Github repository URL"
-  GITHUB_ACCESS_TOKEN = "Github access token (optional for public repos)"
-  TITLE = "Site title (optional, defaults to repo title)"
-  LOGO_URL = "URL of your logo (optional, defaults to repo owner avatar)"
-  PRIMARY_COLOR = "Primary theme color (optional, defaults to repo owner avatar color)"
+  [template.environment]
+    GITHUB_REPO_URL = "Github repository URL"
+    GITHUB_ACCESS_TOKEN = "Github access token (optional for public repos)"
+    TITLE = "Site title (optional, defaults to repo title)"
+    LOGO_URL = "URL of your logo (optional, defaults to repo owner avatar)"
+    PRIMARY_COLOR = "Primary theme color (optional, defaults to repo owner avatar color)"
