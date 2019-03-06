@@ -8,7 +8,8 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "now-build": "yarn build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.7",
