@@ -19,8 +19,12 @@ jobs:
                 now
                   --token=$NOW_TOKEN
                   --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                  --build-env NOW_URL=https://changelog-first.now.sh
                   --public
               )
+
+              now alias $FIRST_EXAMPLE_URL changelog-first
+                --token=$NOW_TOKEN
 
   build_second_example:
     docker:
@@ -41,8 +45,12 @@ jobs:
                 now
                   --token=$NOW_TOKEN
                   --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
+                  --build-env NOW_URL=https://changelog-second.now.sh
                   --public
               )
+
+              now alias $SECOND_EXAMPLE_URL changelog-second
+                --token=$NOW_TOKEN
 
   build_third_example:
     docker:
@@ -63,8 +71,12 @@ jobs:
                 now
                   --token=$NOW_TOKEN
                   --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
+                  --build-env NOW_URL=https://changelog-third.now.sh
                   --public
               )
+
+              now alias $THIRD_EXAMPLE_URL changelog-third
+                --token=$NOW_TOKEN
 
   build_docs:
     docker:
@@ -83,9 +95,9 @@ jobs:
             name: Build docs
             command: now
               --token=$NOW_TOKEN
-              --build-env FIRST_EXAMPLE_URL=$FIRST_EXAMPLE_URL
-              --build-env SECOND_EXAMPLE_URL=$SECOND_EXAMPLE_URL
-              --build-env THIRD_EXAMPLE_URL=$THIRD_EXAMPLE_URL
+              --build-env FIRST_EXAMPLE_URL=https://changelog-first.now.sh
+              --build-env SECOND_EXAMPLE_URL=https://changelog-second.now.sh
+              --build-env THIRD_EXAMPLE_URL=https://changelog-third.now.sh
               --public
         
 
