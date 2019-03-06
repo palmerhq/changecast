@@ -97,12 +97,16 @@ jobs:
 
       - run:
           name: Build docs
-          command: now
+          command: DOCS_URL=$(
+            now
             --token=$NOW_TOKEN
             --build-env FIRST_EXAMPLE_URL=https://changelog-first.now.sh
             --build-env SECOND_EXAMPLE_URL=https://changelog-second.now.sh
             --build-env THIRD_EXAMPLE_URL=https://changelog-third.now.sh
             --public
+            )
+
+            now alias $DOCS_URL changelog --token=$NOW_TOKEN
 
 workflows:
   version: 2
