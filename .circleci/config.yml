@@ -4,8 +4,6 @@ jobs:
     docker:
       - image: circleci/node:10.15
 
-    working_directory: ~/repo
-
     steps:
       - checkout
 
@@ -29,8 +27,6 @@ jobs:
   build_second_example:
     docker:
       - image: circleci/node:10.15
-
-    working_directory: ~/repo
 
     steps:
       - checkout
@@ -56,8 +52,6 @@ jobs:
     docker:
       - image: circleci/node:10.15
 
-    working_directory: ~/repo
-
     steps:
       - checkout
 
@@ -81,8 +75,6 @@ jobs:
   build_docs:
     docker:
       - image: circleci/node:10.15
-
-    working_directory: ~/repo/docs
 
     steps:
       - checkout
