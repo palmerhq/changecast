@@ -8,6 +8,11 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+
       - run:
             name: Build first example
             command: FIRST_EXAMPLE_URL=$(
@@ -25,6 +30,11 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+
       - run:
             name: Build second example
             command: SECOND_EXAMPLE_URL=$(
@@ -42,6 +52,11 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+
       - run:
             name: Build third example
             command: THIRD_EXAMPLE_URL=$(
@@ -59,6 +74,11 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+
       - run:
             name: Build docs
             command: now
