@@ -1,11 +1,9 @@
 {
-  "version": 2,
+  "version": 1,
   "name": "changelog",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@now/static-build",
-      "config": { "distDir": "site/public" }
-    }
-  ]
+  "type": "static",
+  "static": {
+    "trailingSlash": false,
+    "public": "site/public"
+  }
 }

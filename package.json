@@ -9,7 +9,6 @@
   },
   "workspaces": {
     "packages": [
-      "docs",
       "site",
       "widget"
     ],
