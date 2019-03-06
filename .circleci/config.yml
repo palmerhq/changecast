@@ -1,117 +1,160 @@
 version: 2
 jobs:
-  build_first_example:
+  checkout_code:
     docker:
       - image: circleci/node:10.15
-
-    working_directory: ~/repo
 
     steps:
       - checkout
 
+  install_site:
+    docker:
+      - image: circleci/node:10.15
+
+    steps:
+      - restore_cache:
+          name: Restore Site Yarn Package Cache
+          keys:
+            - yarn-packages-site-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Site Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Site Yarn Package Cache
+          key: yarn-packages-site-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+  install_now:
+    docker:
+      - image: circleci/node:10.15
+
+    steps:
       - run:
           name: Install Now CLI
           command: sudo npm install --global --unsafe-perm now
 
-      - run:
-            name: Build first example
-            command: FIRST_EXAMPLE_URL=$(
-                now
-                  --token=$NOW_TOKEN
-                  --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
-                  --build-env URL=https://changelog-first.now.sh
-                  --public
-              )
+  build_first_example:
+    docker:
+      - image: circleci/node:10.15
 
-              now alias $FIRST_EXAMPLE_URL changelog-first
-                --token=$NOW_TOKEN
+    steps:
+      - run:
+        name: Build First Example
+        command: GITHUB_REPO_URL=https://github.com/reduxjs/redux URL=https://changelog-first.now.sh yarn build
+
+      - run:
+          name: Deploy First Example
+          command: FIRST_EXAMPLE_URL=$(
+            now
+            --token=$NOW_TOKEN
+            --public
+            )
+
+            now alias $FIRST_EXAMPLE_URL changelog-first
+            --token=$NOW_TOKEN
 
   build_second_example:
     docker:
       - image: circleci/node:10.15
 
-    working_directory: ~/repo
-
     steps:
-      - checkout
+      - run:
+        name: Build Second Example
+        command: GITHUB_REPO_URL=https://github.com/vuejs/vue URL=https://changelog-second.now.sh yarn build
 
       - run:
-          name: Install Now CLI
-          command: sudo npm install --global --unsafe-perm now
+          name: Deploy Second Example
+          command: SECOND_EXAMPLE_URL=$(
+            now
+            --token=$NOW_TOKEN
+            --public
+            )
 
-      - run:
-            name: Build second example
-            command: SECOND_EXAMPLE_URL=$(
-                now
-                  --token=$NOW_TOKEN
-                  --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
-                  --build-env URL=https://changelog-second.now.sh
-                  --public
-              )
-
-              now alias $SECOND_EXAMPLE_URL changelog-second
-                --token=$NOW_TOKEN
+            now alias $SECOND_EXAMPLE_URL changelog-first
+            --token=$NOW_TOKEN
 
   build_third_example:
     docker:
       - image: circleci/node:10.15
 
-    working_directory: ~/repo
+    steps:
+      - run:
+        name: Build Third Example
+        command: GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd URL=https://changelog-third.now.sh yarn build
+
+      - run:
+          name: Deploy Second Example
+          command: THIRD_EXAMPLE_URL=$(
+            now
+            --token=$NOW_TOKEN
+            --public
+            )
+
+            now alias $THIRD_EXAMPLE_URL changelog-first
+            --token=$NOW_TOKEN
+
+  install_docs:
+    docker:
+      - image: circleci/node:10.15
 
     steps:
-      - checkout
-
+      - restore_cache:
+          name: Restore Docs Yarn Package Cache
+          keys:
+            - yarn-packages-docs-{{ checksum "yarn.lock" }}
       - run:
-          name: Install Now CLI
-          command: sudo npm install --global --unsafe-perm now
-
-      - run:
-            name: Build third example
-            command: THIRD_EXAMPLE_URL=$(
-                now
-                  --token=$NOW_TOKEN
-                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
-                  --build-env URL=https://changelog-third.now.sh
-                  --public
-              )
-
-              now alias $THIRD_EXAMPLE_URL changelog-third
-                --token=$NOW_TOKEN
+          name: Install Docs Dependencies
+          command: cd docs && yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Docs Yarn Package Cache
+          key: yarn-packages-docs-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
 
   build_docs:
     docker:
       - image: circleci/node:10.15
 
-    working_directory: ~/repo/docs
-
     steps:
-      - checkout
+      - run:
+          name: Build Docs
+          command: FIRST_EXAMPLE_URL=https://changelog-first.now.sh SECOND_EXAMPLE_URL=https://changelog-second.now.sh THIRD_EXAMPLE_URL=https://changelog-third.now.sh yarn build
 
       - run:
-          name: Install Now CLI
-          command: sudo npm install --global --unsafe-perm now
-
-      - run:
-            name: Build docs
-            command: now
-              --token=$NOW_TOKEN
-              --build-env FIRST_EXAMPLE_URL=https://changelog-first.now.sh
-              --build-env SECOND_EXAMPLE_URL=https://changelog-second.now.sh
-              --build-env THIRD_EXAMPLE_URL=https://changelog-third.now.sh
-              --public
-        
+          name: Deploy Docs
+          command: now --token=$NOW_TOKEN --public
 
 workflows:
   version: 2
 
   build_and_deploy:
     jobs:
-      - build_first_example
-      - build_second_example
-      - build_third_example
+      - checkout_code
+
+      - install_now
+
+      - install_site:
+          requires:
+            - checkout_code
+
+      - build_first_example:
+          requires:
+            - install_site
+            - install_now
+
+      - build_second_example:
+          requires:
+            - install_site
+            - install_now
+
+      - build_third_example:
+          requires:
+            - install_site
+            - install_now
+
+      - install_docs
 
       - build_docs:
           requires:
-            - build_first_example
-            - build_second_example
-            - build_third_example
+            - install_docs

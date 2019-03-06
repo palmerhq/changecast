@@ -3,9 +3,8 @@
   "name": "changelog-docs",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@now/static-build",
-      "config": { "distDir": "public" }
+      "src": "public",
+      "use": "@now/static"
     }
   ]
 }
