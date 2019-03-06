@@ -33,8 +33,8 @@ jobs:
           command: URL=$(
               now
                 --token=$NOW_TOKEN
-                --team=palmer
                 --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                --public
             )
 
             echo $URL
