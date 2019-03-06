@@ -20,14 +20,17 @@ const IndexPage = ({
       <script
         src={`${reduxChangelogUrl}/widget.js`}
         data-selectors="[data-redux-changelog]"
+        defer
       />
       <script
         src={`${vueChangelogUrl}/widget.js`}
         data-selectors="[data-vue-changelog]"
+        defer
       />
       <script
         src={`${reactDndChangelogUrl}/widget.js`}
         data-selectors="[data-react-beautiful-dnd-changelog]"
+        defer
       />
     </Helmet>
     <button data-redux-changelog>Redux changelog</button>
