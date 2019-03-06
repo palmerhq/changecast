@@ -75,18 +75,12 @@ workflows:
 
   build_and_deploy:
     jobs:
-      - build_first_example:
-          context: org-global
-
-      - build_second_example:
-          context: org-global
-
-      - build_third_example:
-          context: org-global
+      - build_first_example
+      - build_second_example
+      - build_third_example
 
       - build_docs:
           requires:
             - build_first_example
             - build_second_example
             - build_third_example
-          context: org-global
