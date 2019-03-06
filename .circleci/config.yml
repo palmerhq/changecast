@@ -27,3 +27,14 @@ jobs:
       - run:
           name: Install Now CLI
           command: sudo npm install --global --unsafe-perm now
+
+      - run:
+          name: Build example
+          command: URL=$(
+              now
+                --token=$NOW_TOKEN
+                --team=palmer
+                --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+            )
+
+            echo $URL
