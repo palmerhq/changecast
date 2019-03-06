@@ -88,16 +88,14 @@ jobs:
       - checkout
 
       - run:
-          name: Navigate To Docs
-          command: cd docs
-
-      - run:
           name: Install Now CLI
           command: sudo npm install --global --unsafe-perm now
 
       - run:
           name: Build docs
-          command: DOCS_URL=$(
+          command: cd docs
+
+            DOCS_URL=$(
             now
             --token=$NOW_TOKEN
             --build-env FIRST_EXAMPLE_URL=https://changelog-first.now.sh
