@@ -96,7 +96,7 @@ jobs:
             --public
             )
 
-            now alias $DOCS_URL changelog --token=$NOW_TOKEN
+            now alias $DOCS_URL changelog-docs --token=$NOW_TOKEN
 
 workflows:
   version: 2
