@@ -19,7 +19,7 @@ jobs:
                 now
                   --token=$NOW_TOKEN
                   --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
-                  --build-env NOW_URL=https://changelog-first.now.sh
+                  --build-env URL=https://changelog-first.now.sh
                   --public
               )
 
@@ -45,7 +45,7 @@ jobs:
                 now
                   --token=$NOW_TOKEN
                   --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
-                  --build-env NOW_URL=https://changelog-second.now.sh
+                  --build-env URL=https://changelog-second.now.sh
                   --public
               )
 
@@ -71,7 +71,7 @@ jobs:
                 now
                   --token=$NOW_TOKEN
                   --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
-                  --build-env NOW_URL=https://changelog-third.now.sh
+                  --build-env URL=https://changelog-third.now.sh
                   --public
               )
 
