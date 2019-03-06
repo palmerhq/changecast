@@ -89,7 +89,7 @@ jobs:
 
       - run:
           name: Navigate To Docs
-          commadn: cd docs
+          command: cd docs
 
       - run:
           name: Install Now CLI
