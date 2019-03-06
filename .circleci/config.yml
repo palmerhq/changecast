@@ -40,8 +40,8 @@ jobs:
 
     steps:
       - run:
-        name: Build First Example
-        command: GITHUB_REPO_URL=https://github.com/reduxjs/redux URL=https://changelog-first.now.sh yarn build
+          name: Build First Example
+          command: GITHUB_REPO_URL=https://github.com/reduxjs/redux URL=https://changelog-first.now.sh yarn build
 
       - run:
           name: Deploy First Example
@@ -60,8 +60,8 @@ jobs:
 
     steps:
       - run:
-        name: Build Second Example
-        command: GITHUB_REPO_URL=https://github.com/vuejs/vue URL=https://changelog-second.now.sh yarn build
+          name: Build Second Example
+          command: GITHUB_REPO_URL=https://github.com/vuejs/vue URL=https://changelog-second.now.sh yarn build
 
       - run:
           name: Deploy Second Example
@@ -80,8 +80,8 @@ jobs:
 
     steps:
       - run:
-        name: Build Third Example
-        command: GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd URL=https://changelog-third.now.sh yarn build
+          name: Build Third Example
+          command: GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd URL=https://changelog-third.now.sh yarn build
 
       - run:
           name: Deploy Second Example
