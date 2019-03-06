@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build_first_example:
     docker:
       - image: circleci/node:10.15
 
@@ -8,33 +8,85 @@ jobs:
 
     steps:
       - checkout
-
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-
       - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile
+            name: Build first example
+            command: FIRST_EXAMPLE_URL=$(
+                now
+                  --token=$NOW_TOKEN
+                  --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                  --public
+              )
 
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+  build_second_example:
+    docker:
+      - image: circleci/node:10.15
 
+    working_directory: ~/repo
+
+    steps:
+      - checkout
       - run:
-          name: Install Now CLI
-          command: sudo npm install --global --unsafe-perm now
+            name: Build second example
+            command: SECOND_EXAMPLE_URL=$(
+                now
+                  --token=$NOW_TOKEN
+                  --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
+                  --public
+              )
 
+  build_third_example:
+    docker:
+      - image: circleci/node:10.15
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
       - run:
-          name: Build example
-          command: URL=$(
-              now
-                --token=$NOW_TOKEN
-                --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
-                --public
-            )
+            name: Build third example
+            command: THIRD_EXAMPLE_URL=$(
+                now
+                  --token=$NOW_TOKEN
+                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
+                  --public
+              )
 
-            echo $URL
+  build_docs:
+    docker:
+      - image: circleci/node:10.15
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+            name: Build docs
+            command: now
+              --local-config=docs/now.json
+              --token=$NOW_TOKEN
+              --build-env FIRST_EXAMPLE_URL=$FIRST_EXAMPLE_URL
+              --build-env SECOND_EXAMPLE_URL=$SECOND_EXAMPLE_URL
+              --build-env THIRD_EXAMPLE_URL=$THIRD_EXAMPLE_URL
+              --public
+        
+
+workflows:
+  version: 2
+
+  build_and_deploy:
+    jobs:
+      - build_first_example:
+          context: org-global
+
+      - build_second_example:
+          context: org-global
+
+      - build_third_example:
+          context: org-global
+
+      - build_docs:
+          requires:
+            - build_first_example
+            - build_second_example
+            - build_third_example
+          context: org-global
