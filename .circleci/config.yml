@@ -1,47 +1,34 @@
 version: 2
 jobs:
-  checkout_code:
+  build_first_example:
     docker:
       - image: circleci/node:10.15
 
     steps:
       - checkout
 
-  install_site:
-    docker:
-      - image: circleci/node:10.15
-
-    steps:
       - restore_cache:
           name: Restore Site Yarn Package Cache
           keys:
             - yarn-packages-site-{{ checksum "yarn.lock" }}
+
       - run:
           name: Install Site Dependencies
           command: yarn install --frozen-lockfile
+
       - save_cache:
           name: Save Site Yarn Package Cache
           key: yarn-packages-site-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
 
-  install_now:
-    docker:
-      - image: circleci/node:10.15
-
-    steps:
-      - run:
-          name: Install Now CLI
-          command: sudo npm install --global --unsafe-perm now
-
-  build_first_example:
-    docker:
-      - image: circleci/node:10.15
-
-    steps:
       - run:
           name: Build First Example
           command: GITHUB_REPO_URL=https://github.com/reduxjs/redux URL=https://changelog-first.now.sh yarn build
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
 
       - run:
           name: Deploy First Example
@@ -59,9 +46,30 @@ jobs:
       - image: circleci/node:10.15
 
     steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore Site Yarn Package Cache
+          keys:
+            - yarn-packages-site-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Site Dependencies
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+          name: Save Site Yarn Package Cache
+          key: yarn-packages-site-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
       - run:
           name: Build Second Example
           command: GITHUB_REPO_URL=https://github.com/vuejs/vue URL=https://changelog-second.now.sh yarn build
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
 
       - run:
           name: Deploy Second Example
@@ -79,12 +87,33 @@ jobs:
       - image: circleci/node:10.15
 
     steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore Site Yarn Package Cache
+          keys:
+            - yarn-packages-site-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Site Dependencies
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+          name: Save Site Yarn Package Cache
+          key: yarn-packages-site-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
       - run:
           name: Build Third Example
           command: GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd URL=https://changelog-third.now.sh yarn build
 
       - run:
-          name: Deploy Second Example
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+
+      - run:
+          name: Deploy Third Example
           command: THIRD_EXAMPLE_URL=$(
             now
             --token=$NOW_TOKEN
@@ -94,32 +123,39 @@ jobs:
             now alias $THIRD_EXAMPLE_URL changelog-first
             --token=$NOW_TOKEN
 
-  install_docs:
+  build_docs:
     docker:
       - image: circleci/node:10.15
 
     steps:
+      - checkout
+
+      - navigate_to_docs:
+          name: Navigate To Docs Folder
+          command: cd docs
+
       - restore_cache:
           name: Restore Docs Yarn Package Cache
           keys:
             - yarn-packages-docs-{{ checksum "yarn.lock" }}
+
       - run:
           name: Install Docs Dependencies
           command: cd docs && yarn install --frozen-lockfile
+
       - save_cache:
           name: Save Docs Yarn Package Cache
           key: yarn-packages-docs-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
 
-  build_docs:
-    docker:
-      - image: circleci/node:10.15
-
-    steps:
       - run:
           name: Build Docs
           command: FIRST_EXAMPLE_URL=https://changelog-first.now.sh SECOND_EXAMPLE_URL=https://changelog-second.now.sh THIRD_EXAMPLE_URL=https://changelog-third.now.sh yarn build
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
 
       - run:
           name: Deploy Docs
@@ -130,31 +166,12 @@ workflows:
 
   build_and_deploy:
     jobs:
-      - checkout_code
-
-      - install_now
-
-      - install_site:
-          requires:
-            - checkout_code
-
-      - build_first_example:
-          requires:
-            - install_site
-            - install_now
-
-      - build_second_example:
-          requires:
-            - install_site
-            - install_now
-
-      - build_third_example:
-          requires:
-            - install_site
-            - install_now
-
-      - install_docs
+      - build_first_example
+      - build_second_example
+      - build_third_example
 
       - build_docs:
           requires:
-            - install_docs
+            - build_first_example
+            - build_second_example
+            - build_third_example
