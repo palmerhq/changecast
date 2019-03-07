@@ -14,8 +14,9 @@ jobs:
       - run:
           name: Build first example
           environment:
-            SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
-          command: FIRST_EXAMPLE_URL=$(
+            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
+          command: echo $SHORT_SHA1
+            FIRST_EXAMPLE_URL=$(
               now
                 --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
                 --build-env URL=https://changelog-first.now.sh
@@ -44,7 +45,7 @@ jobs:
       - run:
           name: Build second example
           environment:
-            SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
+            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
           command: SECOND_EXAMPLE_URL=$(
               now
                 --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
@@ -74,7 +75,7 @@ jobs:
       - run:
           name: Build third example
           environment:
-            SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
+            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
           command: THIRD_EXAMPLE_URL=$(
               now
                 --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
@@ -104,9 +105,9 @@ jobs:
       - run:
           name: Build docs
           environment:
-            SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
+            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
           command: cd docs
-          
+
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
 
               DOCS_URL=$(
