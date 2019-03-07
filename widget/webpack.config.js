@@ -1,4 +1,5 @@
 const path = require('path')
+const crypto = require('crypto')
 const webpack = require('webpack')
 const copyWebpackPlugin = require('copy-webpack-plugin')
 const { config } = require('dotenv')
@@ -6,6 +7,13 @@ const { config } = require('dotenv')
 config({ path: path.resolve('..', '.env') })
 
 const bundleOutputDir = '../site/static'
+
+const repoHash = crypto
+  .createHash(`md5`)
+  .update(process.env.GITHUB_REPO_URL)
+  .digest(`hex`)
+
+const shortRepoHash = repoHash.substr(repoHash.length - 5)
 
 module.exports = (env, { mode }) => {
   return [
@@ -22,7 +30,10 @@ module.exports = (env, { mode }) => {
         minimize: mode === 'production',
       },
       plugins: [
-        new webpack.EnvironmentPlugin(['URL', 'NOW_URL']),
+        new webpack.EnvironmentPlugin({
+          URL: process.env.URL,
+          REPO_HASH: shortRepoHash,
+        }),
         ...(mode === 'development'
           ? [
               new webpack.SourceMapDevToolPlugin(),
@@ -40,6 +51,7 @@ module.exports = (env, { mode }) => {
                 loader: 'css-loader',
                 options: {
                   modules: true,
+                  hashPrefix: shortRepoHash,
                 },
               },
             ],

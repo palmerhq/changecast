@@ -52,7 +52,6 @@ function generateMetadata() {
       : false,
     url:
       process.env.URL ||
-      process.env.NOW_URL ||
       (process.env.NODE_ENV === 'development'
         ? 'http://localhost:8000'
         : 'http://localhost:9000'),

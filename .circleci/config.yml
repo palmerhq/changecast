@@ -15,14 +15,17 @@ jobs:
           name: Build first example
           command: FIRST_EXAMPLE_URL=$(
             now
-            --token=$NOW_TOKEN
             --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
             --build-env URL=https://changelog-first.now.sh
+            --team=palmer
             --public
+            --token=$NOW_TOKEN
             )
 
-            now alias $FIRST_EXAMPLE_URL changelog-first
-            --token=$NOW_TOKEN
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            now alias $FIRST_EXAMPLE_URL changelog-first-example --token=$NOW_TOKEN
+            else
+            now alias $FIRST_EXAMPLE_URL changelog-first-example-${CIRCLE_SHA1 | cut -c -7} --token=$NOW_TOKEN
 
   build_second_example:
     docker:
@@ -39,14 +42,17 @@ jobs:
           name: Build second example
           command: SECOND_EXAMPLE_URL=$(
             now
-            --token=$NOW_TOKEN
             --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
             --build-env URL=https://changelog-second.now.sh
+            --team=palmer
             --public
+            --token=$NOW_TOKEN
             )
 
-            now alias $SECOND_EXAMPLE_URL changelog-second
-            --token=$NOW_TOKEN
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            now alias $SECOND_EXAMPLE_URL changelog-second-example --token=$NOW_TOKEN
+            else
+            now alias $SECOND_EXAMPLE_URL changelog-second-example-${CIRCLE_SHA1 | cut -c -7} --token=$NOW_TOKEN
 
   build_third_example:
     docker:
@@ -63,14 +69,17 @@ jobs:
           name: Build third example
           command: THIRD_EXAMPLE_URL=$(
             now
-            --token=$NOW_TOKEN
             --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
             --build-env URL=https://changelog-third.now.sh
+            --team=palmer
             --public
+            --token=$NOW_TOKEN
             )
 
-            now alias $THIRD_EXAMPLE_URL changelog-third
-            --token=$NOW_TOKEN
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            now alias $THIRD_EXAMPLE_URL changelog-third-example --token=$NOW_TOKEN
+            else
+            now alias $THIRD_EXAMPLE_URL changelog-third-example-${CIRCLE_SHA1 | cut -c -7} --token=$NOW_TOKEN
 
   build_docs:
     docker:
@@ -86,17 +95,33 @@ jobs:
       - run:
           name: Build docs
           command: cd docs
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
 
             DOCS_URL=$(
             now
-            --token=$NOW_TOKEN
-            --build-env FIRST_EXAMPLE_URL=https://changelog-first.now.sh
-            --build-env SECOND_EXAMPLE_URL=https://changelog-second.now.sh
-            --build-env THIRD_EXAMPLE_URL=https://changelog-third.now.sh
+            --build-env FIRST_EXAMPLE_URL=https://changelog-first-example.now.sh
+            --build-env SECOND_EXAMPLE_URL=https://changelog-second-example.now.sh
+            --build-env THIRD_EXAMPLE_URL=https://changelog-third-example.now.sh
+            --team=palmer
             --public
+            --token=$NOW_TOKEN
             )
 
             now alias $DOCS_URL changelog-docs --token=$NOW_TOKEN
+
+            else
+
+            DOCS_URL=$(
+            now
+            --build-env FIRST_EXAMPLE_URL=https://changelog-first-example-${CIRCLE_SHA1 | cut -c -7}.now.sh
+            --build-env SECOND_EXAMPLE_URL=https://changelog-second-example-${CIRCLE_SHA1 | cut -c -7}.now.sh
+            --build-env THIRD_EXAMPLE_URL=https://changelog-third-example-${CIRCLE_SHA1 | cut -c -7}.now.sh
+            --team=palmer
+            --public
+            --token=$NOW_TOKEN
+            )
+
+            now alias $DOCS_URL changelog-docs-${CIRCLE_SHA1 | cut -c -7} --token=$NOW_TOKEN
 
 workflows:
   version: 2
