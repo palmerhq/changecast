@@ -28,9 +28,9 @@ jobs:
             )
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              now alias $FIRST_EXAMPLE_URL changelog-first-example --token=$NOW_TOKEN;
+              now alias $FIRST_EXAMPLE_URL changelog-first-example --team=palmer --token=$NOW_TOKEN;
             else
-              now alias $FIRST_EXAMPLE_URL changelog-first-example-${SHORT_SHA1} --token=$NOW_TOKEN;
+              now alias $FIRST_EXAMPLE_URL changelog-first-example-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
             fi
 
   build_second_example:
@@ -61,9 +61,9 @@ jobs:
             )
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              now alias $SECOND_EXAMPLE_URL changelog-second-example --token=$NOW_TOKEN;
+              now alias $SECOND_EXAMPLE_URL changelog-second-example --team=palmer --token=$NOW_TOKEN;
             else
-              now alias $SECOND_EXAMPLE_URL changelog-second-example-${SHORT_SHA1} --token=$NOW_TOKEN;
+              now alias $SECOND_EXAMPLE_URL changelog-second-example-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
             fi
 
   build_third_example:
@@ -94,9 +94,9 @@ jobs:
             )
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              now alias $THIRD_EXAMPLE_URL changelog-third-example --token=$NOW_TOKEN;
+              now alias $THIRD_EXAMPLE_URL changelog-third-example --team=palmer --token=$NOW_TOKEN;
             else
-              now alias $THIRD_EXAMPLE_URL changelog-third-example-${SHORT_SHA1} --token=$NOW_TOKEN;
+              now alias $THIRD_EXAMPLE_URL changelog-third-example-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
             fi
 
   build_docs:
@@ -131,7 +131,7 @@ jobs:
                 --token=$NOW_TOKEN
               )
 
-              now alias $DOCS_URL changelog-docs --token=$NOW_TOKEN;
+              now alias $DOCS_URL changelog-docs --team=palmer --token=$NOW_TOKEN;
 
             else
 
@@ -145,7 +145,7 @@ jobs:
                   --token=$NOW_TOKEN
               )
 
-              now alias $DOCS_URL changelog-docs-${SHORT_SHA1} --token=$NOW_TOKEN;
+              now alias $DOCS_URL changelog-docs-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
 
             fi
 
