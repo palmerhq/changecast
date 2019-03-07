@@ -12,11 +12,13 @@ jobs:
           command: sudo npm install --global --unsafe-perm now
 
       - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export SHORT_SHA1="$(git rev-parse --short $CIRCLE_SHA1)"' >> $BASH_ENV
+
+      - run:
           name: Build first example
-          environment:
-            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
-          command: echo $SHORT_SHA1
-            FIRST_EXAMPLE_URL=$(
+          command: FIRST_EXAMPLE_URL=$(
               now
                 --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
                 --build-env URL=https://changelog-first.now.sh
@@ -43,9 +45,12 @@ jobs:
           command: sudo npm install --global --unsafe-perm now
 
       - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export SHORT_SHA1="$(git rev-parse --short $CIRCLE_SHA1)"' >> $BASH_ENV
+
+      - run:
           name: Build second example
-          environment:
-            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
           command: SECOND_EXAMPLE_URL=$(
               now
                 --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
@@ -73,9 +78,12 @@ jobs:
           command: sudo npm install --global --unsafe-perm now
 
       - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export SHORT_SHA1="$(git rev-parse --short $CIRCLE_SHA1)"' >> $BASH_ENV
+
+      - run:
           name: Build third example
-          environment:
-            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
           command: THIRD_EXAMPLE_URL=$(
               now
                 --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
@@ -103,9 +111,12 @@ jobs:
           command: sudo npm install --global --unsafe-perm now
 
       - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export SHORT_SHA1="$(git rev-parse --short $CIRCLE_SHA1)"' >> $BASH_ENV
+
+      - run:
           name: Build docs
-          environment:
-            SHORT_SHA1: $(git rev-parse --short $CIRCLE_SHA1)
           command: cd docs
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
