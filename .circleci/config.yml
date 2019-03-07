@@ -17,19 +17,28 @@ jobs:
             echo 'export SHORT_SHA1="$(git rev-parse --short $CIRCLE_SHA1)"' >> $BASH_ENV
 
       - run:
-          name: Build first example
-          command: FIRST_EXAMPLE_URL=$(
-              now
-                --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
-                --build-env URL=https://changelog-first.now.sh
-                --team=palmer
-                --public
-                --token=$NOW_TOKEN
-            )
-
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+          name: Build First Example
+          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              FIRST_EXAMPLE_URL=$(
+                now
+                  --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                  --build-env URL=https://changelog-first-example.now.sh
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
+              )
+            
               now alias $FIRST_EXAMPLE_URL changelog-first-example --team=palmer --token=$NOW_TOKEN;
             else
+              FIRST_EXAMPLE_URL=$(
+                now
+                  --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                  --build-env URL=https://changelog-first-example-${SHORT_SHA1}.now.sh
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
+              )
+
               now alias $FIRST_EXAMPLE_URL changelog-first-example-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
             fi
 
@@ -50,19 +59,28 @@ jobs:
             echo 'export SHORT_SHA1="$(git rev-parse --short $CIRCLE_SHA1)"' >> $BASH_ENV
 
       - run:
-          name: Build second example
-          command: SECOND_EXAMPLE_URL=$(
-              now
-                --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
-                --build-env URL=https://changelog-second.now.sh
-                --team=palmer
-                --public
-                --token=$NOW_TOKEN
-            )
-
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+          name: Build Second Example
+          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              SECOND_EXAMPLE_URL=$(
+                now
+                  --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
+                  --build-env URL=https://changelog-second-example.now.sh
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
+              )
+            
               now alias $SECOND_EXAMPLE_URL changelog-second-example --team=palmer --token=$NOW_TOKEN;
             else
+              SECOND_EXAMPLE_URL=$(
+                now
+                  --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
+                  --build-env URL=https://changelog-second-example-${SHORT_SHA1}.now.sh
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
+              )
+
               now alias $SECOND_EXAMPLE_URL changelog-second-example-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
             fi
 
@@ -83,19 +101,28 @@ jobs:
             echo 'export SHORT_SHA1="$(git rev-parse --short $CIRCLE_SHA1)"' >> $BASH_ENV
 
       - run:
-          name: Build third example
-          command: THIRD_EXAMPLE_URL=$(
-              now
-                --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
-                --build-env URL=https://changelog-third.now.sh
-                --team=palmer
-                --public
-                --token=$NOW_TOKEN
-            )
-
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+          name: Build Third Example
+          command: if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              THIRD_EXAMPLE_URL=$(
+                now
+                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
+                  --build-env URL=https://changelog-third-example.now.sh
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
+              )
+            
               now alias $THIRD_EXAMPLE_URL changelog-third-example --team=palmer --token=$NOW_TOKEN;
             else
+              THIRD_EXAMPLE_URL=$(
+                now
+                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
+                  --build-env URL=https://changelog-third-example-${SHORT_SHA1}.now.sh
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
+              )
+
               now alias $THIRD_EXAMPLE_URL changelog-third-example-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
             fi
 
