@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 
 const IndexPage = ({
@@ -16,23 +15,21 @@ const IndexPage = ({
   },
 }) => (
   <>
-    <Helmet>
-      <script
-        src={`${reduxChangelogUrl}/widget.js`}
-        data-selectors="[data-redux-changelog]"
-        defer
-      />
-      <script
-        src={`${vueChangelogUrl}/widget.js`}
-        data-selectors="[data-vue-changelog]"
-        defer
-      />
-      <script
-        src={`${reactDndChangelogUrl}/widget.js`}
-        data-selectors="[data-react-beautiful-dnd-changelog]"
-        defer
-      />
-    </Helmet>
+    <script
+      src={`${reduxChangelogUrl}/widget.js`}
+      data-selectors="[data-redux-changelog]"
+      defer
+    />
+    <script
+      src={`${vueChangelogUrl}/widget.js`}
+      data-selectors="[data-vue-changelog]"
+      defer
+    />
+    <script
+      src={`${reactDndChangelogUrl}/widget.js`}
+      data-selectors="[data-react-beautiful-dnd-changelog]"
+      defer
+    />
     <button data-redux-changelog>Redux changelog</button>
     <button data-vue-changelog>Vue changelog</button>
     <button data-react-beautiful-dnd-changelog>

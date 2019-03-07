@@ -5,7 +5,8 @@
     "build": "yarn build:widget && yarn build:site",
     "build:site": "cd site && yarn build",
     "build:widget": "cd widget && yarn build",
-    "now-build": "yarn build"
+    "now-build": "yarn build",
+    "postinstall": "patch-package"
   },
   "workspaces": {
     "packages": [
@@ -15,5 +16,9 @@
     "nohoist": [
       "gatsby"
     ]
+  },
+  "devDependencies": {
+    "patch-package": "^6.0.5",
+    "postinstall-postinstall": "^2.0.0"
   }
 }
