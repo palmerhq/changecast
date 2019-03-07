@@ -16,18 +16,18 @@ jobs:
           environment:
             SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
           command: FIRST_EXAMPLE_URL=$(
-            now
-            --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
-            --build-env URL=https://changelog-first.now.sh
-            --team=palmer
-            --public
-            --token=$NOW_TOKEN
+              now
+                --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                --build-env URL=https://changelog-first.now.sh
+                --team=palmer
+                --public
+                --token=$NOW_TOKEN
             )
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            now alias $FIRST_EXAMPLE_URL changelog-first-example --token=$NOW_TOKEN
+              now alias $FIRST_EXAMPLE_URL changelog-first-example --token=$NOW_TOKEN;
             else
-            now alias $FIRST_EXAMPLE_URL changelog-first-example-${SHORT_SHA1} --token=$NOW_TOKEN
+              now alias $FIRST_EXAMPLE_URL changelog-first-example-${SHORT_SHA1} --token=$NOW_TOKEN;
             fi
 
   build_second_example:
@@ -46,18 +46,18 @@ jobs:
           environment:
             SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
           command: SECOND_EXAMPLE_URL=$(
-            now
-            --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
-            --build-env URL=https://changelog-second.now.sh
-            --team=palmer
-            --public
-            --token=$NOW_TOKEN
+              now
+                --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
+                --build-env URL=https://changelog-second.now.sh
+                --team=palmer
+                --public
+                --token=$NOW_TOKEN
             )
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            now alias $SECOND_EXAMPLE_URL changelog-second-example --token=$NOW_TOKEN
+              now alias $SECOND_EXAMPLE_URL changelog-second-example --token=$NOW_TOKEN;
             else
-            now alias $SECOND_EXAMPLE_URL changelog-second-example-${SHORT_SHA1} --token=$NOW_TOKEN
+              now alias $SECOND_EXAMPLE_URL changelog-second-example-${SHORT_SHA1} --token=$NOW_TOKEN;
             fi
 
   build_third_example:
@@ -76,18 +76,18 @@ jobs:
           environment:
             SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
           command: THIRD_EXAMPLE_URL=$(
-            now
-            --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
-            --build-env URL=https://changelog-third.now.sh
-            --team=palmer
-            --public
-            --token=$NOW_TOKEN
+              now
+                --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
+                --build-env URL=https://changelog-third.now.sh
+                --team=palmer
+                --public
+                --token=$NOW_TOKEN
             )
 
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            now alias $THIRD_EXAMPLE_URL changelog-third-example --token=$NOW_TOKEN
+              now alias $THIRD_EXAMPLE_URL changelog-third-example --token=$NOW_TOKEN;
             else
-            now alias $THIRD_EXAMPLE_URL changelog-third-example-${SHORT_SHA1} --token=$NOW_TOKEN
+              now alias $THIRD_EXAMPLE_URL changelog-third-example-${SHORT_SHA1} --token=$NOW_TOKEN;
             fi
 
   build_docs:
@@ -106,33 +106,34 @@ jobs:
           environment:
             SHORT_SHA1: $(echo $CIRCLE_SHA1 | cut -c -7)
           command: cd docs
+          
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
 
-            DOCS_URL=$(
-            now
-            --build-env FIRST_EXAMPLE_URL=https://changelog-first-example.now.sh
-            --build-env SECOND_EXAMPLE_URL=https://changelog-second-example.now.sh
-            --build-env THIRD_EXAMPLE_URL=https://changelog-third-example.now.sh
-            --team=palmer
-            --public
-            --token=$NOW_TOKEN
-            )
+              DOCS_URL=$(
+                now
+                --build-env FIRST_EXAMPLE_URL=https://changelog-first-example.now.sh
+                --build-env SECOND_EXAMPLE_URL=https://changelog-second-example.now.sh
+                --build-env THIRD_EXAMPLE_URL=https://changelog-third-example.now.sh
+                --team=palmer
+                --public
+                --token=$NOW_TOKEN
+              )
 
-            now alias $DOCS_URL changelog-docs --token=$NOW_TOKEN
+              now alias $DOCS_URL changelog-docs --token=$NOW_TOKEN;
 
             else
 
-            DOCS_URL=$(
-            now
-            --build-env FIRST_EXAMPLE_URL=https://changelog-first-example-${SHORT_SHA1}.now.sh
-            --build-env SECOND_EXAMPLE_URL=https://changelog-second-example-${SHORT_SHA1}.now.sh
-            --build-env THIRD_EXAMPLE_URL=https://changelog-third-example-${SHORT_SHA1}.now.sh
-            --team=palmer
-            --public
-            --token=$NOW_TOKEN
-            )
+              DOCS_URL=$(
+                now
+                  --build-env FIRST_EXAMPLE_URL=https://changelog-first-example-${SHORT_SHA1}.now.sh
+                  --build-env SECOND_EXAMPLE_URL=https://changelog-second-example-${SHORT_SHA1}.now.sh
+                  --build-env THIRD_EXAMPLE_URL=https://changelog-third-example-${SHORT_SHA1}.now.sh
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
+              )
 
-            now alias $DOCS_URL changelog-docs-${SHORT_SHA1} --token=$NOW_TOKEN
+              now alias $DOCS_URL changelog-docs-${SHORT_SHA1} --token=$NOW_TOKEN;
 
             fi
 
