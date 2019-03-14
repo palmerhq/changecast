@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import { Wrapper } from '../components/Wrapper'
 import { SiteWrapper } from '../components/SiteWrapper'
-import { Release } from '../components/Release'
+import { Release } from '../components/Release/Release'
 import { getOgImageSrc } from '../utils/data'
 
 const ReleaseTemplate = ({

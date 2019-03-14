@@ -31,7 +31,7 @@
     "gatsby-remark-gemoji-to-emoji": "^1.0.0",
     "gatsby-remark-images": "file:./plugins/gatsby-remark-images",
     "gatsby-remark-prismjs": "^3.2.4",
-    "gatsby-source-filesystem": "^2.0.19",
+    "gatsby-source-filesystem": "^2.0.23",
     "gatsby-source-github-releases": "file:./plugins/gatsby-source-github-releases",
     "gatsby-transformer-color-thief": "file:./plugins/gatsby-transformer-color-thief",
     "gatsby-transformer-favicons": "file:./plugins/gatsby-transformer-favicons",

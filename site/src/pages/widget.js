@@ -1,9 +1,10 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Waypoint from 'react-waypoint'
-import { Release } from '../components/Release'
+import { Release } from '../components/Release/Release'
 import { WidgetWrapper } from '../components/WidgetWrapper'
 import { Wrapper } from '../components/Wrapper'
+import { ReleaseHeader } from '../components/Release/ReleaseHeader'
 
 const WidgetPage = ({
   data: {
@@ -11,6 +12,7 @@ const WidgetPage = ({
   },
 }) => {
   const [releasesShown, setReleasesShown] = React.useState(10)
+  const [releaseIndex, setReleaseIndex] = React.useState(0)
 
   return (
     <Wrapper>
@@ -19,29 +21,39 @@ const WidgetPage = ({
           {releases
             .slice(0, releasesShown)
             .map(
-              ({
-                node: {
-                  id,
-                  name,
-                  tagName,
-                  publishedAt,
-                  body,
-                  childGithubReleaseBody: {
-                    childMarkdownRemark: { html },
+              (
+                {
+                  node: {
+                    id,
+                    name,
+                    tagName,
+                    publishedAt,
+                    body,
+                    childGithubReleaseBody: {
+                      childMarkdownRemark: { html },
+                    },
                   },
                 },
-              }) => (
-                <Release
-                  key={id}
-                  releaseName={name}
-                  tagName={tagName}
-                  publishedAt={publishedAt}
-                  html={html}
-                  body={body}
-                  embeddedInIframe={true}
-                  primaryColor={primaryColor}
-                  url={url}
-                />
+                index
+              ) => (
+                <React.Fragment key={id}>
+                  <Waypoint
+                    onLeave={() => setReleaseIndex(index)}
+                    topOffset="54px"
+                    fireOnRapidScroll={true}
+                  />
+                  <Release
+                    // key={id}
+                    releaseName={name}
+                    tagName={tagName}
+                    publishedAt={publishedAt}
+                    html={html}
+                    body={body}
+                    embeddedInIframe={true}
+                    primaryColor={primaryColor}
+                    url={url}
+                  />
+                </React.Fragment>
               )
             )}
           {releasesShown < releases.length && (

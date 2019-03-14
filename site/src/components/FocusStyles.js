@@ -1,6 +1,8 @@
 import React from 'react'
 import { css, Global } from '@emotion/core'
 
+const navigationKeyCodes = [9, 13, 27, 38, 40]
+
 const zeroFocusOutline = css`
   *:focus {
     outline: 0;
@@ -11,7 +13,7 @@ export const FocusStyles = () => {
   const [usingKeyboard, setUsingKeyboard] = React.useState(false)
 
   const checkUsingKeyboard = React.useCallback(({ keyCode }) => {
-    if (keyCode === 9) {
+    if (navigationKeyCodes.includes(keyCode)) {
       setUsingKeyboard(true)
     }
   }, [])

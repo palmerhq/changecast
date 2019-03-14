@@ -6,6 +6,12 @@ export const theme = {
     text: '#24292e',
     accent: '#586069',
   },
+  media: {
+    small: '@media(min-width: 400px)',
+    medium: '@media(min-width: 800px)',
+    large: '@media(min-width: 1200px)',
+    xlarge: '@media(min-width: 1600px)',
+  },
   markdown: {
     color: {
       blockquote: '#24292e',

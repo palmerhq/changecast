@@ -16,9 +16,12 @@ export const globalStyles = css`
     font-size: ${theme.fontSize};
     font-style: normal;
     color: ${theme.color.text};
-    -webkit-font-smoothing: antialiased;
     line-height: 1.58;
     background: #f7f7f7;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -ms-overflow-style: scrollbar;
   }
 
   a {
