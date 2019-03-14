@@ -1,30 +1,22 @@
 import { fetch } from 'whatwg-fetch'
 import createFocusTrap from 'focus-trap'
-import {
-  changelogNotification,
-  changelogIframe,
-  changelogIframeOpen,
-  changelogIframeHidden,
-  changelogOverlay,
-  changelogOverlayOpen,
-  changelogOverlayHidden,
-} from './style.css'
+import * as styles from './styles.css'
+
+// configuration
+const changelogHost = process.env.URL
+const CHANGELOG_LOCALSTORAGE_KEY = `changelog-${process.env.REPO_HASH}`
+
+// find all toggles
+const toggleSelectors =
+  document.currentScript.getAttribute('data-selectors') ||
+  '[data-toggle-changelog]'
+const toggles = document.querySelectorAll(toggleSelectors)
 
 function createWidget() {
   // bail early if the widget has already been created
-  if (document.querySelector(changelogIframe)) {
+  if (document.querySelector(styles.iframe)) {
     return
   }
-
-  // configuration
-  const changelogHost = process.env.URL
-  const CHANGELOG_LOCALSTORAGE_KEY = `changelog-${process.env.REPO_HASH}`
-
-  // find all toggles
-  const toggleSelectors =
-    document.currentScript.getAttribute('data-selectors') ||
-    '[data-toggle-changelog]'
-  const toggles = document.querySelectorAll(toggleSelectors)
 
   // add click handlers to toggles
   toggles.forEach(toggle => toggle.addEventListener('click', toggleChangelog))
@@ -36,13 +28,14 @@ function createWidget() {
   const iframe = document.createElement('iframe')
   iframe.src = `${changelogHost}/widget`
   iframe.allowFullscreen = true
+  iframe.scrolling = 'no'
   iframe.tabIndex = 0
   iframe.setAttribute('role', 'dialog')
   iframe.setAttribute('aria-label', 'changelog')
 
   // hide overlay and iframe to start
-  overlay.className = `${changelogOverlay} ${changelogOverlayHidden}`
-  iframe.className = `${changelogIframe} ${changelogIframeHidden}`
+  overlay.className = `${styles.overlay} ${styles.overlayHidden}`
+  iframe.className = `${styles.iframe} ${styles.iframeHidden}`
 
   document.body.appendChild(overlay)
   document.body.appendChild(iframe)
@@ -59,8 +52,8 @@ function createWidget() {
   function openChangelog() {
     open = true
 
-    overlay.className = `${changelogOverlay} ${changelogOverlayOpen}`
-    iframe.className = `${changelogIframe} ${changelogIframeOpen}`
+    overlay.className = `${styles.overlay} ${styles.overlayOpen}`
+    iframe.className = `${styles.iframe} ${styles.iframeOpen}`
 
     focusTrap.activate()
     window.addEventListener('click', toggleChangelog, true)
@@ -83,12 +76,12 @@ function createWidget() {
     focusTrap.deactivate()
     window.removeEventListener('click', toggleChangelog, true)
 
-    overlay.className = changelogOverlay
-    iframe.className = changelogIframe
+    overlay.className = styles.overlay
+    iframe.className = styles.iframe
 
     setTimeout(() => {
-      overlay.className = `${changelogOverlay} ${changelogOverlayHidden}`
-      iframe.className = `${changelogIframe} ${changelogIframeHidden}`
+      overlay.className = `${styles.overlay} ${styles.overlayHidden}`
+      iframe.className = `${styles.iframe} ${styles.iframeHidden}`
     }, 500)
   }
 
@@ -114,7 +107,7 @@ function createWidget() {
   // notifications
   const notification = document.createElement('span')
   notification.setAttribute('data-changelog-notification', true)
-  notification.className = changelogNotification
+  notification.className = styles.notification
 
   const toggleStyle = document.createElement('style')
   document.head.appendChild(toggleStyle)
@@ -155,4 +148,4 @@ function createWidget() {
     })
 }
 
-createWidget()
+window.addEventListener('load', createWidget)

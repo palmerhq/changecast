@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Release } from '../components/Release'
+import { Release } from '../components/Release/Release'
 import { SiteWrapper } from '../components/SiteWrapper'
 import Waypoint from 'react-waypoint'
 import { Wrapper } from '../components/Wrapper'

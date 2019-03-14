@@ -1,6 +1,7 @@
 import React from 'react'
 import { Close } from './Icon/Close'
 import VisuallyHidden from '@reach/visually-hidden'
+import { theme } from '../styles/theme'
 
 function close() {
   window.parent.postMessage('close', '*')
@@ -30,7 +31,7 @@ export const WidgetWrapper = ({
           background: `rgb(${red}, ${green}, ${blue})`,
           color: 'white',
           width: '100%',
-          zIndex: '1',
+          zIndex: 1,
           height: 54,
           display: 'flex',
           alignItems: 'center',
@@ -76,7 +77,13 @@ export const WidgetWrapper = ({
       <main
         css={{
           width: '100vw',
-          padding: 'calc(0.5rem + 54px) 0.5rem 0.5rem 0.5rem',
+          height: '100vh',
+          paddingTop: 'calc(0.5rem + 54px)',
+          [theme.media.small]: {
+            padding: 'calc(0.5rem + 54px) 0.5rem 0.5rem 0.5rem',
+          },
+          overflow: 'scroll',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
         {children}
