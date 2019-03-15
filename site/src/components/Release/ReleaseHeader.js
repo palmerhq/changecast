@@ -6,7 +6,7 @@ import {
   format,
 } from 'date-fns'
 import { Menu, MenuButton, MenuList, MenuItem } from '../MenuButton'
-import { Share } from '../Icon/Share'
+import { Cast } from '../Icon/Cast'
 import VisuallyHidden from '@reach/visually-hidden'
 import { windowPopup } from '../../utils/windowPopup'
 import { Linkedin } from '../Icon/Linkedin'
@@ -86,7 +86,7 @@ export const ReleaseHeader = ({
 
       <Menu>
         <MenuButton>
-          <Share />
+          <Cast />
           <VisuallyHidden>Share {title}</VisuallyHidden>
         </MenuButton>
         <MenuList

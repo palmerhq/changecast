@@ -1,5 +1,5 @@
 {
-  "name": "changelog",
+  "name": "changecast",
   "private": true,
   "scripts": {
     "build": "yarn build:widget && yarn build:site",

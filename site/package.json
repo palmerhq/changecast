@@ -1,7 +1,7 @@
 {
-  "name": "changelog-site",
+  "name": "changecast-site",
   "private": true,
-  "description": "Changelog site and widget generated from a project's Github releases.",
+  "description": "ChangeCast site generated from Github releases.",
   "version": "0.1.0",
   "author": "Jack Cross <jackjocross@gmail.com>",
   "license": "MIT",
