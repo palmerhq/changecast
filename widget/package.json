@@ -1,7 +1,7 @@
 {
-  "name": "changelog-widget",
+  "name": "changecast-widget",
   "private": true,
-  "description": "Embedded changelog widget.",
+  "description": "Embedded ChangeCast widget.",
   "version": "0.1.0",
   "author": "Jack Cross <jackjocross@gmail.com>",
   "license": "MIT",

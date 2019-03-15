@@ -4,12 +4,12 @@ import * as styles from './styles.css'
 
 // configuration
 const changelogHost = process.env.URL
-const CHANGELOG_LOCALSTORAGE_KEY = `changelog-${process.env.REPO_HASH}`
+const CHANGECAST_LOCALSTORAGE_KEY = `changecast-${process.env.REPO_HASH}`
 
 // find all toggles
 const toggleSelectors =
   document.currentScript.getAttribute('data-selectors') ||
-  '[data-toggle-changelog]'
+  '[data-toggle-changecast]'
 const toggles = document.querySelectorAll(toggleSelectors)
 
 function createWidget() {
@@ -19,7 +19,7 @@ function createWidget() {
   }
 
   // add click handlers to toggles
-  toggles.forEach(toggle => toggle.addEventListener('click', toggleChangelog))
+  toggles.forEach(toggle => toggle.addEventListener('click', toggleChangeCast))
 
   // create overlay
   const overlay = document.createElement('div')
@@ -31,7 +31,7 @@ function createWidget() {
   iframe.scrolling = 'no'
   iframe.tabIndex = 0
   iframe.setAttribute('role', 'dialog')
-  iframe.setAttribute('aria-label', 'changelog')
+  iframe.setAttribute('aria-label', 'changecast')
 
   // hide overlay and iframe to start
   overlay.className = `${styles.overlay} ${styles.overlayHidden}`
@@ -49,17 +49,17 @@ function createWidget() {
   let mostRecentReleaseDate
   let toggleNotifications = new Map()
 
-  function openChangelog() {
+  function openChangeCast() {
     open = true
 
     overlay.className = `${styles.overlay} ${styles.overlayOpen}`
     iframe.className = `${styles.iframe} ${styles.iframeOpen}`
 
     focusTrap.activate()
-    window.addEventListener('click', toggleChangelog, true)
+    window.addEventListener('click', toggleChangeCast, true)
 
     window.localStorage.setItem(
-      CHANGELOG_LOCALSTORAGE_KEY,
+      CHANGECAST_LOCALSTORAGE_KEY,
       mostRecentReleaseDate
     )
     if (toggleNotifications.size) {
@@ -70,11 +70,11 @@ function createWidget() {
     }
   }
 
-  function closeChangelog() {
+  function closeChangeCast() {
     open = false
 
     focusTrap.deactivate()
-    window.removeEventListener('click', toggleChangelog, true)
+    window.removeEventListener('click', toggleChangeCast, true)
 
     overlay.className = styles.overlay
     iframe.className = styles.iframe
@@ -85,11 +85,11 @@ function createWidget() {
     }, 500)
   }
 
-  function toggleChangelog() {
+  function toggleChangeCast() {
     if (open) {
-      closeChangelog()
+      closeChangeCast()
     } else {
-      openChangelog()
+      openChangeCast()
     }
   }
 
@@ -98,7 +98,7 @@ function createWidget() {
     'message',
     event => {
       if (event.origin === changelogHost) {
-        closeChangelog()
+        closeChangeCast()
       }
     },
     true
@@ -106,7 +106,7 @@ function createWidget() {
 
   // notifications
   const notification = document.createElement('span')
-  notification.setAttribute('data-changelog-notification', true)
+  notification.setAttribute('data-changecast-notification', true)
   notification.className = styles.notification
 
   const toggleStyle = document.createElement('style')
@@ -124,7 +124,7 @@ function createWidget() {
       mostRecentReleaseDate = dates[0]
 
       const lastReleaseViewed = window.localStorage.getItem(
-        CHANGELOG_LOCALSTORAGE_KEY
+        CHANGECAST_LOCALSTORAGE_KEY
       )
 
       if (lastReleaseViewed) {
@@ -141,7 +141,7 @@ function createWidget() {
         }
       } else {
         window.localStorage.setItem(
-          CHANGELOG_LOCALSTORAGE_KEY,
+          CHANGECAST_LOCALSTORAGE_KEY,
           mostRecentReleaseDate
         )
       }
