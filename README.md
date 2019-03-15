@@ -8,7 +8,7 @@ Create a beautiful, performant, accessible changelog from your Github releases.
 
 #### Netlify
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/palmerhq/change-cast)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/palmerhq/changecast)
 
 You will be prompted for the following information:
 

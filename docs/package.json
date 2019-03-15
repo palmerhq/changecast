@@ -1,7 +1,7 @@
 {
   "name": "changecast-docs",
   "private": true,
-  "description": "Changelog documentation",
+  "description": "ChangeCast documentation and landing page.",
   "version": "0.1.0",
   "author": "Jack Cross <jackjocross@gmail.com>",
   "license": "MIT",
@@ -9,13 +9,16 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "serve": "gatsby serve",
+    "icons": "svgr --template ./scripts/svgrTemplate.js -d ./src/components/Icon ./icons",
     "now-build": "yarn build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.7",
+    "@svgr/cli": "^4.1.0",
     "gatsby": "^2.1.22",
     "gatsby-plugin-emotion": "^4.0.4",
     "gatsby-plugin-react-helmet": "^3.0.7",
+    "normalize.css": "^8.0.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-helmet": "^5.2.0"
