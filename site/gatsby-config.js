@@ -9,6 +9,20 @@ module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sharp',
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/styles/typography`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-github-releases',
+      options: {
+        url: process.env.GITHUB_REPO_URL,
+        token: process.env.GITHUB_ACCESS_TOKEN,
+      },
+    },
     'gatsby-transformer-json',
     'gatsby-transformer-sharp',
     'gatsby-transformer-color-thief',
@@ -21,7 +35,6 @@ module.exports = {
       },
     },
     'gatsby-transformer-favicons',
-    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -31,13 +44,6 @@ module.exports = {
           'gatsby-remark-external-links',
           'gatsby-remark-gemoji-to-emoji',
         ],
-      },
-    },
-    {
-      resolve: 'gatsby-source-github-releases',
-      options: {
-        url: process.env.GITHUB_REPO_URL,
-        token: process.env.GITHUB_ACCESS_TOKEN,
       },
     },
   ],

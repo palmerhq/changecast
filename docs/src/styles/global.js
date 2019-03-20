@@ -1,4 +1,5 @@
 import { css } from '@emotion/core'
+import { fonts } from './typography'
 import 'normalize.css'
 
 export const globalStyles = css`
@@ -10,11 +11,14 @@ export const globalStyles = css`
 
   html {
     height: 100%;
-    font-size: 16px;
+    font-family: ${fonts.regular}, sans-serif;
+    font-style: normal;
     line-height: 1.15;
+    text-rendering: optimizeLegibility;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   *::-moz-selection,
@@ -31,8 +35,6 @@ export const globalStyles = css`
 
   body {
     background-color: white;
-    font-family: 'Lato', Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
     color: #3d3d3d;
   }
   body.state-fixed-body {
@@ -51,20 +53,12 @@ export const globalStyles = css`
     overflow: visible;
   }
 
-  strong,
-  b {
-    font-weight: 700;
-  }
-
   input,
   button,
   select,
   optgroup,
   textarea {
     margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
   }
 
   button,

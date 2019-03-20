@@ -10,6 +10,7 @@ import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { Features } from '../components/Features'
 import { Section } from '../components/Section'
+import { FocusStyles } from '../components/FocusStyles'
 
 const IndexPage = ({
   data: {
@@ -25,6 +26,7 @@ const IndexPage = ({
   },
 }) => (
   <>
+    <FocusStyles />
     <Global styles={globalStyles} />
     <Helmet>
       <script

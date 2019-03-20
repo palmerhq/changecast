@@ -2,6 +2,7 @@ import React from 'react'
 import { Close } from '../../../icons/Close'
 import VisuallyHidden from '@reach/visually-hidden'
 import { theme } from '../styles/theme'
+import { fonts } from '../styles/typography'
 
 function close() {
   window.parent.postMessage('close', '*')
@@ -40,10 +41,10 @@ export const WidgetWrapper = ({
           boxShadow: '0 1px 6px 0 rgba(32,33,36,0.28)',
         }}
       >
-        <h1
+        <h2
           css={{
-            fontSize: '1.3rem',
-            lineHeight: '1.3rem',
+            fontFamily: fonts.regular,
+            color: 'white',
             margin: '0',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
@@ -51,7 +52,7 @@ export const WidgetWrapper = ({
           }}
         >
           Changelog
-        </h1>
+        </h2>
         <button
           css={{
             border: 'none',

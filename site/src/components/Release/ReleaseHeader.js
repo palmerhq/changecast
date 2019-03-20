@@ -42,10 +42,9 @@ export const ReleaseHeader = ({
       {...rest}
     >
       <div>
-        <h1
+        <h2
           css={{
             margin: '0 0 0.5rem 0',
-            fontSize: '1.75rem',
           }}
         >
           {embeddedInIframe ? (
@@ -65,7 +64,7 @@ export const ReleaseHeader = ({
               {title}
             </Link>
           )}
-        </h1>
+        </h2>
         {typeof window !== 'undefined' && (
           <p
             css={{

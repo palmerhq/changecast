@@ -23,5 +23,11 @@ module.exports = {
       },
     },
     'gatsby-transformer-favicons',
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/styles/typography`,
+      },
+    },
   ],
 }
