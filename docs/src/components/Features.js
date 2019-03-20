@@ -1,12 +1,12 @@
 import React from 'react'
 import { AnchorButton } from '../components/Button/AnchorButton'
-import { AbstractIcon1 } from '../components/Icon/AbstractIcon1'
-import { AbstractIcon2 } from '../components/Icon/AbstractIcon2'
-import { AbstractIcon3 } from '../components/Icon/AbstractIcon3'
-import { AbstractIcon4 } from '../components/Icon/AbstractIcon4'
-import { AbstractIcon5 } from '../components/Icon/AbstractIcon5'
-import { AbstractIcon6 } from '../components/Icon/AbstractIcon6'
-import { AbstractIcon7 } from '../components/Icon/AbstractIcon7'
+import { AbstractIcon1 } from '../../../icons/AbstractIcon1'
+import { AbstractIcon2 } from '../../../icons/AbstractIcon2'
+import { AbstractIcon3 } from '../../../icons/AbstractIcon3'
+import { AbstractIcon4 } from '../../../icons/AbstractIcon4'
+import { AbstractIcon5 } from '../../../icons/AbstractIcon5'
+import { AbstractIcon6 } from '../../../icons/AbstractIcon6'
+import { AbstractIcon7 } from '../../../icons/AbstractIcon7'
 
 const Feature = ({ title, icon: Icon, children }) => (
   <li

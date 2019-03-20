@@ -11,5 +11,17 @@ module.exports = {
       process.env.THIRD_EXAMPLE_URL,
     ],
   },
-  plugins: ['gatsby-plugin-emotion', 'gatsby-plugin-react-helmet'],
+  plugins: [
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-transformer-og-image',
+      options: {
+        fontPath: '../fonts/Inter-UI-SemiBold.woff',
+        fontColor: '#24292e',
+        backgroundColor: '#f7f7f7',
+      },
+    },
+    'gatsby-transformer-favicons',
+  ],
 }

@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import { Global } from '@emotion/core'
 import { globalStyles } from '../styles/global'
 import { Button } from '../components/Button/Button'
-import { Cast } from '../components/Icon/Cast'
+import { Cast } from '../../../icons/Cast'
 
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'

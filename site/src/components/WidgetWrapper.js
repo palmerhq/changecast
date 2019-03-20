@@ -1,5 +1,5 @@
 import React from 'react'
-import { Close } from './Icon/Close'
+import { Close } from '../../../icons/Close'
 import VisuallyHidden from '@reach/visually-hidden'
 import { theme } from '../styles/theme'
 

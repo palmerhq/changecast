@@ -97,7 +97,7 @@ export const Wrapper = ({ children }) => (
             ],
           },
         } = data
-
+        console.log({ data })
         const primaryColor = getPrimaryColor(data)
         const ogImageSrc = getOgImageSrc(data)
         const logoSrc = getLogoSrc(data)

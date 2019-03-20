@@ -1,24 +1,27 @@
 {
   "name": "changecast",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "yarn build:widget && yarn build:site",
     "build:site": "cd site && yarn build",
     "build:widget": "cd widget && yarn build",
-    "now-build": "yarn build",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "now-build": "yarn build"
+  },
+  "devDependencies": {
+    "patch-package": "^6.0.5",
+    "postinstall-postinstall": "^2.0.0"
   },
   "workspaces": {
     "packages": [
       "site",
       "widget"
-    ],
-    "nohoist": [
-      "gatsby"
     ]
   },
-  "devDependencies": {
-    "patch-package": "^6.0.5",
-    "postinstall-postinstall": "^2.0.0"
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }

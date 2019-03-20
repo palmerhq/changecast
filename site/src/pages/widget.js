@@ -4,7 +4,6 @@ import Waypoint from 'react-waypoint'
 import { Release } from '../components/Release/Release'
 import { WidgetWrapper } from '../components/WidgetWrapper'
 import { Wrapper } from '../components/Wrapper'
-import { ReleaseHeader } from '../components/Release/ReleaseHeader'
 
 const WidgetPage = ({
   data: {
@@ -12,7 +11,6 @@ const WidgetPage = ({
   },
 }) => {
   const [releasesShown, setReleasesShown] = React.useState(10)
-  const [releaseIndex, setReleaseIndex] = React.useState(0)
 
   return (
     <Wrapper>
@@ -36,24 +34,17 @@ const WidgetPage = ({
                 },
                 index
               ) => (
-                <React.Fragment key={id}>
-                  <Waypoint
-                    onLeave={() => setReleaseIndex(index)}
-                    topOffset="54px"
-                    fireOnRapidScroll={true}
-                  />
-                  <Release
-                    // key={id}
-                    releaseName={name}
-                    tagName={tagName}
-                    publishedAt={publishedAt}
-                    html={html}
-                    body={body}
-                    embeddedInIframe={true}
-                    primaryColor={primaryColor}
-                    url={url}
-                  />
-                </React.Fragment>
+                <Release
+                  key={id}
+                  releaseName={name}
+                  tagName={tagName}
+                  publishedAt={publishedAt}
+                  html={html}
+                  body={body}
+                  embeddedInIframe={true}
+                  primaryColor={primaryColor}
+                  url={url}
+                />
               )
             )}
           {releasesShown < releases.length && (
