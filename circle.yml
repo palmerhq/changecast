@@ -136,6 +136,10 @@ jobs:
       - run:
           name: Install Now CLI
           command: sudo npm install --global --unsafe-perm now
+      
+      - run:
+          name: Install Dependencies
+          command: yarn
 
       - run:
           name: Setup Environment Variables
@@ -144,36 +148,39 @@ jobs:
 
       - run:
           name: Build docs
+          environment:
+            FIRST_EXAMPLE_URL: https://changecast-1.now.sh
+            SECOND_EXAMPLE_URL: https://changecast-2.now.sh
+            THIRD_EXAMPLE_URL: https://changecast-3.now.sh
           command: cd docs
 
+            FIRST_EXAMPLE_URL=https://changecast-1.now.sh SECOND_EXAMPLE_URL=https://changecast-2.now.sh THIRD_EXAMPLE_URL=https://changecast-3.now.sh yarn build
+          
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-
               DOCS_URL=$(
                 now
-                --build-env FIRST_EXAMPLE_URL=https://changecast-1.now.sh
-                --build-env SECOND_EXAMPLE_URL=https://changecast-2.now.sh
-                --build-env THIRD_EXAMPLE_URL=https://changecast-3.now.sh
-                --team=palmer
-                --public
-                --token=$NOW_TOKEN
+                  ./public
+                  --local-config=../now.json
+                  --team=palmer
+                  --public
+                  --token=$NOW_TOKEN
               )
 
               now alias $DOCS_URL changecast --team=palmer --token=$NOW_TOKEN;
 
             else
-
+              FIRST_EXAMPLE_URL=https://changecast-1-${SHORT_SHA1}.now.sh SECOND_EXAMPLE_URL=https://changecast-2-${SHORT_SHA1}.now.sh THIRD_EXAMPLE_URL=https://changecast-3-${SHORT_SHA1}.now.sh yarn build
+              
               DOCS_URL=$(
                 now
-                  --build-env FIRST_EXAMPLE_URL=https://changecast-1-${SHORT_SHA1}.now.sh
-                  --build-env SECOND_EXAMPLE_URL=https://changecast-2-${SHORT_SHA1}.now.sh
-                  --build-env THIRD_EXAMPLE_URL=https://changecast-3-${SHORT_SHA1}.now.sh
+                  ./public 
+                  --local-config=../now.json
                   --team=palmer
                   --public
                   --token=$NOW_TOKEN
               )
 
               now alias $DOCS_URL changecast-${SHORT_SHA1} --team=palmer --token=$NOW_TOKEN;
-
             fi
 
 workflows:

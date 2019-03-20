@@ -3,9 +3,7 @@
   "name": "changecast-docs",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@now/static-build",
-      "config": { "distDir": "public" }
+      "use": "@now/static"
     }
   ]
 }
