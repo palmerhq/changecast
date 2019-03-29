@@ -43,6 +43,7 @@ module.exports = {
           'gatsby-remark-prismjs',
           'gatsby-remark-external-links',
           'gatsby-remark-gemoji-to-emoji',
+          'gatsby-transformer-remark-plaintext',
         ],
       },
     },
@@ -56,10 +57,6 @@ function generateMetadata() {
     primaryColor: process.env.PRIMARY_COLOR
       ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
       : false,
-    url:
-      process.env.URL ||
-      (process.env.NODE_ENV === 'development'
-        ? 'http://localhost:8000'
-        : 'http://localhost:9000'),
+    url: process.env.URL || '',
   }
 }

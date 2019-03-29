@@ -3,13 +3,16 @@ import createFocusTrap from 'focus-trap'
 import * as styles from './styles.css'
 
 // configuration
-const changelogHost = process.env.URL
 const CHANGECAST_LOCALSTORAGE_KEY = `changecast-${process.env.REPO_HASH}`
+const changeCastHost =
+  process.env.URL ||
+  document.currentScript.getAttribute('src').replace('/widget.js', '')
 
 // find all toggles
 const toggleSelectors =
   document.currentScript.getAttribute('data-selectors') ||
   '[data-toggle-changecast]'
+
 const toggles = document.querySelectorAll(toggleSelectors)
 
 function createWidget() {
@@ -26,12 +29,12 @@ function createWidget() {
 
   // create iframe
   const iframe = document.createElement('iframe')
-  iframe.src = `${changelogHost}/widget`
+  iframe.src = `${changeCastHost}/widget`
   iframe.allowFullscreen = true
   iframe.scrolling = 'no'
   iframe.tabIndex = 0
   iframe.setAttribute('role', 'dialog')
-  iframe.setAttribute('aria-label', 'changecast')
+  iframe.setAttribute('aria-label', 'ChangeCast Changelog')
 
   // hide overlay and iframe to start
   overlay.className = `${styles.overlay} ${styles.overlayHidden}`
@@ -97,7 +100,7 @@ function createWidget() {
   window.addEventListener(
     'message',
     event => {
-      if (event.origin === changelogHost) {
+      if (event.origin === changeCastHost) {
         closeChangeCast()
       }
     },
@@ -113,7 +116,7 @@ function createWidget() {
   document.head.appendChild(toggleStyle)
   toggleStyle.sheet.insertRule(`${toggleSelectors} { position: relative; }`)
 
-  fetch(`${changelogHost}/release-dates.json`)
+  fetch(`${changeCastHost}/release-dates.json`)
     .then(
       res => res.json(),
       err => {

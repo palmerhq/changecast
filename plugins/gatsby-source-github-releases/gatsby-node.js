@@ -2,7 +2,6 @@ const Octokat = require('octokat')
 const md5 = require('md5')
 const parseGitUrl = require('git-url-parse')
 const { linkify } = require('linkify-markdown')
-const { getColorFromURL } = require('color-thief-node')
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
 exports.sourceNodes = async (

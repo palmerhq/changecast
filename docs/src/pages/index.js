@@ -30,16 +30,19 @@ const IndexPage = ({
     <Global styles={globalStyles} />
     <Helmet>
       <script
+        key="redux-changecast"
         src={`${reduxChangeCastUrl}/widget.js`}
         data-selectors="[data-redux-changecast]"
         defer
       />
       <script
+        key="vue-changecast"
         src={`${vueChangeCastUrl}/widget.js`}
         data-selectors="[data-vue-changecast]"
         defer
       />
       <script
+        key="react-beautiful-dnd-changecast"
         src={`${reactDndChangeCastUrl}/widget.js`}
         data-selectors="[data-react-beautiful-dnd-changecast]"
         defer

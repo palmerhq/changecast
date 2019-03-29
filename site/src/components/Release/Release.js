@@ -7,7 +7,7 @@ export const Release = ({
   releaseName,
   tagName,
   publishedAt,
-  body,
+  plainText,
   html,
   embeddedInIframe,
   primaryColor,
@@ -40,7 +40,7 @@ export const Release = ({
         url={url}
       />
       <div css={{ padding: '0 1rem', margin: '1rem 0' }}>
-        {body ? (
+        {plainText ? (
           <div
             css={[
               markdownStyles,
