@@ -1,5 +1,5 @@
+import { Cast } from 'icons/Cast'
 import React from 'react'
-import { Cast } from '../../../icons/Cast'
 
 export const Footer = () => (
   <div

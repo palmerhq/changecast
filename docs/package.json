@@ -20,6 +20,7 @@
     "gatsby-source-filesystem": "^2.0.23",
     "gatsby-transformer-favicons": "file:../plugins/gatsby-transformer-favicons",
     "gatsby-transformer-og-image": "file:../plugins/gatsby-transformer-og-image",
+    "icons": "0.1.0",
     "normalize.css": "^8.0.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",

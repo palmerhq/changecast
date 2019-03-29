@@ -1,34 +1,22 @@
-import React from 'react'
 import {
   differenceInDays,
   distanceInWordsToNow,
-  isThisYear,
   format,
+  isThisYear,
 } from 'date-fns'
-import { Menu, MenuButton, MenuList, MenuItem } from '../MenuButton'
-import VisuallyHidden from '@reach/visually-hidden'
-import { windowPopup } from '../../utils/windowPopup'
-import { copyToClipboard } from '../../utils/copyToClipboard'
-import { Linkedin } from '../../../../icons/Linkedin'
-import { Twitter } from '../../../../icons/Twitter'
-import { Facebook } from '../../../../icons/Facebook'
-import { Copy } from '../../../../icons/Copy'
-import { Cast } from '../../../../icons/Cast'
 import { Link } from 'gatsby'
+import React from 'react'
 import { theme } from '../../styles/theme'
 
 export const ReleaseHeader = ({
-  releaseName,
+  title,
   tagName,
   publishedAt,
-  embeddedInIframe,
+  isWidget,
   primaryColor: [red, green, blue],
   url,
   ...rest
 }) => {
-  const shareableUrl = `${url}/${tagName}`
-  const title = releaseName || tagName
-
   return (
     <div
       css={{
@@ -41,112 +29,45 @@ export const ReleaseHeader = ({
       }}
       {...rest}
     >
-      <div>
-        <h2
-          css={{
-            margin: '0 0 0.5rem 0',
-          }}
-        >
-          {embeddedInIframe ? (
-            <a
-              href={`/${tagName}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              css={{ color: `rgb(${red}, ${green}, ${blue})` }}
-            >
-              {title}
-            </a>
-          ) : (
-            <Link
-              to={`/${tagName}`}
-              css={{ color: `rgb(${red}, ${green}, ${blue})` }}
-            >
-              {title}
-            </Link>
-          )}
-        </h2>
-        {typeof window !== 'undefined' && (
-          <p
-            css={{
-              color: theme.color.accent,
-              margin: 0,
-            }}
+      <h2
+        css={{
+          margin: '0',
+        }}
+      >
+        {isWidget ? (
+          <a
+            href={`/${tagName}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            css={{ color: `rgb(${red}, ${green}, ${blue})` }}
           >
-            {differenceInDays(Date.now(), publishedAt) < 30
-              ? distanceInWordsToNow(publishedAt, {
-                  addSuffix: true,
-                })
-              : isThisYear(publishedAt)
-              ? format(publishedAt, 'MMM D')
-              : format(publishedAt, 'MMMM Do, YYYY')}
-          </p>
+            {title}
+          </a>
+        ) : (
+          <Link
+            to={`/${tagName}`}
+            css={{ color: `rgb(${red}, ${green}, ${blue})` }}
+          >
+            {title}
+          </Link>
         )}
-      </div>
-
-      <Menu>
-        <MenuButton>
-          <Cast />
-          <VisuallyHidden>Share {title}</VisuallyHidden>
-        </MenuButton>
-        <MenuList
+      </h2>
+      {typeof window !== 'undefined' && (
+        <p
           css={{
-            '[data-selected]': {
-              background: `rgb(${red}, ${green}, ${blue})`,
-            },
+            color: theme.color.accent,
+            margin: 0,
           }}
         >
-          <MenuItem
-            onSelect={() =>
-              windowPopup(
-                `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                  shareableUrl
-                )}`,
-                500,
-                300
-              )
-            }
-          >
-            <Facebook
-              css={{ height: '1rem', width: '1rem', marginRight: 10 }}
-            />
-            Facebook
-          </MenuItem>
-          <MenuItem
-            onSelect={() =>
-              windowPopup(
-                `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                  shareableUrl
-                )}`,
-                500,
-                300
-              )
-            }
-          >
-            <Twitter css={{ height: '1rem', width: '1rem', marginRight: 10 }} />
-            Twitter
-          </MenuItem>
-          <MenuItem
-            onSelect={() =>
-              windowPopup(
-                `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
-                  shareableUrl
-                )}&mini=true`,
-                500,
-                300
-              )
-            }
-          >
-            <Linkedin
-              css={{ height: '1rem', width: '1rem', marginRight: 10 }}
-            />
-            Linkedin
-          </MenuItem>
-          <MenuItem onSelect={() => copyToClipboard(shareableUrl)}>
-            <Copy css={{ height: '1rem', width: '1rem', marginRight: 10 }} />
-            Copy link
-          </MenuItem>
-        </MenuList>
-      </Menu>
+          {differenceInDays(Date.now(), publishedAt) < 30
+            ? distanceInWordsToNow(publishedAt, {
+                addSuffix: true,
+              })
+            : isThisYear(publishedAt)
+            ? format(publishedAt, 'MMM D')
+            : format(publishedAt, 'MMMM Do, YYYY')}
+        </p>
+      )}
     </div>
   )
 }

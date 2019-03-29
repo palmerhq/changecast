@@ -8,7 +8,6 @@ export const AnchorButton = props => (
       position: 'relative',
       padding: '12px 20px 12px',
       border: '2px solid transparent',
-      // minHeight: '44px',
       borderRadius: '4px',
       fontWeight: '700',
       userSelect: 'none',

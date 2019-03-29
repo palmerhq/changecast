@@ -1,16 +1,14 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
 import { Global } from '@emotion/core'
-import { globalStyles } from '../styles/global'
+import { graphql } from 'gatsby'
+import React from 'react'
+import Helmet from 'react-helmet'
 import { Button } from '../components/Button/Button'
-import { Cast } from '../../../icons/Cast'
-
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
 import { Features } from '../components/Features'
-import { Section } from '../components/Section'
 import { FocusStyles } from '../components/FocusStyles'
+import { Footer } from '../components/Footer'
+import { Header } from '../components/Header'
+import { Section } from '../components/Section'
+import { globalStyles } from '../styles/global'
 
 const IndexPage = ({
   data: {

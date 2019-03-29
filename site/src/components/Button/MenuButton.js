@@ -1,13 +1,13 @@
-import React from 'react'
 import { keyframes } from '@emotion/core'
 import {
   Menu,
   MenuButton as ReachMenuButton,
-  MenuList as ReachMenuList,
   MenuItem as ReachMenuItem,
   MenuLink as ReachMenuLink,
+  MenuList as ReachMenuList,
 } from '@reach/menu-button'
-import { theme } from '../styles/theme'
+import React from 'react'
+import { theme } from '../../styles/theme'
 
 export const MenuButton = props => (
   <ReachMenuButton

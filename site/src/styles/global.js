@@ -1,8 +1,7 @@
 import { css } from '@emotion/core'
+import '@reach/menu-button/styles.css'
 import { theme } from './theme'
 import { fonts } from './typography'
-
-import '@reach/menu-button/styles.css'
 
 export const globalStyles = css`
   * {

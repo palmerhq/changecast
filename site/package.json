@@ -41,6 +41,8 @@
     "gatsby-transformer-remark-plaintext": "^1.0.3",
     "gatsby-transformer-sharp": "^2.1.13",
     "hex-rgb": "^4.0.0",
+    "icons": "0.1.0",
+    "js-search": "^1.4.2",
     "just-debounce-it": "^1.1.0",
     "normalize.css": "^8.0.1",
     "object-assign": "^4.1.1",

@@ -1,6 +1,6 @@
+import { Cast } from 'icons/Cast'
 import React from 'react'
 import { AnchorButton } from './Button/AnchorButton'
-import { Cast } from '../../../icons/Cast'
 
 export const Header = () => (
   <header>
