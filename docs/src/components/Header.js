@@ -37,19 +37,25 @@ export const Header = () => (
               padding: '0',
               margin: '0',
               listStyle: 'none',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
             <li
               css={{
-                display: 'inline-block',
-                marginRight: '15px',
+                marginRight: 15,
+                marginBottom: 0,
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
               <AnchorButton>What's New?</AnchorButton>
             </li>
             <li
               css={{
-                display: 'inline-block',
+                marginBottom: 0,
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
               <AnchorButton href="https://github.com/palmerhq/changecast">
@@ -70,10 +76,13 @@ export const Header = () => (
       }}
     >
       <div css={{ maxWidth: '500px', padding: '0 20px' }}>
-        <h2 css={{ color: 'black', fontSize: '3em' }}>ChangeCast</h2>
+        <h2 css={{ color: 'black', fontSize: '3em' }}>
+          Change
+          <wbr />
+          Cast
+        </h2>
         <p css={{ color: 'black' }}>
-          Create beautiful, performant, accessible changelogs from your Github
-          releases.
+          Create beautiful, performant, accessible changelog sites and widgets.
         </p>
       </div>
     </div>

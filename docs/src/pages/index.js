@@ -26,42 +26,59 @@ const IndexPage = ({
   <>
     <FocusStyles />
     <Global styles={globalStyles} />
-    <Helmet>
-      <script
-        key="redux-changecast"
-        src={`${reduxChangeCastUrl}/widget.js`}
-        data-selectors="[data-redux-changecast]"
-        defer
-      />
-      <script
-        key="vue-changecast"
-        src={`${vueChangeCastUrl}/widget.js`}
-        data-selectors="[data-vue-changecast]"
-        defer
-      />
-      <script
-        key="react-beautiful-dnd-changecast"
-        src={`${reactDndChangeCastUrl}/widget.js`}
-        data-selectors="[data-react-beautiful-dnd-changecast]"
-        defer
-      />
-    </Helmet>
+
+    {(process.env.NODE_ENV === 'development' ||
+      typeof window === 'undefined') && (
+      <Helmet>
+        <script
+          src={`${reduxChangeCastUrl}/widget.js`}
+          data-selectors="[data-redux-changecast]"
+          defer
+        />
+        <script
+          src={`${vueChangeCastUrl}/widget.js`}
+          data-selectors="[data-vue-changecast]"
+          defer
+        />
+        <script
+          src={`${reactDndChangeCastUrl}/widget.js`}
+          data-selectors="[data-react-beautiful-dnd-changecast]"
+          defer
+        />
+      </Helmet>
+    )}
+
     <Header />
     <Section
-      title="Give ChangeCast a Try"
-      subtitle="See For Yourself"
-      content="Ecce, teres racana! Hercle, racana raptus!, bassus axona! Albus extum
-          grauiter magicaes usus est. A falsis, compater altus heuretes. Nixus
-          de placidus lacta, dignus cacula! Alter, regius eras absolute talem de
-          superbus, emeritis lumen."
+      subtitle="What we do"
+      title="How does it work?"
+      content="ChangeCast generates a static site and widget from your Github releases. 
+          Adding these to your project homepage will keep users informed of any updates 
+          you make. Try the examples below to see ChangeCast in action!"
     >
-      <Button color="#4fc08d" data-vue-changecast css={{ marginRight: '30px' }}>
+      <Button
+        color="#4fc08d"
+        data-vue-changecast
+        css={{
+          marginRight: 30,
+          '@media (max-width: 600px)': {
+            marginRight: 0,
+            marginBottom: 15,
+          },
+        }}
+      >
         Vue
       </Button>
       <Button
         color="#764abc"
         data-redux-changecast
-        css={{ marginRight: '30px' }}
+        css={{
+          marginRight: 30,
+          '@media (max-width: 600px)': {
+            marginRight: 0,
+            marginBottom: 15,
+          },
+        }}
       >
         Redux
       </Button>
@@ -71,17 +88,17 @@ const IndexPage = ({
     </Section>
     <Features />
     <Section
+      subtitle="How to start"
       title="Deploy With One Click"
-      subtitle="Try It Out"
-      content="Ecce, teres racana! Hercle, racana raptus!, bassus axona! Albus extum
-          grauiter magicaes usus est. A falsis, compater altus heuretes. Nixus
-          de placidus lacta, dignus cacula! Alter, regius eras absolute talem de
-          superbus, emeritis lumen."
+      content="ChangeCast can be built and deployed on Netlify, Now, or any other 
+          static hosting service. And, using a Github webhook or action, you can 
+          configure ChangeCast to redeploy whenver you cut a new release."
     >
       <a href="https://app.netlify.com/start/deploy?repository=https://github.com/palmerhq/changecast">
         <img
           src="https://www.netlify.com/img/deploy/button.svg"
           alt="Deploy to Netlify"
+          css={{ marginBottom: 0 }}
         />
       </a>
     </Section>

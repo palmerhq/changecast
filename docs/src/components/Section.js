@@ -45,12 +45,16 @@ export const Section = ({ title, subtitle, content, children }) => (
     </div>
     <div
       css={{
+        padding: '0 15px',
         marginLeft: 'auto',
         marginRight: 'auto',
         textAlign: 'center',
         maxWidth: '700px',
         display: 'flex',
         justifyContent: 'center',
+        '@media (max-width: 600px)': {
+          flexDirection: 'column',
+        },
       }}
     >
       {children}

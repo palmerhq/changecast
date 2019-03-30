@@ -1,7 +1,6 @@
 import { AbstractIcon1 } from 'icons/AbstractIcon1'
 import { AbstractIcon2 } from 'icons/AbstractIcon2'
 import { AbstractIcon3 } from 'icons/AbstractIcon3'
-import { AbstractIcon4 } from 'icons/AbstractIcon4'
 import { AbstractIcon5 } from 'icons/AbstractIcon5'
 import { AbstractIcon6 } from 'icons/AbstractIcon6'
 import { AbstractIcon7 } from 'icons/AbstractIcon7'
@@ -14,10 +13,10 @@ const Feature = ({ title, icon: Icon, children }) => (
       maxWidth: '350px',
       marginBottom: '60px',
       padding: '0 15px',
-      ['@media (max-width: 990px)']: {
+      '@media (max-width: 990px)': {
         width: '50%',
       },
-      ['@media (max-width: 600px)']: {
+      '@media (max-width: 600px)': {
         width: '100%',
       },
     }}
@@ -86,18 +85,22 @@ export const Features = () => (
               lineHeight: '1.4',
             }}
           >
-            Expore the benefits
+            What you get
           </div>
           <h2
             css={{
               fontSize: '3em',
             }}
           >
-            We Have Features
+            What are the features?
           </h2>
           <p>
-            Quinoa can be enameled with sour oysters, also try jumbleing the
-            kebab with condensed milk.
+            ChangeCast comes with every feature needed to easily communicate
+            project updates. If you think we're missing one,{' '}
+            <a href="https://github.com/palmerhq/changecast/issues/new">
+              open an issue
+            </a>
+            !
           </p>
         </div>
       </div>
@@ -124,33 +127,29 @@ export const Features = () => (
             },
           }}
         >
-          <Feature title="Custom Design" icon={AbstractIcon1}>
-            With chocolates drink oyster sauce. Pork shoulder can be flavored
-            with grey nachos, also try whisking the cake with vinegar.
-          </Feature>
           <Feature title="Built-in Widget" icon={AbstractIcon2}>
-            With chocolates drink oyster sauce. Pork shoulder can be flavored
-            with grey nachos, also try whisking the cake with vinegar.
+            Our widget notifies users of new updates and allows them to view the
+            updates without leaving your site.
           </Feature>
-          <Feature title="Shareable Links" icon={AbstractIcon3}>
-            With chocolates drink oyster sauce. Pork shoulder can be flavored
-            with grey nachos, also try whisking the cake with vinegar.
+          <Feature title="Themeable" icon={AbstractIcon1}>
+            Our site and widget are built with your Github avatar's color scheme
+            and can be overriden with any color you choose.
           </Feature>
-          <Feature title="Automatic Deploys" icon={AbstractIcon4}>
-            With chocolates drink oyster sauce. Pork shoulder can be flavored
-            with grey nachos, also try whisking the cake with vinegar.
+          <Feature title="Shareable" icon={AbstractIcon3}>
+            Each release comes with it's own shareable link and open graph image
+            that looks great when shared on any social media.
           </Feature>
-          <Feature title="Search" icon={AbstractIcon5}>
-            With chocolates drink oyster sauce. Pork shoulder can be flavored
-            with grey nachos, also try whisking the cake with vinegar.
+          <Feature title="Searchable" icon={AbstractIcon5}>
+            From our widget and site, your users can search the text of each
+            release to find the feature or update they are looking for.
           </Feature>
           <Feature title="Accessible" icon={AbstractIcon6}>
-            With chocolates drink oyster sauce. Pork shoulder can be flavored
-            with grey nachos, also try whisking the cake with vinegar.
+            We take accessibility seriously and will make sure that your product
+            updates can reach everyone.
           </Feature>
           <Feature title="Blazing Fast" icon={AbstractIcon7}>
-            With chocolates drink oyster sauce. Pork shoulder can be flavored
-            with grey nachos, also try whisking the cake with vinegar.
+            Built on top of Gatsby, your site and widget are highly tuned for a
+            fast experience over any connection.
           </Feature>
         </ul>
       </div>
