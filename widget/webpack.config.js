@@ -31,7 +31,7 @@ module.exports = (env, { mode }) => {
       },
       plugins: [
         new webpack.EnvironmentPlugin({
-          URL: process.env.URL,
+          URL: process.env.URL || '',
           REPO_HASH: shortRepoHash,
         }),
         ...(mode === 'development'

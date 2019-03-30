@@ -6,9 +6,22 @@ let releaseEdges
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const releaseTemplate = path.resolve('./src/templates/ReleaseTemplate.js')
+  const releasesTemplate = path.resolve('./src/templates/ReleasesTemplate.js')
 
   const query = `
       {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+        repository: allGithubRepo {
+          edges {
+            node {
+              name
+            }
+          }
+        }
         releases: allGithubRelease(filter: { draft: { eq: false } }) {
           edges {
             node {
@@ -33,6 +46,28 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         tagName,
       },
     })
+  })
+
+  const ogText =
+    result.data.site.siteMetadata.title ||
+    result.data.repository.edges[0].node.name
+
+  createPage({
+    path: `/`,
+    component: releasesTemplate,
+    context: {
+      ogText,
+      isWidget: false,
+    },
+  })
+
+  createPage({
+    path: `/widget`,
+    component: releasesTemplate,
+    context: {
+      ogText,
+      isWidget: true,
+    },
   })
 }
 

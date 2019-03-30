@@ -3,7 +3,7 @@ export function getPrimaryColor(data) {
     return data.site.siteMetadata.primaryColor
   }
 
-  if (data.logo) {
+  if (data.logo.edges[0]) {
     return data.logo.edges[0].node.fields.colorPalette[0]
   }
 
@@ -11,7 +11,7 @@ export function getPrimaryColor(data) {
 }
 
 export function getOgImageSrc(data) {
-  if (data.logo) {
+  if (data.logo.edges[0]) {
     return data.logo.edges[0].node.childOgImage.ogImageWithText.src
   }
 
@@ -20,7 +20,7 @@ export function getOgImageSrc(data) {
 }
 
 export function getLogoSrc(data) {
-  if (data.logo) {
+  if (data.logo.edges[0]) {
     return data.logo.edges[0].node.childImageSharp.original.src
   }
 
@@ -37,7 +37,7 @@ export function getTitle(data) {
 }
 
 export function getFaviconElements(data) {
-  if (data.logo) {
+  if (data.logo.edges[0]) {
     return data.logo.edges[0].node.childFavicon.faviconElements
   }
 

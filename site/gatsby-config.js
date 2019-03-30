@@ -9,6 +9,20 @@ module.exports = {
   plugins: [
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sharp',
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/styles/typography`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-github-releases',
+      options: {
+        url: process.env.GITHUB_REPO_URL,
+        token: process.env.GITHUB_ACCESS_TOKEN,
+      },
+    },
     'gatsby-transformer-json',
     'gatsby-transformer-sharp',
     'gatsby-transformer-color-thief',
@@ -21,7 +35,6 @@ module.exports = {
       },
     },
     'gatsby-transformer-favicons',
-    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -30,14 +43,8 @@ module.exports = {
           'gatsby-remark-prismjs',
           'gatsby-remark-external-links',
           'gatsby-remark-gemoji-to-emoji',
+          'gatsby-transformer-remark-plaintext',
         ],
-      },
-    },
-    {
-      resolve: 'gatsby-source-github-releases',
-      options: {
-        url: process.env.GITHUB_REPO_URL,
-        token: process.env.GITHUB_ACCESS_TOKEN,
       },
     },
   ],
@@ -50,10 +57,6 @@ function generateMetadata() {
     primaryColor: process.env.PRIMARY_COLOR
       ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
       : false,
-    url:
-      process.env.URL ||
-      (process.env.NODE_ENV === 'development'
-        ? 'http://localhost:8000'
-        : 'http://localhost:9000'),
+    url: process.env.URL || '',
   }
 }

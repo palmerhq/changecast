@@ -1,8 +1,7 @@
 import { css } from '@emotion/core'
-import { theme } from './theme'
-
-import 'normalize.css'
 import '@reach/menu-button/styles.css'
+import { theme } from './theme'
+import { fonts } from './typography'
 
 export const globalStyles = css`
   * {
@@ -11,12 +10,11 @@ export const globalStyles = css`
 
   html,
   body {
-    font-family: ${theme.fontFamily};
+    font-family: ${fonts.regular}, sans-serif;
+    font-size: 16px;
     font-weight: 400;
-    font-size: ${theme.fontSize};
     font-style: normal;
     color: ${theme.color.text};
-    line-height: 1.58;
     background: #f7f7f7;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -30,14 +28,5 @@ export const globalStyles = css`
     &:hover {
       text-decoration: underline;
     }
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1em;
   }
 `
