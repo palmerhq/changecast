@@ -1,6 +1,9 @@
 import { css } from '@emotion/core'
-import { fonts } from './typography'
 import 'normalize.css'
+// import { fonts } from './typography'
+const fonts = {
+  regular: '',
+}
 
 export const globalStyles = css`
   * {

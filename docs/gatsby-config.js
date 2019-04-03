@@ -1,4 +1,5 @@
 const path = require('path')
+const mdPlugins = [require('remark-unwrap-images')]
 const { config } = require('dotenv')
 
 config({ path: path.resolve('..', '.env') })
@@ -23,10 +24,23 @@ module.exports = {
       },
     },
     'gatsby-transformer-favicons',
+    // {
+    //   resolve: `gatsby-plugin-typography`,
+    //   options: {
+    //     pathToConfigModule: `src/styles/typography`,
+    //   },
+    // },
+    // {
+    //   resolve: 'gatsby-plugin-compile-es6-packages',
+    //   options: {
+    //     modules: ['mdx-blocks'],
+    //   },
+    // },
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: 'gatsby-mdx',
       options: {
-        pathToConfigModule: `src/styles/typography`,
+        extensions: ['.mdx', '.md'],
+        mdPlugins,
       },
     },
   ],
