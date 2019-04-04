@@ -1,4 +1,4 @@
-import { Cast } from 'icons/Cast'
+import { Radio } from 'icons/Radio'
 import React from 'react'
 
 export const Footer = () => (
@@ -26,7 +26,7 @@ export const Footer = () => (
             marginBottom: '10px',
           }}
         >
-          <Cast />
+          <Radio />
         </div>
 
         <ul

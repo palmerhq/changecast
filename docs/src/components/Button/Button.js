@@ -1,24 +1,27 @@
 import React from 'react'
 
-export const Button = ({ color = '#4D61FC', ...props }) => (
-  <button
-    css={{
-      margin: '0',
-      padding: '12px 20px 12px',
-      borderRadius: '4px',
-      backgroundColor: color,
-      boxShadow: `0 3px 26px -2px ${color}`,
-      color: 'white',
-      display: 'inline-block',
-      cursor: 'pointer',
-      textDecoration: 'none',
-      border: 'none',
-      userSelect: 'none',
-      transition: 'transform 200ms ease',
-      ':hover': {
-        transform: 'translateY(-2px)',
-      },
-    }}
-    {...props}
-  />
-)
+export const buttonStyles = {
+  color: 'white',
+  overflow: 'hidden',
+  display: 'inline-block',
+  position: 'relative',
+  padding: '12px 20px 12px',
+  border: '2px solid transparent',
+  borderRadius: '4px',
+  fontWeight: '700',
+  userSelect: 'none',
+  textAlign: 'center',
+  textDecoration: 'none',
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
+  transition: 'background 200ms ease, transform 200ms ease',
+  ':hover': {
+    transform: 'translateY(-2px)',
+    background: 'rgba(0, 0, 0, 0.1)',
+  },
+  ':visited': {
+    color: 'white',
+  },
+}
+
+export const Button = props => <button css={buttonStyles} {...props} />
