@@ -4,6 +4,7 @@ import { Radio } from 'icons/Radio'
 import React from 'react'
 import { AnchorButton } from './Button/AnchorButton'
 import { Button } from './Button/Button'
+import { LinkButton } from './Button/LinkButton'
 
 export const Header = () => {
   const {
@@ -56,14 +57,26 @@ export const Header = () => {
                 alignItems: 'center',
               }}
             >
-              <div
+              <LinkButton
+                to="/"
                 css={{
-                  position: 'relative',
-                  padding: '12px 20px 12px',
+                  display: 'flex',
+                  alignItems: 'center',
                 }}
               >
-                <Radio css={{ color: 'white' }} />
-              </div>
+                <Radio />
+                <span
+                  css={{
+                    fontWeight: 'bold',
+                    marginLeft: '1rem',
+                    '@media (max-width: 600px)': {
+                      display: 'none',
+                    },
+                  }}
+                >
+                  ChangeCast
+                </span>
+              </LinkButton>
               <ul
                 css={{
                   padding: '0',
@@ -126,9 +139,7 @@ export const Header = () => {
             }}
           >
             <h2 css={{ color: 'black', fontSize: '3em' }}>
-              Change
-              <wbr />
-              Cast
+              Keep users informed.
             </h2>
             <p css={{ color: 'black' }}>
               Create{' '}
@@ -143,7 +154,7 @@ export const Header = () => {
               <span css={{ color: 'royalblue', fontWeight: 'bold' }}>
                 accessible
               </span>{' '}
-              changelog sites and widgets.
+              widgets and sites from your Github releases.
             </p>
           </div>
           <div
@@ -163,8 +174,6 @@ export const Header = () => {
               fluid={fluid}
               style={{
                 width: '100%',
-                // maxWidth: 400,
-                // height: '100%',
               }}
               imgStyle={{
                 width: '100%',
