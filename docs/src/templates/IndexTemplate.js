@@ -62,7 +62,6 @@ const IndexTemplate = ({
       </CenteredText>
       <ButtonContainer>
         <GlowingButton
-          color="#4fc08d"
           data-vue-changecast
           css={{
             marginRight: 30,
@@ -71,7 +70,6 @@ const IndexTemplate = ({
           Vue
         </GlowingButton>
         <GlowingButton
-          color="#764abc"
           data-redux-changecast
           css={{
             marginRight: 30,
@@ -79,7 +77,7 @@ const IndexTemplate = ({
         >
           Redux
         </GlowingButton>
-        <GlowingButton color="#0052CC" data-react-beautiful-dnd-changecast>
+        <GlowingButton data-react-beautiful-dnd-changecast>
           React Beautiful DnD
         </GlowingButton>
       </ButtonContainer>
@@ -89,7 +87,10 @@ const IndexTemplate = ({
       <CenteredText color="black">
         ChangeCast comes with every feature needed to easily communicate project
         updates. If you think we're missing one,{' '}
-        <a href="https://github.com/palmerhq/changecast/issues/new">
+        <a
+          href="https://github.com/palmerhq/changecast/issues/new"
+          css={{ color: 'royalblue', ':visited': { color: 'royalblue' } }}
+        >
           open an issue
         </a>
         !
@@ -133,7 +134,7 @@ const IndexTemplate = ({
           href="https://github.com/marketplace/actions/changecast"
           css={{ color: 'white' }}
         >
-          Add Changecast Action
+          Add ChangeCast Action
         </GlowingAnchorButton>
       </div>
     </Section>

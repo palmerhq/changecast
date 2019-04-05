@@ -64,6 +64,7 @@ exports.sourceNodes = async (
   })
 
   createNode({
+    homepage: null,
     ...repo,
     id: repoId,
     parent: null,

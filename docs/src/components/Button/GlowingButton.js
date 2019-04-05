@@ -18,6 +18,6 @@ export const glowingButtonStyles = color => ({
   },
 })
 
-export const GlowingButton = ({ color = '#ff00cc', ...props }) => (
+export const GlowingButton = ({ color = 'royalblue', ...props }) => (
   <button css={glowingButtonStyles(color)} {...props} />
 )

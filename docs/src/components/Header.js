@@ -12,10 +12,10 @@ export const Header = () => {
     },
   } = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "photo-1518784940690-cbe92616251d.jpeg" }) {
+      file(relativePath: { eq: "oleg-laptev-546607-unsplash.png" }) {
         childImageSharp {
-          fluid(maxWidth: 1000) {
-            ...GatsbyImageSharpFluid
+          fluid(maxWidth: 600) {
+            ...GatsbyImageSharpFluid_tracedSVG
           }
         }
       }
@@ -27,31 +27,14 @@ export const Header = () => {
       <header
         css={{
           position: 'relative',
-          height: 700,
+          // height: '90vh',
+          background: '#f0f0f0',
         }}
       >
-        <Img
-          fluid={fluid}
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-          }}
-          imgStyle={{
-            height: '100%',
-          }}
-        />
-        <div
-          css={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(rgba(0,0,0,0.1875),rgba(0,0,0,0.75))',
-          }}
-        />
         <nav
           css={{
             padding: '20px 0',
+            background: 'black',
           }}
         >
           <div
@@ -62,7 +45,7 @@ export const Header = () => {
               '@media (max-width: 600px)': {
                 padding: 0,
               },
-              maxWidth: '1080px',
+              maxWidth: 1080,
             }}
           >
             <div
@@ -118,24 +101,75 @@ export const Header = () => {
         </nav>
         <div
           css={{
-            position: 'absolute',
-            width: '100%',
-            marginRight: 'auto',
             marginLeft: 'auto',
-            padding: '150px 15px 250px 15px',
-            maxWidth: '1080px',
+            marginRight: 'auto',
+            width: '100%',
+            '@media (max-width: 600px)': {
+              flexDirection: 'column-reverse',
+            },
+            height: '80vh',
+            minHeight: 530,
+            maxWidth: 1080,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <div css={{ maxWidth: '500px', padding: '0 20px' }}>
-            <h2 css={{ color: 'white', fontSize: '3em' }}>
+          <div
+            css={{
+              maxWidth: '500px',
+              padding: '0 20px',
+              width: '50%',
+              '@media (max-width: 600px)': {
+                width: '100%',
+              },
+            }}
+          >
+            <h2 css={{ color: 'black', fontSize: '3em' }}>
               Change
               <wbr />
               Cast
             </h2>
-            <p css={{ color: 'white' }}>
-              Create beautiful, performant, accessible changelog sites and
-              widgets.
+            <p css={{ color: 'black' }}>
+              Create{' '}
+              <span css={{ color: 'royalblue', fontWeight: 'bold' }}>
+                beautiful
+              </span>
+              ,{' '}
+              <span css={{ color: 'royalblue', fontWeight: 'bold' }}>
+                performant
+              </span>
+              ,{' '}
+              <span css={{ color: 'royalblue', fontWeight: 'bold' }}>
+                accessible
+              </span>{' '}
+              changelog sites and widgets.
             </p>
+          </div>
+          <div
+            css={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '50%',
+              padding: '0 50px',
+
+              '@media (max-width: 600px)': {
+                width: '100%',
+                padding: '0 75px',
+              },
+            }}
+          >
+            <Img
+              fluid={fluid}
+              style={{
+                width: '100%',
+                // maxWidth: 400,
+                // height: '100%',
+              }}
+              imgStyle={{
+                width: '100%',
+              }}
+            />
           </div>
         </div>
       </header>
