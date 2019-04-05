@@ -37,6 +37,7 @@ const ReleaseTemplate = ({
     description,
     homepage,
     url,
+    htmlUrl
   } = useSiteSetup()
 
   const siteTitle = `${title} ${tagName}`
@@ -70,7 +71,7 @@ const ReleaseTemplate = ({
         ]}
       />
       <Header
-        homepage={homepage || url}
+        homepage={homepage || htmlUrl}
         logoSrc={logoSrc}
         primaryColor={primaryColor}
       />

@@ -1,5 +1,5 @@
-import { fetch } from 'whatwg-fetch'
 import createFocusTrap from 'focus-trap'
+import { fetch } from 'whatwg-fetch'
 import * as styles from './styles.css'
 
 // configuration
@@ -35,6 +35,7 @@ function createWidget() {
   iframe.tabIndex = 0
   iframe.setAttribute('role', 'dialog')
   iframe.setAttribute('aria-label', 'ChangeCast Changelog')
+  iframe.setAttribute('aria-hidden', true)
 
   // hide overlay and iframe to start
   overlay.className = `${styles.overlay} ${styles.overlayHidden}`
@@ -57,6 +58,7 @@ function createWidget() {
 
     overlay.className = `${styles.overlay} ${styles.overlayOpen}`
     iframe.className = `${styles.iframe} ${styles.iframeOpen}`
+    iframe.setAttribute('aria-hidden', false)
 
     focusTrap.activate()
     window.addEventListener('click', toggleChangeCast, true)
@@ -81,11 +83,12 @@ function createWidget() {
 
     overlay.className = styles.overlay
     iframe.className = styles.iframe
+    iframe.setAttribute('aria-hidden', true)
 
     setTimeout(() => {
       overlay.className = `${styles.overlay} ${styles.overlayHidden}`
       iframe.className = `${styles.iframe} ${styles.iframeHidden}`
-    }, 500)
+    }, 400)
   }
 
   function toggleChangeCast() {

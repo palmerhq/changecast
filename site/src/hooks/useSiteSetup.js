@@ -22,6 +22,7 @@ export const useSiteSetup = () => {
             name
             description
             homepage
+            htmlUrl
             avatarImageFile: childFile {
               fields {
                 colorPalette
@@ -71,7 +72,7 @@ export const useSiteSetup = () => {
     repository: {
       edges: [
         {
-          node: { description, homepage },
+          node: { description, homepage, htmlUrl },
         },
       ],
     },
@@ -89,6 +90,7 @@ export const useSiteSetup = () => {
     title,
     description,
     homepage,
+    htmlUrl,
     url,
   }
 }
