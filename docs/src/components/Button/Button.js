@@ -16,7 +16,6 @@ export const buttonStyles = {
   whiteSpace: 'nowrap',
   transition: 'background 200ms ease, transform 200ms ease',
   ':hover': {
-    transform: 'translateY(-2px)',
     background: 'rgba(0, 0, 0, 0.1)',
   },
   ':visited': {

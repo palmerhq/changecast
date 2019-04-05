@@ -2,6 +2,7 @@ import { Global } from '@emotion/core'
 import { graphql } from 'gatsby'
 import React from 'react'
 import Helmet from 'react-helmet'
+import { Anchor } from '../components/Anchor'
 import { ButtonContainer } from '../components/Button/ButtonContainer'
 import { GlowingAnchorButton } from '../components/Button/GlowingAnchorButton'
 import { GlowingButton } from '../components/Button/GlowingButton'
@@ -58,7 +59,8 @@ const IndexTemplate = ({
       <CenteredText color="white">
         ChangeCast generates a static site and widget from your Github releases.
         Adding these to your project homepage will keep users informed of any
-        updates you make. Try the examples below to see ChangeCast in action!
+        updates you make. Click on the examples below to see ChangeCast in
+        action!
       </CenteredText>
       <ButtonContainer>
         <GlowingButton
@@ -85,56 +87,53 @@ const IndexTemplate = ({
     <Section background="white">
       <CenteredTitle color="black">What are the features?</CenteredTitle>
       <CenteredText color="black">
-        ChangeCast comes with every feature needed to easily communicate project
-        updates. If you think we're missing one,{' '}
-        <a
-          href="https://github.com/palmerhq/changecast/issues/new"
-          css={{ color: 'royalblue', ':visited': { color: 'royalblue' } }}
-        >
+        ChangeCast comes with every feature you need to easily communicate
+        project updates. If you think something is missing, please{' '}
+        <Anchor href="https://github.com/palmerhq/changecast/issues/new">
           open an issue
-        </a>
+        </Anchor>
         !
       </CenteredText>
       <Features>
         <Feature title="Built-in Widget">
-          Our widget notifies users of new updates and allows them to view the
-          updates without leaving your site.
+          Our widget notifies users of new updates and allows them to view
+          release notes without leaving your site.
         </Feature>
         <Feature title="Themeable">
           Our site and widget are built with your Github avatar's color scheme
-          and can be overriden with any color you choose.
+          and can be overridden with any color you choose.
         </Feature>
         <Feature title="Shareable">
           Each release comes with it's own shareable link and open graph image
-          that looks great when shared on any social media.
+          that looks great when shared on social media.
         </Feature>
         <Feature title="Searchable">
-          From our widget and site, your users can search the text of each
-          release to find the feature or update they are looking for.
+          Users can search the text of each release to find the feature or
+          update they are looking for.
         </Feature>
         <Feature title="Accessible">
-          We take accessibility seriously and will make sure that your product
+          We take accessibility seriously and will make sure that your project
           updates can reach everyone.
         </Feature>
         <Feature title="Blazing Fast">
-          Built on top of Gatsby, your site and widget are highly tuned for a
-          fast experience over any connection.
+          Built on top of{' '}
+          <Anchor href="https://www.gatsbyjs.org">Gatsby</Anchor>, your site and
+          widget are tuned for a fast experience out of the box.
         </Feature>
       </Features>
     </Section>
     <Section background="black">
       <CenteredTitle color="white">How do I get started?</CenteredTitle>
       <CenteredText color="white">
-        ChangeCast can be built and deployed on Netlify, Now, or any other
-        static hosting service. And, using a Github webhook or action, you can
+        ChangeCast can be built and deployed on{' '}
+        <Anchor href="https://www.netlify.com">Netlify</Anchor>,{' '}
+        <Anchor href="https://zeit.co/now">Now</Anchor>, or any other static
+        hosting service. And, using a Github webhook or action, you can
         configure ChangeCast to redeploy whenver you cut a new release.
       </CenteredText>
-      <div css={{ textAlign: 'center', color: 'white' }}>
-        <GlowingAnchorButton
-          href="https://github.com/marketplace/actions/changecast"
-          css={{ color: 'white' }}
-        >
-          Add ChangeCast Action
+      <div css={{ textAlign: 'center', color: 'white', marginBottom: 30 }}>
+        <GlowingAnchorButton href="https://github.com/palmerhq/changecast#deploy">
+          Deploy ChangeCast
         </GlowingAnchorButton>
       </div>
     </Section>

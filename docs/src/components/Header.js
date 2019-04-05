@@ -154,7 +154,7 @@ export const Header = () => {
               <span css={{ color: 'royalblue', fontWeight: 'bold' }}>
                 accessible
               </span>{' '}
-              widgets and sites from your Github releases.
+              changelogs from your Github releases.
             </p>
           </div>
           <div
