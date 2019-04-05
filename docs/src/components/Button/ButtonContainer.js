@@ -14,7 +14,7 @@ export const ButtonContainer = ({ children }) => (
         display: 'block',
         '> button': {
           display: 'block',
-          margin: '0 auto 15px auto',
+          margin: '0 auto 30px auto',
         },
       },
     }}
