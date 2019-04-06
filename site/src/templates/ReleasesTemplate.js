@@ -69,6 +69,7 @@ const ReleasesTemplate = ({
     description,
     homepage,
     url,
+    htmlUrl,
   } = useSiteSetup()
 
   const siteTitle = `${title} changelog`
@@ -105,7 +106,7 @@ const ReleasesTemplate = ({
         ]}
       />
       <Header
-        homepage={homepage || url}
+        homepage={homepage || htmlUrl}
         onSearchChange={getReleaseSearch()}
         searchValue={searchValue}
         logoSrc={logoSrc}

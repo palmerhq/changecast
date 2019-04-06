@@ -70,11 +70,12 @@ export const Header = ({
             width: '100%',
             marginRight: '0.25rem',
             background: !!searchValue
-              ? `rgb(${red}, ${green}, ${blue}, 0.1)`
-              : `rgb(${red}, ${green}, ${blue}, 0.9)`,
+              ? `rgba(${red}, ${green}, ${blue}, 0.1)`
+              : `rgba(${red}, ${green}, ${blue}, 0.9)`,
             border: '1px solid transparent',
             borderRadius: '4px',
             padding: '0.25rem 0.5rem',
+            WebkitAppearance: 'none',
             '::placeholder': {
               color: 'white',
             },

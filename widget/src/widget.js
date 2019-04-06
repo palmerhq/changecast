@@ -1,5 +1,5 @@
-import { fetch } from 'whatwg-fetch'
 import createFocusTrap from 'focus-trap'
+import { fetch } from 'whatwg-fetch'
 import * as styles from './styles.css'
 
 // configuration
@@ -35,6 +35,8 @@ function createWidget() {
   iframe.tabIndex = 0
   iframe.setAttribute('role', 'dialog')
   iframe.setAttribute('aria-label', 'ChangeCast Changelog')
+  iframe.setAttribute('aria-hidden', true)
+  iframe.setAttribute('tabindex', -1)
 
   // hide overlay and iframe to start
   overlay.className = `${styles.overlay} ${styles.overlayHidden}`
@@ -49,7 +51,6 @@ function createWidget() {
 
   // shared state
   let open = false
-  let mostRecentReleaseDate
   let toggleNotifications = new Map()
 
   function openChangeCast() {
@@ -57,14 +58,17 @@ function createWidget() {
 
     overlay.className = `${styles.overlay} ${styles.overlayOpen}`
     iframe.className = `${styles.iframe} ${styles.iframeOpen}`
+    iframe.setAttribute('aria-hidden', false)
+    iframe.removeAttribute('tabindex')
 
     focusTrap.activate()
     window.addEventListener('click', toggleChangeCast, true)
 
     window.localStorage.setItem(
       CHANGECAST_LOCALSTORAGE_KEY,
-      mostRecentReleaseDate
+      new Date().toISOString()
     )
+
     if (toggleNotifications.size) {
       toggles.forEach(toggle => {
         toggle.removeChild(toggleNotifications.get(toggle))
@@ -81,11 +85,13 @@ function createWidget() {
 
     overlay.className = styles.overlay
     iframe.className = styles.iframe
+    iframe.setAttribute('aria-hidden', true)
+    iframe.setAttribute('tabindex', -1)
 
     setTimeout(() => {
       overlay.className = `${styles.overlay} ${styles.overlayHidden}`
       iframe.className = `${styles.iframe} ${styles.iframeHidden}`
-    }, 500)
+    }, 400)
   }
 
   function toggleChangeCast() {
@@ -124,14 +130,15 @@ function createWidget() {
       }
     )
     .then(dates => {
-      mostRecentReleaseDate = dates[0]
-
-      const lastReleaseViewed = window.localStorage.getItem(
+      const lastViewed = window.localStorage.getItem(
         CHANGECAST_LOCALSTORAGE_KEY
       )
 
-      if (lastReleaseViewed) {
-        const lastViewedIndex = dates.indexOf(lastReleaseViewed)
+      if (lastViewed) {
+        const lastViewedDate = new Date(lastViewed)
+        const lastViewedIndex = dates.findIndex(
+          date => new Date(date) <= lastViewedDate
+        )
         const count = lastViewedIndex === -1 ? dates.length : lastViewedIndex
 
         if (count > 0) {
@@ -145,7 +152,7 @@ function createWidget() {
       } else {
         window.localStorage.setItem(
           CHANGECAST_LOCALSTORAGE_KEY,
-          mostRecentReleaseDate
+          new Date().toISOString()
         )
       }
     })

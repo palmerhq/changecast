@@ -18,7 +18,7 @@
 }
 
 .iframe {
-  display: block;
+  opacity: 1;
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -28,7 +28,6 @@
   padding: 0;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transform: translateX(100%);
   animation: slideOut 500ms cubic-bezier(0.175, 0.985, 0.1, 1.035);
 }
 
@@ -38,7 +37,8 @@
 }
 
 .iframeHidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .overlay {
