@@ -1,22 +1,9 @@
 import React from 'react'
+import { WidgetContext } from '../providers/WidgetProvider'
 import { theme } from '../styles/theme'
 
-export function onClose() {
-  window.parent.postMessage('close', '*')
-}
-
-function closeOnEscape(e) {
-  if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
-    e.preventDefault()
-    onClose()
-  }
-}
-
 export const WidgetWrapper = ({ children }) => {
-  React.useEffect(() => {
-    window.addEventListener('keydown', closeOnEscape, false)
-    return () => window.removeEventListener('keydown', closeOnEscape)
-  })
+  const isOpen = React.useContext(WidgetContext)
 
   return (
     <main
@@ -27,7 +14,7 @@ export const WidgetWrapper = ({ children }) => {
         [theme.media.small]: {
           padding: 'calc(0.5rem + 54px) 0.5rem 0.5rem 0.5rem',
         },
-        overflow: 'scroll',
+        overflow: isOpen ? 'scroll' : 'hidden',
         WebkitOverflowScrolling: 'touch',
       }}
     >

@@ -56,6 +56,8 @@ function createWidget() {
   function openChangeCast() {
     open = true
 
+    iframe.contentWindow.postMessage('open', '*')
+
     overlay.className = `${styles.overlay} ${styles.overlayOpen}`
     iframe.className = `${styles.iframe} ${styles.iframeOpen}`
     iframe.setAttribute('aria-hidden', false)
@@ -91,6 +93,7 @@ function createWidget() {
     setTimeout(() => {
       overlay.className = `${styles.overlay} ${styles.overlayHidden}`
       iframe.className = `${styles.iframe} ${styles.iframeHidden}`
+      iframe.contentWindow.postMessage('close', '*')
     }, 400)
   }
 

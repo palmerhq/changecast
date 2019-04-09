@@ -1,8 +1,9 @@
 import React from 'react'
 import { theme } from '../styles/theme'
 
-export const SiteWrapper = ({ children }) => (
+export const SiteWrapper = React.forwardRef(({ children }, ref) => (
   <main
+    ref={ref}
     css={{
       maxWidth: 800,
       margin: '0 auto',
@@ -15,4 +16,4 @@ export const SiteWrapper = ({ children }) => (
   >
     {children}
   </main>
-)
+))

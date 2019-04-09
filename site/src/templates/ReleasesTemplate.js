@@ -12,6 +12,7 @@ import { Release } from '../components/Release/Release'
 import { SiteWrapper } from '../components/SiteWrapper'
 import { WidgetWrapper } from '../components/WidgetWrapper'
 import { useSiteSetup } from '../hooks/useSiteSetup'
+import { WidgetContext, WidgetProvider } from '../providers/WidgetProvider'
 import { globalStyles } from '../styles/global'
 import { getOgImageSrc } from '../utils/data'
 
@@ -22,8 +23,10 @@ const ReleasesTemplate = ({
   },
   pageContext: { isWidget },
 }) => {
-  const ogImageSrc = getOgImageSrc(data)
+  const Provider = isWidget ? WidgetProvider : React.Fragment
   const Wrapper = isWidget ? WidgetWrapper : SiteWrapper
+
+  const ogImageSrc = getOgImageSrc(data)
 
   const [releases, setReleases] = React.useState(edges)
   const [releasesShown, setReleasesShown] = React.useState(10)
@@ -76,7 +79,7 @@ const ReleasesTemplate = ({
   const ogImage = `${url}${ogImageSrc}`
 
   return (
-    <>
+    <Provider>
       <Favicons favicons={faviconElements} />
       <Global styles={globalStyles} />
       <FocusStyles />
@@ -106,7 +109,8 @@ const ReleasesTemplate = ({
         ]}
       />
       <Header
-        homepage={homepage || htmlUrl}
+        homepage={homepage}
+        htmlUrl={htmlUrl}
         onSearchChange={getReleaseSearch()}
         searchValue={searchValue}
         logoSrc={logoSrc}
@@ -154,14 +158,19 @@ const ReleasesTemplate = ({
               )
             )
         )}
-        {releasesShown < releases.length && (
-          <Waypoint
-            onEnter={() => setReleasesShown(count => count + 10)}
-            bottomOffset="-100%"
-          />
-        )}
+        <WidgetContext.Consumer>
+          {isOpen =>
+            isOpen &&
+            releasesShown < releases.length && (
+              <Waypoint
+                onEnter={() => setReleasesShown(count => count + 10)}
+                bottomOffset="-100%"
+              />
+            )
+          }
+        </WidgetContext.Consumer>
       </Wrapper>
-    </>
+    </Provider>
   )
 }
 
