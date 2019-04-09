@@ -13,6 +13,7 @@ export const Header = ({
   searchValue,
   logoSrc,
   homepage,
+  htmlUrl,
   isWidget,
 }) => (
   <header
@@ -59,7 +60,7 @@ export const Header = ({
       <div
         css={{
           background: 'white',
-          borderRadius: '4px',
+          borderRadius: 34,
           flexGrow: 1,
           marginLeft: '0.5rem',
         }}
@@ -68,13 +69,12 @@ export const Header = ({
           placeholder="Search"
           css={{
             width: '100%',
-            marginRight: '0.25rem',
             background: !!searchValue
               ? `rgba(${red}, ${green}, ${blue}, 0.1)`
               : `rgba(${red}, ${green}, ${blue}, 0.9)`,
             border: '1px solid transparent',
             borderRadius: '4px',
-            padding: '0.25rem 0.5rem',
+            padding: '0.25rem 0.75rem',
             WebkitAppearance: 'none',
             '::placeholder': {
               color: 'white',
@@ -106,12 +106,12 @@ export const Header = ({
         </Button>
       ) : (
         <AnchorButton
-          href={homepage}
+          href={homepage || htmlUrl}
           target="_blank"
           rel="noopener noreferrer"
           css={{ marginLeft: '0.5rem' }}
         >
-          Homepage
+          {homepage ? 'Homepage' : 'Github'}
           <ExternalLink
             css={{
               marginLeft: '0.25rem',
