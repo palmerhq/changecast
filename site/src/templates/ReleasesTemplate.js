@@ -12,6 +12,7 @@ import { Release } from '../components/Release/Release'
 import { SiteWrapper } from '../components/SiteWrapper'
 import { WidgetWrapper } from '../components/WidgetWrapper'
 import { useSiteSetup } from '../hooks/useSiteSetup'
+import { SiteProvider } from '../providers/SiteProvider'
 import { WidgetContext, WidgetProvider } from '../providers/WidgetProvider'
 import { globalStyles } from '../styles/global'
 import { getOgImageSrc } from '../utils/data'
@@ -23,7 +24,7 @@ const ReleasesTemplate = ({
   },
   pageContext: { isWidget },
 }) => {
-  const Provider = isWidget ? WidgetProvider : React.Fragment
+  const Provider = isWidget ? WidgetProvider : SiteProvider
   const Wrapper = isWidget ? WidgetWrapper : SiteWrapper
 
   const ogImageSrc = getOgImageSrc(data)

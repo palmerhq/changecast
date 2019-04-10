@@ -1,4 +1,5 @@
 import React from 'react'
+import { CHANGECAST_LOCALSTORAGE_KEY } from '../utils/constants'
 
 export function onClose() {
   window.parent.postMessage('close', '*')
@@ -18,6 +19,10 @@ export const WidgetProvider = ({ children }) => {
   const handleMessage = React.useCallback(event => {
     if (event.data === 'open') {
       setOpen(true)
+      window.localStorage.setItem(
+        CHANGECAST_LOCALSTORAGE_KEY,
+        new Date().toISOString()
+      )
     } else if (event.data === 'close') {
       setOpen(false)
     }

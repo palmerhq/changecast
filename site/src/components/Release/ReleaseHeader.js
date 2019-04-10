@@ -7,6 +7,8 @@ import {
 import { Link } from 'gatsby'
 import React from 'react'
 import { theme } from '../../styles/theme'
+import { CHANGECAST_LOCALSTORAGE_KEY } from '../../utils/constants'
+import { Tag } from '../Tag'
 
 export const ReleaseHeader = ({
   title,
@@ -17,6 +19,11 @@ export const ReleaseHeader = ({
   url,
   ...rest
 }) => {
+  const lastViewed =
+    typeof window !== 'undefined' &&
+    window.localStorage.getItem(CHANGECAST_LOCALSTORAGE_KEY)
+  const isNew = lastViewed && new Date(lastViewed) < new Date(publishedAt)
+
   return (
     <div
       css={{
@@ -29,34 +36,48 @@ export const ReleaseHeader = ({
       }}
       {...rest}
     >
-      <h2
-        css={{
-          margin: '0',
-        }}
-      >
-        {isWidget ? (
-          <a
-            href={`/${tagName}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            css={{ color: `rgb(${red}, ${green}, ${blue})` }}
+      <div css={{ display: 'flex', alignItems: 'center' }}>
+        <h2
+          css={{
+            margin: '0',
+          }}
+        >
+          {isWidget ? (
+            <a
+              href={`/${tagName}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              css={{ color: `rgb(${red}, ${green}, ${blue})` }}
+            >
+              {title}
+            </a>
+          ) : (
+            <Link
+              to={`/${tagName}`}
+              css={{ color: `rgb(${red}, ${green}, ${blue})` }}
+            >
+              {title}
+            </Link>
+          )}
+        </h2>
+        {isNew && (
+          <Tag
+            css={{
+              margin: '0 1rem',
+              backgroundColor: `rgb(${red}, ${green}, ${blue})`,
+            }}
           >
-            {title}
-          </a>
-        ) : (
-          <Link
-            to={`/${tagName}`}
-            css={{ color: `rgb(${red}, ${green}, ${blue})` }}
-          >
-            {title}
-          </Link>
+            New
+          </Tag>
         )}
-      </h2>
+      </div>
+
       {typeof window !== 'undefined' && (
         <p
           css={{
             color: theme.color.accent,
             margin: 0,
+            flexShrink: 0,
           }}
         >
           {differenceInDays(Date.now(), publishedAt) < 30
