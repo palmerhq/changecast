@@ -3,9 +3,9 @@ import { Link } from 'gatsby'
 import { Close } from 'icons/Close'
 import { ExternalLink } from 'icons/ExternalLink'
 import React from 'react'
+import { onClose } from '../providers/WidgetProvider'
 import { AnchorButton } from './Button/AnchorButton'
 import { Button } from './Button/Button'
-import { onClose } from './WidgetWrapper'
 
 export const Header = ({
   primaryColor: [red, green, blue],
