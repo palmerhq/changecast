@@ -8,6 +8,7 @@ import { GlowingAnchorButton } from '../components/Button/GlowingAnchorButton'
 import { GlowingButton } from '../components/Button/GlowingButton'
 import { CenteredText } from '../components/CenteredText'
 import { CenteredTitle } from '../components/CenteredTitle'
+import { Favicons } from '../components/Favicons'
 import { Feature } from '../components/Feature'
 import { Features } from '../components/Features'
 import { FocusStyles } from '../components/FocusStyles'
@@ -27,12 +28,15 @@ const IndexTemplate = ({
         ],
       },
     },
+    favicon: {
+      childFavicon: { faviconElements },
+    },
   },
 }) => (
   <>
     <FocusStyles />
     <Global styles={globalStyles} />
-
+    <Favicons favicons={faviconElements} />
     {(process.env.NODE_ENV === 'development' ||
       typeof window === 'undefined') && (
       <Helmet>
@@ -146,6 +150,14 @@ export const query = graphql`
     site {
       siteMetadata {
         exampleSiteUrls
+      }
+    }
+    favicon: file(relativePath: { eq: "ChangeCast.png" }) {
+      childFavicon {
+        faviconElements {
+          props
+          type
+        }
       }
     }
   }
