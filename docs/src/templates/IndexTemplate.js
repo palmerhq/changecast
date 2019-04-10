@@ -8,6 +8,7 @@ import { GlowingAnchorButton } from '../components/Button/GlowingAnchorButton'
 import { GlowingButton } from '../components/Button/GlowingButton'
 import { CenteredText } from '../components/CenteredText'
 import { CenteredTitle } from '../components/CenteredTitle'
+import { Favicons } from '../components/Favicons'
 import { Feature } from '../components/Feature'
 import { Features } from '../components/Features'
 import { FocusStyles } from '../components/FocusStyles'
@@ -15,6 +16,11 @@ import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { Section } from '../components/Section'
 import { globalStyles } from '../styles/global'
+
+const url = 'https://changecast.now.sh'
+const title = 'ChangeCast'
+const description =
+  'Create beautiful, performant, accessible changelogs from your Github releases.'
 
 const IndexTemplate = ({
   data: {
@@ -27,12 +33,42 @@ const IndexTemplate = ({
         ],
       },
     },
+    logo: {
+      childFavicon: { faviconElements },
+      childOgImage: {
+        ogImageWithText: { src: ogImgSrc },
+      },
+    },
   },
 }) => (
   <>
     <FocusStyles />
     <Global styles={globalStyles} />
-
+    <Favicons favicons={faviconElements} />
+    <Helmet
+      title={title}
+      meta={[
+        { property: 'og:title', content: title },
+        { name: 'description', content: description },
+        {
+          property: 'og:url',
+          content: url,
+        },
+        {
+          property: 'og:image',
+          content: `${url}${ogImgSrc}`,
+        },
+        {
+          name: 'twitter:url',
+          content: url,
+        },
+        { name: 'twitter:title', content: title },
+        {
+          name: 'twitter:image',
+          content: `${url}${ogImgSrc}`,
+        },
+      ]}
+    />
     {(process.env.NODE_ENV === 'development' ||
       typeof window === 'undefined') && (
       <Helmet>
@@ -142,10 +178,23 @@ const IndexTemplate = ({
 )
 
 export const query = graphql`
-  query IndexQuery {
+  query IndexQuery($ogText: String!) {
     site {
       siteMetadata {
         exampleSiteUrls
+      }
+    }
+    logo: file(relativePath: { eq: "ChangeCastTransparent.png" }) {
+      childFavicon {
+        faviconElements {
+          props
+          type
+        }
+      }
+      childOgImage {
+        ogImageWithText(text: $ogText) {
+          src
+        }
       }
     }
   }

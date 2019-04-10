@@ -113,7 +113,7 @@ async function generateOgImage(
   fontColor,
   backgroundColor
 ) {
-  const image = fs.readFileSync(file.relativePath)
+  const image = fs.readFileSync(file.absolutePath)
 
   const svg = generateTextSvg(text, fontPath, fontColor)
   const width = getSvgWidth(svg)
