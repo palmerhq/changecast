@@ -111,7 +111,7 @@ exports.setFieldsOnGraphQLNodeType = async ({
           file.internal.contentDigest
         }/${argsDigestShort}`
 
-        const { html, images } = await generateFavicons(file.relativePath, {
+        const { html, images } = await generateFavicons(file.absolutePath, {
           path: faviconsPath,
         })
 

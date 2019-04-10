@@ -17,6 +17,11 @@ import { Header } from '../components/Header'
 import { Section } from '../components/Section'
 import { globalStyles } from '../styles/global'
 
+const url = 'https://changecast.now.sh'
+const title = 'ChangeCast'
+const description =
+  'Create beautiful, performant, accessible changelogs from your Github releases.'
+
 const IndexTemplate = ({
   data: {
     site: {
@@ -28,8 +33,11 @@ const IndexTemplate = ({
         ],
       },
     },
-    favicon: {
+    logo: {
       childFavicon: { faviconElements },
+      childOgImage: {
+        ogImageWithText: { src: ogImgSrc },
+      },
     },
   },
 }) => (
@@ -37,6 +45,30 @@ const IndexTemplate = ({
     <FocusStyles />
     <Global styles={globalStyles} />
     <Favicons favicons={faviconElements} />
+    <Helmet
+      title={title}
+      meta={[
+        { property: 'og:title', content: title },
+        { name: 'description', content: description },
+        {
+          property: 'og:url',
+          content: url,
+        },
+        {
+          property: 'og:image',
+          content: `${url}${ogImgSrc}`,
+        },
+        {
+          name: 'twitter:url',
+          content: url,
+        },
+        { name: 'twitter:title', content: title },
+        {
+          name: 'twitter:image',
+          content: `${url}${ogImgSrc}`,
+        },
+      ]}
+    />
     {(process.env.NODE_ENV === 'development' ||
       typeof window === 'undefined') && (
       <Helmet>
@@ -146,17 +178,22 @@ const IndexTemplate = ({
 )
 
 export const query = graphql`
-  query IndexQuery {
+  query IndexQuery($ogText: String!) {
     site {
       siteMetadata {
         exampleSiteUrls
       }
     }
-    favicon: file(relativePath: { eq: "ChangeCast.png" }) {
+    logo: file(relativePath: { eq: "ChangeCastTransparent.png" }) {
       childFavicon {
         faviconElements {
           props
           type
+        }
+      }
+      childOgImage {
+        ogImageWithText(text: $ogText) {
+          src
         }
       }
     }

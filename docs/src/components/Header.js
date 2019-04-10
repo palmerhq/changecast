@@ -28,13 +28,15 @@ export const Header = () => {
       <header
         css={{
           position: 'relative',
-          // height: '90vh',
           background: '#f0f0f0',
         }}
       >
         <nav
           css={{
             padding: '20px 0',
+            '@media (max-width: 600px)': {
+              padding: '10px 0',
+            },
             background: 'black',
           }}
         >
@@ -117,10 +119,11 @@ export const Header = () => {
             marginLeft: 'auto',
             marginRight: 'auto',
             width: '100%',
+            height: '80vh',
             '@media (max-width: 600px)': {
+              height: 0,
               flexDirection: 'column-reverse',
             },
-            height: '80vh',
             minHeight: 530,
             maxWidth: 1080,
             display: 'flex',
@@ -138,7 +141,15 @@ export const Header = () => {
               },
             }}
           >
-            <h2 css={{ color: 'black', fontSize: '3em' }}>
+            <h2
+              css={{
+                color: 'black',
+                fontSize: '3em',
+                '@media (max-width: 600px)': {
+                  fontSize: '2em',
+                },
+              }}
+            >
               Keep users informed.
             </h2>
             <p css={{ color: 'black' }}>
@@ -163,9 +174,9 @@ export const Header = () => {
               justifyContent: 'center',
               width: '50%',
               padding: '0 50px',
-
               '@media (max-width: 600px)': {
                 width: '100%',
+                maxWidth: 400,
                 padding: '0 75px',
               },
             }}
