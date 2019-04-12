@@ -1,12 +1,56 @@
-# ChangeCast
+<p align="center">
+  <img width="200" src="https://user-images.githubusercontent.com/1153686/55920627-8d5fdc00-5bc7-11e9-92d5-34dca3f66712.png" />
+</p>
 
-Create a beautiful, performant, accessible changelog from your Github releases.
+# [ChangeCast](https://changecast.now.sh)
 
-## Steps
+## How to Deploy
 
-### 1. Deploy
+### Github Action
 
-#### Netlify
+[Github Actions](https://github.com/features/actions) are the easiest way to build and deploy ChangeCast for your project.
+
+#### 1. Add the ChangeCast Action
+
+```HCL
+action "Build" {
+  uses = "palmerhq/changecast@v1.0.0"
+  secrets = [
+  	"GITHUB_TOKEN",
+  	"URL",
+  ]
+}
+```
+
+Note that `URL` is necessary for SEO and Open Graph tags to work properly, but ChangeCast will build without it.  You can skip this for your first deployment, and redeploy once you know the deployment URL.
+
+#### 2. Add a static deployment Action
+
+In the example below we are using [Netlify](https://www.netlify.com), but any static deployment action should work.  Simply configure the action to deploy the `./changecast` directory that is created by the ChangeCast Action.
+
+```HCL
+action "Publish with Netlify" {
+  needs = "Build"
+  uses = "netlify/actions/cli@master"
+  args = "deploy --dir=./changecast --prod"
+  secrets = [
+    "NETLIFY_AUTH_TOKEN",
+    "NETLIFY_SITE_ID",
+  ]
+}
+```
+
+Note that you can generate a new `NETLIFY_SITE_ID` by installing the [Netlify CLI](<https://github.com/netlify/cli>) and running `netlify sites:create`.
+
+As a bonus you can also try the [Chronicler Action](https://github.com/marketplace/actions/chronicler-action) to help you draft release notes from PR titles.
+
+For a full working example of deploying ChangeCast using Github Actions, check out our [changecast.workflow](https://github.com/palmerhq/changecast/blob/master/.github/changecast.workflow).
+
+### Netlify
+
+If you don't have access to the [Github Actions Beta](https://github.com/features/actions/signup), Netlify is the second easiest way to build and deploy ChangeCast for your project.
+
+#### 1. Deploy
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/palmerhq/changecast)
 
@@ -17,12 +61,12 @@ You will be prompted for the following information:
 
 After deploying, you can assign a custom domain for your changelog [using Netlify](https://www.netlify.com/docs/custom-domains/).
 
-### 2. Add a Build Trigger
+#### 2. Add a Build Trigger
 
 In order to rebuild whenever a Github release is published, we want to add a webhook for Github releases to Netlify. The steps to do so are:
 
 1. [Create a build hook](https://www.netlify.com/docs/webhooks/#incoming-webhooks) in Netlify.
-2. Create a webhook in the Github repository (https://github.com/<owner>/<name>/settings/hooks/new).
+2. Create a webhook in the Github repository (https://github.com/{owner}/{name}/settings/hooks/new).
 3. Copy the build hook URL from Netlify into the Github "Payload URL".
 4. In the Github webhook under "Which events would you like to trigger this webhook?", select "Let me select individual events." and "Releases".
 
