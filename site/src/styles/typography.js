@@ -2,12 +2,12 @@ import Typography from 'typography'
 import '../../../fonts/fonts.css'
 
 export const fonts = {
-  regular: 'Inter UI Regular',
-  regularItalic: 'Inter UI Regular Italic',
-  semibold: 'Inter UI Semibold',
-  semiboldItalic: 'Inter UI Semibold Italic',
-  bold: 'Inter UI Bold',
-  boldItalic: 'Inter UI Bold Italic',
+  regular: 'Inter Regular',
+  regularItalic: 'Inter Italic',
+  semibold: 'Inter Semibold',
+  semiboldItalic: 'Inter Semibold Italic',
+  bold: 'Inter Bold',
+  boldItalic: 'Inter Bold Italic',
 }
 
 const typography = new Typography({

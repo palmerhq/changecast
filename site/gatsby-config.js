@@ -29,7 +29,7 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-og-image',
       options: {
-        fontPath: '../fonts/Inter-UI-SemiBold.woff',
+        fontPath: '../fonts/Inter-SemiBold.woff',
         fontColor: '#24292e',
         backgroundColor: '#f7f7f7',
       },
