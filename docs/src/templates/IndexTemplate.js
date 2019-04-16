@@ -101,7 +101,7 @@ const IndexTemplate = ({
             marginRight: 30,
           }}
         >
-          Vue
+          React Beautiful DnD
         </GlowingButton>
         <GlowingButton
           data-material-ui-changecast
@@ -109,11 +109,9 @@ const IndexTemplate = ({
             marginRight: 30,
           }}
         >
-          Redux
+          Material UI
         </GlowingButton>
-        <GlowingButton data-workbox-changecast>
-          React Beautiful DnD
-        </GlowingButton>
+        <GlowingButton data-workbox-changecast>Workbox</GlowingButton>
       </ButtonContainer>
     </Section>
     <Section background="white">
