@@ -26,11 +26,7 @@ const IndexTemplate = ({
   data: {
     site: {
       siteMetadata: {
-        exampleSiteUrls: [
-          reduxChangeCastUrl,
-          vueChangeCastUrl,
-          reactDndChangeCastUrl,
-        ],
+        exampleSiteUrls: [reactBeautifulDndUrl, materialUiUrl, workboxUrl],
       },
     },
     logo: {
@@ -73,18 +69,18 @@ const IndexTemplate = ({
       typeof window === 'undefined') && (
       <Helmet>
         <script
-          src={`${reduxChangeCastUrl}/widget.js`}
-          data-selectors="[data-redux-changecast]"
-          defer
-        />
-        <script
-          src={`${vueChangeCastUrl}/widget.js`}
-          data-selectors="[data-vue-changecast]"
-          defer
-        />
-        <script
-          src={`${reactDndChangeCastUrl}/widget.js`}
+          src={`${reactBeautifulDndUrl}/widget.js`}
           data-selectors="[data-react-beautiful-dnd-changecast]"
+          defer
+        />
+        <script
+          src={`${materialUiUrl}/widget.js`}
+          data-selectors="[data-material-ui-changecast]"
+          defer
+        />
+        <script
+          src={`${workboxUrl}/widget.js`}
+          data-selectors="[data-workbox-changecast]"
           defer
         />
       </Helmet>
@@ -100,7 +96,7 @@ const IndexTemplate = ({
       </CenteredText>
       <ButtonContainer>
         <GlowingButton
-          data-vue-changecast
+          data-react-beautiful-dnd-changecast
           css={{
             marginRight: 30,
           }}
@@ -108,14 +104,14 @@ const IndexTemplate = ({
           Vue
         </GlowingButton>
         <GlowingButton
-          data-redux-changecast
+          data-material-ui-changecast
           css={{
             marginRight: 30,
           }}
         >
           Redux
         </GlowingButton>
-        <GlowingButton data-react-beautiful-dnd-changecast>
+        <GlowingButton data-workbox-changecast>
           React Beautiful DnD
         </GlowingButton>
       </ButtonContainer>
