@@ -162,8 +162,8 @@ const IndexTemplate = ({
         configure ChangeCast to redeploy whenver you cut a new release.
       </CenteredText>
       <div css={{ textAlign: 'center', color: 'white', marginBottom: 30 }}>
-        <GlowingAnchorButton href="https://github.com/palmerhq/changecast#how-to-deploy">
-          Deploy ChangeCast
+        <GlowingAnchorButton href="https://github.com/palmerhq/changecast#getting-started">
+          Get Started
         </GlowingAnchorButton>
       </div>
     </Section>
