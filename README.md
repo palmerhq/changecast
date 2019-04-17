@@ -2,31 +2,48 @@
   <img width="200" src="https://user-images.githubusercontent.com/1153686/55920627-8d5fdc00-5bc7-11e9-92d5-34dca3f66712.png" />
 </p>
 
-# [ChangeCast](https://changecast.now.sh)
+<div align="center">
+  <h1>
+    <a href="https://changecast.now.sh">
+      ChangeCast
+    </a>
+  </h1>
+</div>
 
-## How to Deploy
+## Introduction
 
-### Github Action
+TODO
 
-[Github Actions](https://github.com/features/actions) are the easiest way to build and deploy ChangeCast for your project.
+## Getting Started
 
-#### 1. Add the ChangeCast Action
+### Step One: Deploy
+
+#### Github Actions
+
+[Github Actions](https://github.com/features/actions) are the easiest way to deploy ChangeCast for your project.
+
+<details>
+  <summary>Instructions</summary>
+
+You must be enrolled in the [Github Actions Beta](https://github.com/features/actions/signup) to use this method.
+
+##### 1. Add the ChangeCast Action
 
 ```HCL
 action "Build" {
   uses = "palmerhq/changecast@v1.0.0"
   secrets = [
-  	"GITHUB_TOKEN",
-  	"URL",
+    "GITHUB_TOKEN",
+    "URL",
   ]
 }
 ```
 
-Note that `URL` is necessary for SEO and Open Graph tags to work properly, but ChangeCast will build without it.  You can skip this for your first deployment, and redeploy once you know the deployment URL.
+Note that `URL` is necessary for SEO and Open Graph tags to work properly, but ChangeCast will build without it. You can skip this for your first deployment, and redeploy once you know the deployment URL.
 
-#### 2. Add a static deployment Action
+##### 2. Add a static deployment Action
 
-In the example below we are using [Netlify](https://www.netlify.com), but any static deployment action should work.  Simply configure the action to deploy the `./changecast` directory that is created by the ChangeCast Action.
+In the example below we are using [Netlify](https://www.netlify.com), but any static deployment action should work. Simply configure the action to deploy the `./changecast` directory that is created by the ChangeCast Action.
 
 ```HCL
 action "Publish with Netlify" {
@@ -40,17 +57,22 @@ action "Publish with Netlify" {
 }
 ```
 
-Note that you can generate a new `NETLIFY_SITE_ID` by installing the [Netlify CLI](<https://github.com/netlify/cli>) and running `netlify sites:create`.
+Note that you can generate a new `NETLIFY_SITE_ID` by installing the [Netlify CLI](https://github.com/netlify/cli) and running `netlify sites:create`.
 
 As a bonus you can also try the [Chronicler Action](https://github.com/marketplace/actions/chronicler-action) to help you draft release notes from PR titles.
 
 For a full working example of deploying ChangeCast using Github Actions, check out our [changecast.workflow](https://github.com/palmerhq/changecast/blob/master/.github/changecast.workflow).
 
-### Netlify
+</details>
 
-If you don't have access to the [Github Actions Beta](https://github.com/features/actions/signup), Netlify is the second easiest way to build and deploy ChangeCast for your project.
+#### Netlify
 
-#### 1. Deploy
+[Netlify](https://www.netlify.com) is the next easiest way to deploy ChangeCast for your project.
+
+<details>
+  <summary>Instructions</summary>
+
+##### 1. Deploy
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/palmerhq/changecast)
 
@@ -61,7 +83,7 @@ You will be prompted for the following information:
 
 After deploying, you can assign a custom domain for your changelog [using Netlify](https://www.netlify.com/docs/custom-domains/).
 
-#### 2. Add a Build Trigger
+##### 2. Add a Build Trigger
 
 In order to rebuild whenever a Github release is published, we want to add a webhook for Github releases to Netlify. The steps to do so are:
 
@@ -71,3 +93,23 @@ In order to rebuild whenever a Github release is published, we want to add a web
 4. In the Github webhook under "Which events would you like to trigger this webhook?", select "Let me select individual events." and "Releases".
 
 You're all set! Now your changelog page and widget will rebuild whenever a new release is published.
+
+</details>
+
+### Step Two: Embed Widget
+
+First, add the following `script` tag to your site header. `BASE_URL` should be the deployment URL of your ChangeCast site.
+
+```html
+<script src="{BASE_URL}/widget.js" defer="true"></script>
+```
+
+Next, add the `data-toggle-changecast` attribute to any clickable elements that you want to toggle the ChangeCast widget.
+
+```html
+<button data-toggle-changecast="true">What's new?</button>
+```
+
+## Contributing
+
+TODO
