@@ -5,6 +5,7 @@ import * as styles from './styles.css'
 // configuration
 const CHANGECAST_LOCALSTORAGE_KEY = `changecast-${process.env.REPO_HASH}`
 const changeCastHost =
+  process.env.BASE_URL ||
   process.env.URL ||
   document.currentScript.getAttribute('src').replace('/widget.js', '')
 

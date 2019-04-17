@@ -53,10 +53,10 @@ module.exports = {
 function generateMetadata() {
   // default to false for each since undefined fields cannot be queried
   return {
-    title: process.env.TITLE || false,
+    title: process.env.SITE_TITLE || false,
     primaryColor: process.env.PRIMARY_COLOR
       ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
       : false,
-    url: process.env.URL || '',
+    url: process.env.BASE_URL || process.env.URL || '',
   }
 }
