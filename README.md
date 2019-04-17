@@ -22,10 +22,10 @@ ChangeCast uses your [Github Releases](https://help.github.com/en/articles/creat
 
 #### Github Actions
 
+[Github Actions](https://github.com/features/actions) are the easiest way to deploy ChangeCast for your project.
+
 <details>
   <summary>Instructions</summary>
-
-You must be enrolled in the [Github Actions Beta](https://github.com/features/actions/signup) to use this method.
 
 ##### 1. Add the ChangeCast Action
 
