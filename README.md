@@ -12,15 +12,15 @@
 
 ## Introduction
 
-TODO
+We built ChangeCast to help communicate project updates to users.  Whether the project is an open source library or a paid website, users want to know about the hard work being done!  Keeping a changelog [is important](https://keepachangelog.com), but the other half of the battle is making that changelog available to users.
+
+ChangeCast uses your [Github Releases](https://help.github.com/en/articles/creating-releases) to build a static site and widget that can be added to your application or project homepage.  Check out the [examples on our homepage](https://changecast.now.sh) or get started deploying your own ChangeCast below.
 
 ## Getting Started
 
 ### Step One: Deploy
 
 #### Github Actions
-
-[Github Actions](https://github.com/features/actions) are the easiest way to deploy ChangeCast for your project.
 
 <details>
   <summary>Instructions</summary>
@@ -109,7 +109,3 @@ Next, add the `data-toggle-changecast` attribute to any clickable elements that 
 ```html
 <button data-toggle-changecast="true">What's new?</button>
 ```
-
-## Contributing
-
-TODO
