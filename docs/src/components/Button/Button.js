@@ -18,9 +18,6 @@ export const buttonStyles = {
   ':hover': {
     background: 'rgba(0, 0, 0, 0.1)',
   },
-  ':visited': {
-    color: 'white',
-  },
 }
 
 export const Button = props => <button css={buttonStyles} {...props} />

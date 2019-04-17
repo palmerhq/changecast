@@ -26,11 +26,7 @@ const IndexTemplate = ({
   data: {
     site: {
       siteMetadata: {
-        exampleSiteUrls: [
-          reduxChangeCastUrl,
-          vueChangeCastUrl,
-          reactDndChangeCastUrl,
-        ],
+        exampleSiteUrls: [reactBeautifulDndUrl, materialUiUrl, workboxUrl],
       },
     },
     logo: {
@@ -73,18 +69,18 @@ const IndexTemplate = ({
       typeof window === 'undefined') && (
       <Helmet>
         <script
-          src={`${reduxChangeCastUrl}/widget.js`}
-          data-selectors="[data-redux-changecast]"
-          defer
-        />
-        <script
-          src={`${vueChangeCastUrl}/widget.js`}
-          data-selectors="[data-vue-changecast]"
-          defer
-        />
-        <script
-          src={`${reactDndChangeCastUrl}/widget.js`}
+          src={`${reactBeautifulDndUrl}/widget.js`}
           data-selectors="[data-react-beautiful-dnd-changecast]"
+          defer
+        />
+        <script
+          src={`${materialUiUrl}/widget.js`}
+          data-selectors="[data-material-ui-changecast]"
+          defer
+        />
+        <script
+          src={`${workboxUrl}/widget.js`}
+          data-selectors="[data-workbox-changecast]"
           defer
         />
       </Helmet>
@@ -100,24 +96,22 @@ const IndexTemplate = ({
       </CenteredText>
       <ButtonContainer>
         <GlowingButton
-          data-vue-changecast
+          data-react-beautiful-dnd-changecast
           css={{
             marginRight: 30,
           }}
         >
-          Vue
-        </GlowingButton>
-        <GlowingButton
-          data-redux-changecast
-          css={{
-            marginRight: 30,
-          }}
-        >
-          Redux
-        </GlowingButton>
-        <GlowingButton data-react-beautiful-dnd-changecast>
           React Beautiful DnD
         </GlowingButton>
+        <GlowingButton
+          data-material-ui-changecast
+          css={{
+            marginRight: 30,
+          }}
+        >
+          Material UI
+        </GlowingButton>
+        <GlowingButton data-workbox-changecast>Workbox</GlowingButton>
       </ButtonContainer>
     </Section>
     <Section background="white">
@@ -168,8 +162,8 @@ const IndexTemplate = ({
         configure ChangeCast to redeploy whenver you cut a new release.
       </CenteredText>
       <div css={{ textAlign: 'center', color: 'white', marginBottom: 30 }}>
-        <GlowingAnchorButton href="https://github.com/palmerhq/changecast#how-to-deploy">
-          Deploy ChangeCast
+        <GlowingAnchorButton href="https://github.com/palmerhq/changecast#getting-started">
+          Get Started
         </GlowingAnchorButton>
       </div>
     </Section>

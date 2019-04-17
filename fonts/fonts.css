@@ -1,42 +1,48 @@
 @font-face {
-  font-family: 'Inter UI Regular';
+  font-family: 'Inter Regular';
   font-style: normal;
   font-weight: 400;
-  src: url('Inter-UI-Regular.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/npm/inter-ui@3.5.0/Inter (web)/Inter-Regular.woff')
+    format('woff');
   font-display: fallback;
 }
 @font-face {
-  font-family: 'Inter UI Regular Italic';
+  font-family: 'Inter Italic';
   font-style: italic;
   font-weight: 400;
-  src: url('Inter-UI-Italic.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/npm/inter-ui@3.5.0/Inter (web)/Inter-Italic.woff')
+    format('woff');
   font-display: fallback;
 }
 @font-face {
-  font-family: 'Inter UI SemiBold';
+  font-family: 'Inter SemiBold';
   font-style: normal;
   font-weight: 600;
-  src: url('Inter-UI-SemiBold.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/npm/inter-ui@3.5.0/Inter (web)/Inter-SemiBold.woff')
+    format('woff');
   font-display: fallback;
 }
 @font-face {
-  font-family: 'Inter UI SemiBold Italic';
+  font-family: 'Inter SemiBold Italic';
   font-style: italic;
   font-weight: 600;
-  src: url('Inter-UI-SemiBoldItalic.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/npm/inter-ui@3.5.0/Inter (web)/Inter-SemiBoldItalic.woff')
+    format('woff');
   font-display: fallback;
 }
 @font-face {
-  font-family: 'Inter UI Bold';
+  font-family: 'Inter Bold';
   font-style: normal;
   font-weight: 700;
-  src: url('Inter-UI-Bold.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/npm/inter-ui@3.5.0/Inter (web)/Inter-Bold.woff')
+    format('woff');
   font-display: fallback;
 }
 @font-face {
-  font-family: 'Inter UI Bold Italic';
+  font-family: 'Inter Bold Italic';
   font-style: italic;
   font-weight: 700;
-  src: url('Inter-UI-BoldItalic.woff') format('woff');
+  src: url('https://cdn.jsdelivr.net/npm/inter-ui@3.5.0/Inter (web)/Inter-BoldItalic.woff')
+    format('woff');
   font-display: fallback;
 }

@@ -21,7 +21,7 @@ jobs:
           command: if [ "${CIRCLE_BRANCH}" == "master" ]; then
               FIRST_EXAMPLE_URL=$(
                 now
-                  --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
                   --build-env URL=https://changecast-1.now.sh
                   --team=palmer
                   --public
@@ -32,7 +32,7 @@ jobs:
             else
               FIRST_EXAMPLE_URL=$(
                 now
-                  --build-env GITHUB_REPO_URL=https://github.com/reduxjs/redux
+                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
                   --build-env URL=https://changecast-1-${SHORT_SHA1}.now.sh
                   --team=palmer
                   --public
@@ -63,7 +63,7 @@ jobs:
           command: if [ "${CIRCLE_BRANCH}" == "master" ]; then
               SECOND_EXAMPLE_URL=$(
                 now
-                  --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
+                  --build-env GITHUB_REPO_URL=https://github.com/mui-org/material-ui
                   --build-env URL=https://changecast-2.now.sh
                   --team=palmer
                   --public
@@ -74,7 +74,7 @@ jobs:
             else
               SECOND_EXAMPLE_URL=$(
                 now
-                  --build-env GITHUB_REPO_URL=https://github.com/vuejs/vue
+                  --build-env GITHUB_REPO_URL=https://github.com/mui-org/material-ui
                   --build-env URL=https://changecast-2-${SHORT_SHA1}.now.sh
                   --team=palmer
                   --public
@@ -105,7 +105,7 @@ jobs:
           command: if [ "${CIRCLE_BRANCH}" == "master" ]; then
               THIRD_EXAMPLE_URL=$(
                 now
-                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
+                  --build-env GITHUB_REPO_URL=https://github.com/GoogleChrome/workbox
                   --build-env URL=https://changecast-3.now.sh
                   --team=palmer
                   --public
@@ -116,7 +116,7 @@ jobs:
             else
               THIRD_EXAMPLE_URL=$(
                 now
-                  --build-env GITHUB_REPO_URL=https://github.com/atlassian/react-beautiful-dnd
+                  --build-env GITHUB_REPO_URL=https://github.com/GoogleChrome/workbox
                   --build-env URL=https://changecast-3-${SHORT_SHA1}.now.sh
                   --team=palmer
                   --public

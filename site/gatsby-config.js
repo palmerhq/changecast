@@ -29,7 +29,7 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-og-image',
       options: {
-        fontPath: '../fonts/Inter-UI-SemiBold.woff',
+        fontPath: '../fonts/Inter-SemiBold.woff',
         fontColor: '#24292e',
         backgroundColor: '#f7f7f7',
       },
@@ -53,10 +53,10 @@ module.exports = {
 function generateMetadata() {
   // default to false for each since undefined fields cannot be queried
   return {
-    title: process.env.TITLE || false,
+    title: process.env.SITE_TITLE || false,
     primaryColor: process.env.PRIMARY_COLOR
       ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
       : false,
-    url: process.env.URL || '',
+    url: process.env.BASE_URL || process.env.URL || '',
   }
 }

@@ -37,7 +37,6 @@ export const Header = () => {
             '@media (max-width: 600px)': {
               padding: '10px 0',
             },
-            background: 'black',
           }}
         >
           <div
@@ -66,10 +65,11 @@ export const Header = () => {
                   alignItems: 'center',
                 }}
               >
-                <Radio />
+                <Radio css={{ color: 'black' }} />
                 <span
                   css={{
                     fontWeight: 'bold',
+                    color: 'black',
                     marginLeft: '1rem',
                     '@media (max-width: 600px)': {
                       display: 'none',
@@ -86,7 +86,6 @@ export const Header = () => {
                   listStyle: 'none',
                   display: 'flex',
                   alignItems: 'center',
-                  color: 'white',
                 }}
               >
                 <li
@@ -97,7 +96,7 @@ export const Header = () => {
                     alignItems: 'center',
                   }}
                 >
-                  <Button>What's New?</Button>
+                  <Button css={{ color: 'black' }}>What's New?</Button>
                 </li>
                 <li
                   css={{
@@ -106,7 +105,10 @@ export const Header = () => {
                     alignItems: 'center',
                   }}
                 >
-                  <AnchorButton href="https://github.com/palmerhq/changecast">
+                  <AnchorButton
+                    href="https://github.com/palmerhq/changecast"
+                    css={{ color: 'black' }}
+                  >
                     Github
                   </AnchorButton>
                 </li>
