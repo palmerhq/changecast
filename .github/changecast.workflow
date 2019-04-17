@@ -24,6 +24,6 @@ action "Publish with Netlify" {
 action "Publish with Now" {
   uses = "actions/zeit-now@1.0.0"
   needs = ["Build"]
-  args = "./changecast --public"
+  args = "./changecast --public --scope=palmer"
   secrets = ["ZEIT_TOKEN"]
 }
