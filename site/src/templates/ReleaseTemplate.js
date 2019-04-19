@@ -59,6 +59,7 @@ const ReleaseTemplate = ({
             property: 'og:image',
             content: `${url}${tagOgImageSrc}`,
           },
+          { name: 'twitter:card', content: 'summary_large_image' },
           {
             name: 'twitter:url',
             content: `${url}/${tagName}`,

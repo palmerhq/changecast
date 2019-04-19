@@ -23,14 +23,14 @@ action "Publish with Netlify" {
 action "Publish with Now" {
   uses = "actions/zeit-now@1.0.0"
   needs = ["Build"]
-  args = "--public --no-clipboard --scope=palmer deploy ./changecast > $HOME/$GITHUB_ACTION.txt"
+  args = "--public --no-clipboard --scope=palmer deploy ./changecast > $GITHUB_WORKSPACE/deploy.txt"
   secrets = ["ZEIT_TOKEN"]
 }
 
 action "Alias Now Deployment" {
   needs = ["Publish with Now"]
   uses = "actions/zeit-now@1.0.0"
-  args = "alias `cat /github/home/deploy.txt` changecast-log"
+  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-log"
   secrets = [
     "ZEIT_TOKEN",
   ]

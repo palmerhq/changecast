@@ -71,9 +71,6 @@ export const Header = () => {
                     fontWeight: 'bold',
                     color: 'black',
                     marginLeft: '1rem',
-                    '@media (max-width: 600px)': {
-                      display: 'none',
-                    },
                   }}
                 >
                   ChangeCast
@@ -86,6 +83,9 @@ export const Header = () => {
                   listStyle: 'none',
                   display: 'flex',
                   alignItems: 'center',
+                  '@media (max-width: 600px)': {
+                    display: 'none',
+                  },
                 }}
               >
                 <li
@@ -96,7 +96,12 @@ export const Header = () => {
                     alignItems: 'center',
                   }}
                 >
-                  <Button css={{ color: 'black' }}>What's New?</Button>
+                  <Button
+                    css={{ color: 'black' }}
+                    data-changecast-changecast={true}
+                  >
+                    What's New?
+                  </Button>
                 </li>
                 <li
                   css={{
