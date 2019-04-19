@@ -1,7 +1,7 @@
 workflow "Build and Publish ChangeCast" {
   on = "release"
   resolves = [
-    "Publish with Now",
+    "Alias Now Deployment",
     "Publish with Netlify",
   ]
 }
@@ -14,10 +14,9 @@ action "Build" {
 action "Publish with Netlify" {
   needs = "Build"
   uses = "netlify/actions/cli@master"
-  args = "deploy --dir=./changecast --prod"
+  args = "deploy --dir=./changecast --site=061cc43b-d700-492c-9e3d-3d92f6d197aa --prod"
   secrets = [
     "NETLIFY_AUTH_TOKEN",
-    "NETLIFY_SITE_ID",
   ]
 }
 
