@@ -9,6 +9,7 @@ workflow "Build and Publish ChangeCast" {
 action "Build" {
   uses = "palmerhq/changecast@v1.0.0"
   secrets = ["GITHUB_TOKEN"]
+  args = "BASE_URL=https://changecast-log.now.sh"
 }
 
 action "Publish with Netlify" {
