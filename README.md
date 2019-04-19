@@ -61,7 +61,7 @@ Note that you can generate a new `NETLIFY_SITE_ID` by installing the [Netlify CL
 
 As a bonus you can also try the [Chronicler Action](https://github.com/marketplace/actions/chronicler-action) to help you draft release notes from PR titles.
 
-For a full working example of deploying ChangeCast using Github Actions, check out our [changecast.workflow](https://github.com/palmerhq/changecast/blob/master/.github/changecast.workflow).
+For a full working example of deploying ChangeCast using Github Actions, check out our [main.workflow](https://github.com/palmerhq/changecast/blob/master/.github/main.workflow).
 
 </details>
 
