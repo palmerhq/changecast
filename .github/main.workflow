@@ -96,7 +96,7 @@ action "Publish Material UI" {
 }
 
 action "Alias Material UI" {
-  uses = "actions/zeit-now@5c51b26db987d15a0133e4c760924896b4f1512f"
+  uses = "actions/zeit-now@1.0.0"
   needs = ["Publish Material UI"]
   args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-2-$GITHUB_SHA"
   secrets = ["ZEIT_TOKEN"]
@@ -133,6 +133,11 @@ action "Build Docs" {
   uses = "nuxt/actions-yarn@master"
   args = "build --cwd \"./docs\""
   needs = ["Install Docs"]
+  env = {
+    FIRST_EXAMPLE_URL = "https://changecast-1-$GITHUB_SHA.now.sh"
+    SECOND_EXAMPLE_URL = "https://changecast-2-$GITHUB_SHA.now.sh"
+    THIRD_EXAMPLE_URL = "https://changecast-3-$GITHUB_SHA.now.sh"
+  }
 }
 
 action "Publish Docs" {
