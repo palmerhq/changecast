@@ -124,27 +124,16 @@ action "Alias Workbox Preview" {
   needs = ["Deploy Workbox Preview"]
 }
 
-action "Install Docs Preview" {
+action "Install and Build Docs Preview" {
   uses = "nuxt/actions-yarn@master"
-  args = "install"
-}
-
-action "Build Docs Preview" {
-  uses = "nuxt/actions-yarn@master"
-  args = "build:docs"
-  env = {
-    FIRST_EXAMPLE_URL = "https://changecast-1-$GITHUB_SHA.now.sh"
-    SECOND_EXAMPLE_URL = "https://changecast-2-$GITHUB_SHA.now.sh"
-    THIRD_EXAMPLE_URL = "https://changecast-3-$GITHUB_SHA.now.sh"
-  }
-  needs = ["Install Docs Preview"]
+  args = "install && FIRST_EXAMPLE_URL=https://changecast-1-$GITHUB_SHA.now.sh SECOND_EXAMPLE_URL=https://changecast-2-$GITHUB_SHA.now.sh THIRD_EXAMPLE_URL=https://changecast-3-$GITHUB_SHA.now.sh yarn build:docs"
 }
 
 action "Deploy Docs Preview" {
   uses = "actions/zeit-now@1.0.0"
   args = "--public --no-clipboard --scope=palmer deploy ./docs > $GITHUB_WORKSPACE/deploy.txt"
   secrets = ["ZEIT_TOKEN"]
-  needs = ["Build Docs Preview"]
+  needs = ["Install and Build Docs Preview"]
 }
 
 action "Alias Docs Preview" {
@@ -250,9 +239,9 @@ action "Build Docs" {
   args = "build:docs"
   needs = ["Install Docs"]
   env = {
-    FIRST_EXAMPLE_URL = "https://changecast-1-$GITHUB_SHA.now.sh"
-    SECOND_EXAMPLE_URL = "https://changecast-2-$GITHUB_SHA.now.sh"
-    THIRD_EXAMPLE_URL = "https://changecast-3-$GITHUB_SHA.now.sh"
+    THIRD_EXAMPLE_URL = "https://changecast-3.now.sh"
+    SECOND_EXAMPLE_URL = "https://changecast-2.now.sh"
+    FIRST_EXAMPLE_URL = "https://changecast-1.now.sh"
   }
 }
 
