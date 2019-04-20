@@ -1,10 +1,6 @@
 FROM node:10
 
-COPY ../../ /changecast
-
-RUN cd /changecast
-
-ENTRYPOINT ["/changecast/action/entrypoint.sh"]
+ENTRYPOINT ["/github/workspace/action/pr/entrypoint.sh"]
 
 LABEL "com.github.actions.name"="ChangeCast"
 LABEL "com.github.actions.description"="Create beautiful, performant, accessible changelogs from your Github releases."
