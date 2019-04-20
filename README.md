@@ -32,7 +32,9 @@ ChangeCast uses your [Github Releases](https://help.github.com/en/articles/creat
 ```HCL
 action "Build" {
   uses = "palmerhq/changecast@v1.0.0"
-  args = "BASE_URL={BASE_URL}"
+  env = {
+    BASE_URL = {BASE_URL}
+  }
   secrets = [
     "GITHUB_TOKEN",
   ]
