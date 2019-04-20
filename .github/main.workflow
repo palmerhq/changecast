@@ -47,17 +47,18 @@ action "Chronicler" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-workflow "Build Docs" {
-  on = "pull_request"
+workflow "Build and Publish Docs" {
   resolves = [
     "Alias Material UI",
     "Alias Workbox",
     "Alias React Beautiful Dnd",
+    "Alias Docs",
   ]
+  on = "pull_request"
 }
 
 action "React Beautiful DnD Changecast" {
-  uses = "./action/pr"
+  uses = "./"
   secrets = ["GITHUB_TOKEN"]
   env = {
     REPO_URL = "https://github.com/atlassian/react-beautiful-dnd"
@@ -79,7 +80,7 @@ action "Alias React Beautiful Dnd" {
 }
 
 action "Material UI Changecast" {
-  uses = "./action/pr"
+  uses = "./"
   args = "GITHUB_REPO_URL="
   secrets = ["GITHUB_TOKEN"]
   env = {
@@ -102,10 +103,10 @@ action "Alias Material UI" {
 }
 
 action "Workbox Changecast" {
-  uses = "./action/pr"
+  uses = "./"
   secrets = ["GITHUB_TOKEN"]
   env = {
-    REPO_URL = "https://github.com/GoogleChrome/workbox"  
+    REPO_URL = "https://github.com/GoogleChrome/workbox"
   }
 }
 
@@ -121,4 +122,29 @@ action "Alias Workbox" {
   needs = ["Publish Workbox"]
   secrets = ["ZEIT_TOKEN"]
   args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-3-$GITHUB_SHA"
+}
+
+action "Install Docs" {
+  uses = "nuxt/actions-yarn@master"
+  args = "install"
+}
+
+action "Build Docs" {
+  uses = "nuxt/actions-yarn@master"
+  args = "build --cwd \"./docs\""
+  needs = ["Install Docs"]
+}
+
+action "Publish Docs" {
+  uses = "actions/zeit-now@1.0.0"
+  args = "--public --no-clipboard --scope=palmer deploy ./changecast > $GITHUB_WORKSPACE/deploy.txt"
+  secrets = ["ZEIT_TOKEN"]
+  needs = ["Build Docs"]
+}
+
+action "Alias Docs" {
+  uses = "actions/zeit-now@5c51b26db987d15a0133e4c760924896b4f1512f"
+  needs = ["Publish Docs"]
+  secrets = ["ZEIT_TOKEN"]
+  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-$GITHUB_SHA"
 }
