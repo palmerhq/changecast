@@ -37,7 +37,7 @@ action "Alias Now Deployment" {
   ]
 }
 
-workflow "PR to release notes" {
+workflow "Run Chronicler" {
   on = "pull_request"
   resolves = ["Chronicler"]
 }
@@ -50,20 +50,18 @@ action "Chronicler" {
 workflow "Build Docs" {
   on = "pull_request"
   resolves = [
-    "React Beautiful DnD Changecast",
     "Alias Material UI",
-    "Alias Workbox Master",
     "Alias Workbox",
     "Alias React Beautiful Dnd",
-    "Alias React Beautiful DnD Master",
-    "Alias Material UI Master",
   ]
 }
 
 action "React Beautiful DnD Changecast" {
-  uses = "palmerhq/changecast@master"
+  uses = "./action/pr"
   secrets = ["GITHUB_TOKEN"]
-  args = "GITHUB_REPO_URL=https://github.com/mui-org/material-ui"
+  env = {
+    REPO_URL = "https://github.com/atlassian/react-beautiful-dnd"
+  }
 }
 
 action "Publish React Beautiful DnD" {
@@ -81,9 +79,12 @@ action "Alias React Beautiful Dnd" {
 }
 
 action "Material UI Changecast" {
-  uses = "palmerhq/changecast@master"
-  args = "GITHUB_REPO_URL=https://github.com/mui-org/material-ui"
+  uses = "./action/pr"
+  args = "GITHUB_REPO_URL="
   secrets = ["GITHUB_TOKEN"]
+  env = {
+    REPO_URL = "https://github.com/mui-org/material-ui"
+  }
 }
 
 action "Publish Material UI" {
@@ -101,9 +102,11 @@ action "Alias Material UI" {
 }
 
 action "Workbox Changecast" {
-  uses = "palmerhq/changecast@master"
-  args = "GITHUB_REPO_URL=https://github.com/GoogleChrome/workbox"
+  uses = "./action/pr"
   secrets = ["GITHUB_TOKEN"]
+  env = {
+    REPO_URL = "https://github.com/GoogleChrome/workbox"  
+  }
 }
 
 action "Publish Workbox" {
@@ -118,43 +121,4 @@ action "Alias Workbox" {
   needs = ["Publish Workbox"]
   secrets = ["ZEIT_TOKEN"]
   args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-3-$GITHUB_SHA"
-}
-
-action "Filter master" {
-  uses = "actions/bin/filter@master"
-  needs = ["Publish Workbox"]
-  args = "branch master"
-}
-
-action "Alias Workbox Master" {
-  uses = "actions/zeit-now@1.0.0"
-  needs = ["Filter master"]
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-3"
-  secrets = ["ZEIT_TOKEN"]
-}
-
-action "actions/bin/filter@master" {
-  uses = "actions/bin/filter@master"
-  needs = ["Publish React Beautiful DnD"]
-  args = "branch master"
-}
-
-action "Alias React Beautiful DnD Master" {
-  uses = "actions/zeit-now@1.0.0"
-  needs = ["actions/bin/filter@master"]
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-1"
-  secrets = ["ZEIT_TOKEN"]
-}
-
-action "actions/bin/filter@master-1" {
-  uses = "actions/bin/filter@master"
-  needs = ["Publish Material UI"]
-  args = "branch master"
-}
-
-action "Alias Material UI Master" {
-  uses = "actions/zeit-now@1.0.0"
-  needs = ["actions/bin/filter@master-1"]
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-2"
-  secrets = ["ZEIT_TOKEN"]
 }
