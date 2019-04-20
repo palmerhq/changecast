@@ -131,7 +131,7 @@ action "Install Docs" {
 
 action "Build Docs" {
   uses = "nuxt/actions-yarn@master"
-  args = "build --cwd \"./docs\""
+  args = "build:docs"
   needs = ["Install Docs"]
   env = {
     FIRST_EXAMPLE_URL = "https://changecast-1-$GITHUB_SHA.now.sh"

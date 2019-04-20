@@ -6,6 +6,7 @@
     "build": "yarn build:widget && yarn build:site",
     "build:site": "cd site && yarn build",
     "build:widget": "cd widget && yarn build",
+    "build:docs": "cd docs && yarn build",
     "postinstall": "patch-package",
     "now-build": "yarn build"
   },
