@@ -131,7 +131,7 @@ action "Install and Build Docs Preview" {
 
 action "Deploy Docs Preview" {
   uses = "actions/zeit-now@1.0.0"
-  args = "--public --no-clipboard --scope=palmer deploy ./docs > $GITHUB_WORKSPACE/deploy.txt"
+  args = "--public --no-clipboard --scope=palmer deploy ./docs/public --local-config=../now.json > $GITHUB_WORKSPACE/deploy.txt"
   secrets = ["ZEIT_TOKEN"]
   needs = ["Install and Build Docs Preview"]
 }
@@ -247,7 +247,7 @@ action "Build Docs" {
 
 action "Deploy Docs" {
   uses = "actions/zeit-now@1.0.0"
-  args = "--public --no-clipboard --scope=palmer deploy ./changecast > $GITHUB_WORKSPACE/deploy.txt"
+  args = "--public --no-clipboard --scope=palmer deploy ./docs/public --local-config=../now.json > $GITHUB_WORKSPACE/deploy.txt"
   secrets = ["ZEIT_TOKEN"]
   needs = ["Build Docs"]
 }
