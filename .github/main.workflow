@@ -76,7 +76,7 @@ action "Deploy React Beautiful DnD Preview" {
 
 action "Alias React Beautiful DnD Preview" {
   uses = "actions/zeit-now@1.0.0"
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-1-$GITHUB_SHA"
+  args = "alias --scope=palmer `cat $GITHUB_WORKSPACE/deploy.txt` changecast-1-$GITHUB_SHA"
   secrets = ["ZEIT_TOKEN"]
   needs = ["Deploy React Beautiful DnD Preview"]
 }
@@ -99,7 +99,7 @@ action "Deploy Material UI Preview" {
 
 action "Alias Material UI Preview" {
   uses = "actions/zeit-now@1.0.0"
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-2-$GITHUB_SHA"
+  args = "alias --scope=palmer `cat $GITHUB_WORKSPACE/deploy.txt` changecast-2-$GITHUB_SHA"
   secrets = ["ZEIT_TOKEN"]
   needs = ["Deploy Material UI Preview"]
 }
@@ -122,7 +122,7 @@ action "Deploy Workbox Preview" {
 action "Alias Workbox Preview" {
   uses = "actions/zeit-now@1.0.0"
   secrets = ["ZEIT_TOKEN"]
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-3-$GITHUB_SHA"
+  args = "alias --scope=palmer `cat $GITHUB_WORKSPACE/deploy.txt` changecast-3-$GITHUB_SHA"
   needs = ["Deploy Workbox Preview"]
 }
 
@@ -141,7 +141,7 @@ action "Deploy Docs Preview" {
 action "Alias Docs Preview" {
   uses = "actions/zeit-now@5c51b26db987d15a0133e4c760924896b4f1512f"
   secrets = ["ZEIT_TOKEN"]
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-$GITHUB_SHA"
+  args = "alias --scope=palmer `cat $GITHUB_WORKSPACE/deploy.txt` changecast-$GITHUB_SHA"
   needs = ["Deploy Docs Preview"]
 }
 
@@ -178,7 +178,7 @@ action "Deploy React Beautiful DnD" {
 
 action "Alias React Beautiful Dnd" {
   uses = "actions/zeit-now@1.0.0"
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-1"
+  args = "alias --scope=palmer `cat $GITHUB_WORKSPACE/deploy.txt` changecast-1"
   secrets = ["ZEIT_TOKEN"]
   needs = ["Deploy React Beautiful DnD"]
 }
@@ -202,7 +202,7 @@ action "Deploy Material UI" {
 
 action "Alias Material UI" {
   uses = "actions/zeit-now@1.0.0"
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-2"
+  args = "alias --scope=palmer `cat $GITHUB_WORKSPACE/deploy.txt` changecast-2"
   secrets = ["ZEIT_TOKEN"]
   needs = ["Deploy Material UI"]
 }
@@ -226,7 +226,7 @@ action "Deploy Workbox" {
 action "Alias Workbox" {
   uses = "actions/zeit-now@1.0.0"
   secrets = ["ZEIT_TOKEN"]
-  args = "alias `cat $GITHUB_WORKSPACE/deploy.txt` changecast-3"
+  args = "alias --scope=palmer `cat $GITHUB_WORKSPACE/deploy.txt` changecast-3"
   needs = ["Deploy Workbox"]
 }
 
