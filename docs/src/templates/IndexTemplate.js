@@ -83,6 +83,11 @@ const IndexTemplate = ({
           data-selectors="[data-workbox-changecast]"
           defer
         />
+        <script
+          src="https://changecast-log.netlify.com/widget.js"
+          data-selectors="[data-changecast-changecast]"
+          defer
+        />
       </Helmet>
     )}
     <Header />
@@ -156,10 +161,22 @@ const IndexTemplate = ({
       <CenteredTitle color="white">How do I get started?</CenteredTitle>
       <CenteredText color="white">
         ChangeCast can be built and deployed on{' '}
-        <Anchor href="https://www.netlify.com">Netlify</Anchor>,{' '}
-        <Anchor href="https://zeit.co/now">Now</Anchor>, or any other static
-        hosting service. And, using a Github webhook or action, you can
-        configure ChangeCast to redeploy whenver you cut a new release.
+        <Anchor
+          href="https://www.netlify.com"
+          css={{ color: 'white', ':visited': { color: 'white' } }}
+        >
+          Netlify
+        </Anchor>
+        ,{' '}
+        <Anchor
+          href="https://zeit.co/now"
+          css={{ color: 'white', ':visited': { color: 'white' } }}
+        >
+          Now
+        </Anchor>
+        , or any other static hosting service. And, using a Github webhook or
+        action, you can configure ChangeCast to redeploy whenver you cut a new
+        release.
       </CenteredText>
       <div css={{ textAlign: 'center', color: 'white', marginBottom: 30 }}>
         <GlowingAnchorButton href="https://github.com/palmerhq/changecast#getting-started">

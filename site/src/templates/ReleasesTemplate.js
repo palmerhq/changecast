@@ -32,6 +32,11 @@ const ReleasesTemplate = ({
   const [releases, setReleases] = React.useState(edges)
   const [releasesShown, setReleasesShown] = React.useState(10)
 
+  const mark = React.useRef()
+  React.useEffect(() => {
+    mark.current = new Mark(document.querySelector('.release'))
+  }, [])
+
   const [searchValue, setSearchValue] = React.useState('')
   const search = React.useRef(null)
   function getReleaseSearch() {
@@ -51,7 +56,10 @@ const ReleasesTemplate = ({
     releaseSearch.addDocuments(edges)
 
     const debouncedReleaseSearch = debounce(
-      value => setReleases(!!value ? releaseSearch.search(value) : edges),
+      value => {
+        setReleases(!!value ? releaseSearch.search(value) : edges)
+        mark.current.mark(value)
+      },
       100
       // true
     )

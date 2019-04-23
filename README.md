@@ -12,9 +12,9 @@
 
 ## Introduction
 
-We built ChangeCast to help communicate project updates to users.  Whether the project is an open source library or a paid website, users want to know about the hard work being done!  Keeping a changelog [is important](https://keepachangelog.com), but the other half of the battle is making that changelog available to users.
+We built ChangeCast to help communicate project updates to users. Whether the project is an open source library or a paid website, users want to know about the hard work being done! Keeping a changelog [is important](https://keepachangelog.com), but the other half of the battle is making that changelog available to users.
 
-ChangeCast uses your [Github Releases](https://help.github.com/en/articles/creating-releases) to build a static site and widget that can be added to your application or project homepage.  Check out the [examples on our homepage](https://changecast.now.sh) or get started deploying your own ChangeCast below.
+ChangeCast uses your [Github Releases](https://help.github.com/en/articles/creating-releases) to build a static site and widget that can be added to your application or project homepage. Check out the [examples on our homepage](https://changecast.now.sh) or get started deploying your own ChangeCast below.
 
 ## Getting Started
 
@@ -32,9 +32,11 @@ ChangeCast uses your [Github Releases](https://help.github.com/en/articles/creat
 ```HCL
 action "Build" {
   uses = "palmerhq/changecast@v1.0.0"
+  env = {
+    BASE_URL = {BASE_URL}
+  }
   secrets = [
     "GITHUB_TOKEN",
-    "BASE_URL",
   ]
 }
 ```
@@ -61,7 +63,7 @@ Note that you can generate a new `NETLIFY_SITE_ID` by installing the [Netlify CL
 
 As a bonus you can also try the [Chronicler Action](https://github.com/marketplace/actions/chronicler-action) to help you draft release notes from PR titles.
 
-For a full working example of deploying ChangeCast using Github Actions, check out our [changecast.workflow](https://github.com/palmerhq/changecast/blob/master/.github/changecast.workflow).
+For a full working example of deploying ChangeCast using Github Actions, check out our [main.workflow](https://github.com/palmerhq/changecast/blob/master/.github/main.workflow).
 
 </details>
 

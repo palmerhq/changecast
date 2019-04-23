@@ -1,5 +1,8 @@
 import { Radio } from 'icons/Radio'
 import React from 'react'
+import { AnchorButton } from './Button/AnchorButton'
+import { Button } from './Button/Button'
+import { LinkButton } from './Button/LinkButton'
 
 export const Footer = () => (
   <div
@@ -21,14 +24,6 @@ export const Footer = () => (
           textAlign: 'center',
         }}
       >
-        <div
-          css={{
-            marginBottom: '10px',
-          }}
-        >
-          <Radio />
-        </div>
-
         <ul
           css={{
             padding: '0',
@@ -41,38 +36,46 @@ export const Footer = () => (
               marginBottom: '10px',
             }}
           >
-            <a
-              css={{
-                color: '#303030',
-              }}
-              href="https://twitter.com/PalmerGroupHQ"
+            <AnchorButton
+              href="https://github.com/palmerhq/changecast"
+              css={{ color: 'black' }}
             >
-              Twitter
-            </a>
+              Github
+            </AnchorButton>
           </li>
           <li
             css={{
               marginBottom: '10px',
             }}
           >
-            <a
-              css={{
-                color: '#303030',
-              }}
-              href="https://github.com/palmerhq"
-            >
-              Github
-            </a>
+            <Button css={{ color: 'black' }} data-changecast-changecast={true}>
+              What's New?
+            </Button>
           </li>
-          <li>
-            <a
+          <li
+            css={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <LinkButton
+              to="/"
               css={{
-                color: '#303030',
+                display: 'flex',
+                alignItems: 'center',
               }}
-              href="https://palmer.net"
             >
-              The Palmer Group
-            </a>
+              <Radio css={{ color: 'black' }} />
+              <span
+                css={{
+                  fontWeight: 'bold',
+                  color: 'black',
+                  marginLeft: '1rem',
+                }}
+              >
+                ChangeCast
+              </span>
+            </LinkButton>
           </li>
         </ul>
       </div>

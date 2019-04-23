@@ -51,6 +51,7 @@ export const Release = ({
       <div css={{ padding: '0 1rem', margin: '1rem 0' }}>
         {plainText ? (
           <div
+            className="release"
             css={[
               markdownStyles,
               {

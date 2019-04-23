@@ -2,13 +2,11 @@
 
 cd /changecast
 
-BASE_URL=$BASE_URL \
-SITE_TITLE=$SITE_TITLE \
-LOGO_URL=$LOGO_URL \ 
-PRIMARY_COLOR=$PRIMARY_COLOR \
-GITHUB_REPO_URL="https://github.com/$GITHUB_REPOSITORY" \
-GITHUB_ACCESS_TOKEN=$GITHUB_TOKEN \
-yarn build
+if [ -z ${REPO_URL+x} ]; then
+  sh -c "GITHUB_REPO_URL=https://github.com/$GITHUB_REPOSITORY GITHUB_ACCESS_TOKEN=$GITHUB_TOKEN yarn build"
+else
+  sh -c "GITHUB_REPO_URL=$REPO_URL GITHUB_ACCESS_TOKEN=$GITHUB_TOKEN yarn build"
+fi
 
 mkdir "$GITHUB_WORKSPACE/changecast"
 cp -r /changecast/site/public/. "$GITHUB_WORKSPACE/changecast"
