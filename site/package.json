@@ -44,6 +44,7 @@
     "icons": "0.1.0",
     "js-search": "^1.4.2",
     "just-debounce-it": "^1.1.0",
+    "mark.js": "^8.11.1",
     "normalize.css": "^8.0.1",
     "object-assign": "^4.1.1",
     "prismjs": "^1.15.0",
