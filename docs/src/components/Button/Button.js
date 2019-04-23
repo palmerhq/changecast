@@ -4,6 +4,7 @@ export const buttonStyles = {
   color: 'white',
   overflow: 'hidden',
   display: 'inline-block',
+  verticalAlign: 'bottom',
   position: 'relative',
   padding: '12px 20px 12px',
   border: '2px solid transparent',
