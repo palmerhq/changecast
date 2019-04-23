@@ -2,6 +2,7 @@ import { Global } from '@emotion/core'
 import { graphql } from 'gatsby'
 import { Search, UnorderedSearchIndex } from 'js-search'
 import debounce from 'just-debounce-it'
+import Mark from 'mark.js'
 import React from 'react'
 import Helmet from 'react-helmet'
 import Waypoint from 'react-waypoint'
@@ -32,11 +33,6 @@ const ReleasesTemplate = ({
   const [releases, setReleases] = React.useState(edges)
   const [releasesShown, setReleasesShown] = React.useState(10)
 
-  const mark = React.useRef()
-  React.useEffect(() => {
-    mark.current = new Mark(document.querySelector('.release'))
-  }, [])
-
   const [searchValue, setSearchValue] = React.useState('')
   const search = React.useRef(null)
   function getReleaseSearch() {
@@ -55,14 +51,9 @@ const ReleasesTemplate = ({
     ])
     releaseSearch.addDocuments(edges)
 
-    const debouncedReleaseSearch = debounce(
-      value => {
-        setReleases(!!value ? releaseSearch.search(value) : edges)
-        mark.current.mark(value)
-      },
-      100
-      // true
-    )
+    const debouncedReleaseSearch = debounce(value => {
+      setReleases(!!value ? releaseSearch.search(value) : edges)
+    }, 100)
 
     search.current = event => {
       const value = event.target.value
@@ -72,6 +63,15 @@ const ReleasesTemplate = ({
 
     return search.current
   }
+
+  const mark = React.useRef()
+  React.useEffect(() => {
+    if (mark.current) {
+      mark.current.unmark()
+    }
+    mark.current = new Mark(document.querySelectorAll('.release'))
+    mark.current.mark(searchValue)
+  }, [releases])
 
   const {
     faviconElements,
@@ -163,6 +163,8 @@ const ReleasesTemplate = ({
                   isWidget={isWidget}
                   primaryColor={primaryColor}
                   url={url}
+                  // searchValue={searchValue}
+                  id={id}
                 />
               )
             )
