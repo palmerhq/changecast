@@ -1,5 +1,5 @@
+import { Clipboard } from 'icons/Clipboard'
 import { Facebook } from 'icons/Facebook'
-import { Link } from 'icons/Link'
 import { Linkedin } from 'icons/Linkedin'
 import { Twitter } from 'icons/Twitter'
 import React from 'react'
@@ -119,7 +119,7 @@ export const Release = React.memo(
           />
           <SocialButton
             label="Copy link"
-            icon={Link}
+            icon={Clipboard}
             onClick={() => copyToClipboard(shareableUrl)}
           />
         </div>

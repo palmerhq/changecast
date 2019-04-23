@@ -10,7 +10,7 @@ action "Build" {
   uses = "palmerhq/changecast@v1.0.0"
   secrets = ["GITHUB_TOKEN"]
   env = {
-    BASE_URL = "https://changecast-log.now.sh"
+    DEPLOY_URL = "https://changecast-log.now.sh"
   }
 }
 
@@ -62,6 +62,7 @@ workflow "Build and Deploy Docs Preview" {
 action "Build React Beautiful DnD ChangeCast Preview" {
   uses = "./"
   secrets = ["GITHUB_TOKEN"]
+  args = "DEPLOY_URL=https://changecast-1-$GITHUB_SHA.now.sh"
   env = {
     REPO_URL = "https://github.com/atlassian/react-beautiful-dnd"
   }
@@ -83,7 +84,7 @@ action "Alias React Beautiful DnD Preview" {
 
 action "Build Material UI ChangeCast Preview" {
   uses = "./"
-  args = "GITHUB_REPO_URL="
+  args = "DEPLOY_URL=https://changecast-2-$GITHUB_SHA.now.sh"
   secrets = ["GITHUB_TOKEN"]
   env = {
     REPO_URL = "https://github.com/mui-org/material-ui"
@@ -106,6 +107,7 @@ action "Alias Material UI Preview" {
 
 action "Build Workbox ChangeCast Preview" {
   uses = "./"
+  args = "DEPLOY_URL=https://changecast-3-$GITHUB_SHA.now.sh"
   secrets = ["GITHUB_TOKEN"]
   env = {
     REPO_URL = "https://github.com/GoogleChrome/workbox"
@@ -165,6 +167,7 @@ action "Build React Beautiful DnD ChangeCast" {
   secrets = ["GITHUB_TOKEN"]
   env = {
     REPO_URL = "https://github.com/atlassian/react-beautiful-dnd"
+    DEPLOY_URL = "https://changecast-1.now.sh"
   }
   needs = ["Filter master"]
 }
@@ -189,6 +192,7 @@ action "Build Material UI ChangeCast" {
   secrets = ["GITHUB_TOKEN"]
   env = {
     REPO_URL = "https://github.com/mui-org/material-ui"
+    DEPLOY_URL = "https://changecast-2.now.sh"
   }
   needs = ["Filter master"]
 }
@@ -212,6 +216,7 @@ action "Build Workbox ChangeCast" {
   secrets = ["GITHUB_TOKEN"]
   env = {
     REPO_URL = "https://github.com/GoogleChrome/workbox"
+    DEPLOY_URL = "https://changecast-3.now.sh"
   }
   needs = ["Filter master"]
 }

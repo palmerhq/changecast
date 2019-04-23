@@ -1,6 +1,8 @@
 import { Global } from '@emotion/core'
 import { graphql } from 'gatsby'
 import { ChevronLeft } from 'icons/ChevronLeft'
+import debounce from 'just-debounce-it'
+import Mark from 'mark.js'
 import React from 'react'
 import Helmet from 'react-helmet'
 import { LinkButton } from '../components/Button/LinkButton'
@@ -28,6 +30,31 @@ const ReleaseTemplate = ({
   pageContext: { isWidget },
 }) => {
   const tagOgImageSrc = getOgImageSrc(data)
+
+  const [searchValue, setSearchValue] = React.useState('')
+  const mark = React.useRef()
+  const search = React.useRef(null)
+  function getReleaseSearch() {
+    if (search.current !== null) {
+      return search.current
+    }
+
+    const debouncedMark = debounce(value => {
+      if (mark.current) {
+        mark.current.unmark()
+      }
+      mark.current = new Mark(document.querySelectorAll('.release'))
+      mark.current.mark(value)
+    }, 100)
+
+    search.current = event => {
+      const value = event.target.value
+      setSearchValue(value)
+      debouncedMark(value)
+    }
+
+    return search.current
+  }
 
   const {
     faviconElements,
@@ -76,6 +103,8 @@ const ReleaseTemplate = ({
         htmlUrl={htmlUrl}
         logoSrc={logoSrc}
         primaryColor={primaryColor}
+        onSearchChange={getReleaseSearch()}
+        searchValue={searchValue}
       />
       <SiteWrapper>
         <LinkButton to="/" css={{ marginBottom: '0.5rem' }}>

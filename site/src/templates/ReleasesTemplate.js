@@ -163,7 +163,7 @@ const ReleasesTemplate = ({
                   isWidget={isWidget}
                   primaryColor={primaryColor}
                   url={url}
-                  // searchValue={searchValue}
+                  searchValue={searchValue}
                   id={id}
                 />
               )

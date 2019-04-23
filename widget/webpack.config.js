@@ -10,7 +10,7 @@ const bundleOutputDir = '../site/static'
 
 const repoHash = crypto
   .createHash(`md5`)
-  .update(process.env.GITHUB_REPO_URL)
+  .update(process.env.REPO_URL)
   .digest(`hex`)
 
 const shortRepoHash = repoHash.substr(repoHash.length - 5)
@@ -31,7 +31,7 @@ module.exports = (env, { mode }) => {
       },
       plugins: [
         new webpack.EnvironmentPlugin({
-          URL: process.env.URL || '',
+          URL: process.env.DEPLOY_URL || process.env.URL || '',
           REPO_HASH: shortRepoHash,
         }),
         ...(mode === 'development'
