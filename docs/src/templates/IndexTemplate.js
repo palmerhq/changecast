@@ -147,8 +147,11 @@ const IndexTemplate = ({
           update they are looking for.
         </Feature>
         <Feature title="Accessible">
-          We take accessibility seriously and will make sure that your project
-          updates can reach everyone.
+          We follow the{' '}
+          <Anchor href="https://www.w3.org/TR/WCAG21/">
+            WCAG 2.1 Standard
+          </Anchor>{' '}
+          to ensure your project updates can reach everyone.
         </Feature>
         <Feature title="Blazing Fast">
           Built on top of{' '}
