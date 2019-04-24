@@ -33,7 +33,7 @@ ChangeCast uses your [Github Releases](https://help.github.com/en/articles/creat
 action "Build" {
   uses = "palmerhq/changecast@v1.0.0"
   env = {
-    BASE_URL = {BASE_URL}
+    DEPLOY_URL = {DEPLOY_URL}
   }
   secrets = [
     "GITHUB_TOKEN",
@@ -100,10 +100,10 @@ You're all set! Now your changelog page and widget will rebuild whenever a new r
 
 ### Step Two: Embed Widget
 
-First, add the following `script` tag to your site header. `BASE_URL` should be the deployment URL of your ChangeCast site.
+First, add the following `script` tag to your site header. `DEPLOY_URL` should be the deployment URL of your ChangeCast site.
 
 ```html
-<script src="{BASE_URL}/widget.js" defer="true"></script>
+<script src="{DEPLOY_URL}/widget.js" defer="true"></script>
 ```
 
 Next, add the `data-toggle-changecast` attribute to any clickable elements that you want to toggle the ChangeCast widget.

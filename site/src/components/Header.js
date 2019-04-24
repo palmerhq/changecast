@@ -10,10 +10,10 @@ import { Button } from './Button/Button'
 export const Header = ({
   primaryColor: [red, green, blue],
   onSearchChange,
-  searchValue,
   logoSrc,
   homepage,
   htmlUrl,
+  searchValue,
   isWidget,
 }) => (
   <header
@@ -57,43 +57,40 @@ export const Header = ({
           />
         </Link>
       )}
-      {onSearchChange && (
-        <div
+      <div
+        css={{
+          background: 'white',
+          borderRadius: 34,
+          flexGrow: 1,
+          marginLeft: '0.5rem',
+        }}
+      >
+        <input
+          placeholder="Search"
           css={{
-            background: 'white',
-            borderRadius: 34,
-            flexGrow: 1,
-            marginLeft: '0.5rem',
-          }}
-        >
-          <input
-            placeholder="Search"
-            css={{
-              width: '100%',
-              background: !!searchValue
-                ? `rgba(${red}, ${green}, ${blue}, 0.1)`
-                : `rgba(${red}, ${green}, ${blue}, 0.9)`,
-              border: '1px solid transparent',
-              borderRadius: '4px',
-              padding: '0.25rem 0.75rem',
-              WebkitAppearance: 'none',
+            width: '100%',
+            background: !!searchValue
+              ? `rgba(${red}, ${green}, ${blue}, 0.1)`
+              : `rgba(${red}, ${green}, ${blue}, 0.9)`,
+            border: '1px solid transparent',
+            borderRadius: '4px',
+            padding: '0.25rem 0.75rem',
+            WebkitAppearance: 'none',
+            '::placeholder': {
+              color: 'white',
+            },
+            // @todo improve performance by animating opacity
+            transition: 'background 100ms ease-in, color 100ms 50ms linear',
+            ':focus': {
+              background: `rgb(${red}, ${green}, ${blue}, 0.1)`,
               '::placeholder': {
-                color: 'white',
+                color: 'inherit',
               },
-              // @todo improve performance by animating opacity
-              transition: 'background 150ms ease-in, color 150ms 50ms linear',
-              ':hover,:focus': {
-                background: `rgb(${red}, ${green}, ${blue}, 0.1)`,
-                '::placeholder': {
-                  color: 'inherit',
-                },
-              },
-            }}
-            onChange={onSearchChange}
-            value={searchValue}
-          />
-        </div>
-      )}
+            },
+          }}
+          onChange={onSearchChange}
+        />
+      </div>
 
       {isWidget ? (
         <Button

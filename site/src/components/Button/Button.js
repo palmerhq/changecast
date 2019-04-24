@@ -23,4 +23,6 @@ export const buttonStyles = {
   },
 }
 
-export const Button = props => <button css={buttonStyles} {...props} />
+export const Button = React.forwardRef((props, ref) => (
+  <button ref={ref} css={buttonStyles} {...props} />
+))

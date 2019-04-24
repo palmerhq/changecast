@@ -19,8 +19,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-github-releases',
       options: {
-        url: process.env.GITHUB_REPO_URL,
-        token: process.env.GITHUB_ACCESS_TOKEN,
+        url: process.env.REPO_URL,
+        token: process.env.GITHUB_TOKEN,
       },
     },
     'gatsby-transformer-json',
@@ -57,6 +57,6 @@ function generateMetadata() {
     primaryColor: process.env.PRIMARY_COLOR
       ? hexRgb(process.env.PRIMARY_COLOR, { format: 'array' })
       : false,
-    url: process.env.BASE_URL || process.env.URL || '',
+    url: process.env.DEPLOY_URL || process.env.URL || '',
   }
 }
