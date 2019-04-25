@@ -146,7 +146,7 @@ function createWidget() {
         const count = lastViewedIndex === -1 ? dates.length : lastViewedIndex
 
         if (count > 0) {
-          notification.innerHTML = count === dates.length ? `${count}+` : count
+          notification.innerHTML = count > 9 ? `9+` : count
           toggles.forEach(toggle => {
             const notificationCopy = notification.cloneNode(true)
             toggleNotifications.set(toggle, notificationCopy)

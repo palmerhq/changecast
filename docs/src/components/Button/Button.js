@@ -2,7 +2,6 @@ import React from 'react'
 
 export const buttonStyles = {
   color: 'white',
-  overflow: 'hidden',
   display: 'inline-block',
   verticalAlign: 'bottom',
   position: 'relative',
