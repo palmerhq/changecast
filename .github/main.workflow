@@ -7,7 +7,7 @@ workflow "Build and Deploy ChangeCast" {
 }
 
 action "Build" {
-  uses = "palmerhq/changecast@v1.0.0"
+  uses = "./"
   secrets = ["GITHUB_TOKEN"]
   env = {
     DEPLOY_URL = "https://changecast-log.now.sh"
