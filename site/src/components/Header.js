@@ -4,12 +4,13 @@ import { Close } from 'icons/Close'
 import { ExternalLink } from 'icons/ExternalLink'
 import React from 'react'
 import { onClose } from '../providers/WidgetProvider'
+import { theme } from '../styles/theme'
 import { AnchorButton } from './Button/AnchorButton'
 import { Button } from './Button/Button'
 
 export const Header = ({
   primaryColor: [red, green, blue],
-  onSearchChange,
+  setSearchValue,
   logoSrc,
   homepage,
   htmlUrl,
@@ -63,6 +64,7 @@ export const Header = ({
           borderRadius: 34,
           flexGrow: 1,
           marginLeft: '0.5rem',
+          position: 'relative',
         }}
       >
         <input
@@ -74,7 +76,7 @@ export const Header = ({
               : `rgba(${red}, ${green}, ${blue}, 0.9)`,
             border: '1px solid transparent',
             borderRadius: '4px',
-            padding: '0.25rem 0.75rem',
+            padding: '0.25rem 2rem 0.25rem 0.75rem',
             WebkitAppearance: 'none',
             '::placeholder': {
               color: 'white',
@@ -88,8 +90,27 @@ export const Header = ({
               },
             },
           }}
-          onChange={onSearchChange}
+          value={searchValue}
+          onChange={({ target: { value } }) => setSearchValue(value)}
         />
+        {searchValue && (
+          <Button
+            onClick={() => setSearchValue('')}
+            css={{
+              position: 'absolute',
+              marginRight: '0.25rem',
+              borderRadius: '50%',
+              padding: '0.25rem',
+              right: 0,
+              ':hover': {
+                background: 'initial',
+              },
+            }}
+          >
+            <Close css={{ color: theme.color.accent, width: 22, height: 22 }} />
+            <VisuallyHidden>Clear search</VisuallyHidden>
+          </Button>
+        )}
       </div>
 
       {isWidget ? (

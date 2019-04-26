@@ -55,8 +55,7 @@ const ReleasesTemplate = ({
       setReleases(!!value ? releaseSearch.search(value) : edges)
     }, 100)
 
-    search.current = event => {
-      const value = event.target.value
+    search.current = value => {
       setSearchValue(value)
       debouncedReleaseSearch(value)
     }
@@ -120,7 +119,7 @@ const ReleasesTemplate = ({
       <Header
         homepage={homepage}
         htmlUrl={htmlUrl}
-        onSearchChange={getReleaseSearch()}
+        setSearchValue={getReleaseSearch()}
         searchValue={searchValue}
         logoSrc={logoSrc}
         primaryColor={primaryColor}
