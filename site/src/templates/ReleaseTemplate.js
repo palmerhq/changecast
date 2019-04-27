@@ -47,8 +47,7 @@ const ReleaseTemplate = ({
       mark.current.mark(value)
     }, 100)
 
-    search.current = event => {
-      const value = event.target.value
+    search.current = value => {
       setSearchValue(value)
       debouncedMark(value)
     }
@@ -103,7 +102,7 @@ const ReleaseTemplate = ({
         htmlUrl={htmlUrl}
         logoSrc={logoSrc}
         primaryColor={primaryColor}
-        onSearchChange={getReleaseSearch()}
+        setSearchValue={getReleaseSearch()}
         searchValue={searchValue}
       />
       <SiteWrapper>
