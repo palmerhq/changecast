@@ -89,9 +89,9 @@ After deploying, you can assign a custom domain for your changelog [using Netlif
 
 In order to rebuild whenever a Github release is published, we want to add a webhook for Github releases to Netlify. The steps to do so are:
 
-1. [Create a build hook](https://www.netlify.com/docs/webhooks/#incoming-webhooks) in Netlify.
+1. In your Netlify site's "Build & deploy" settings, find the "Github Releases" build hook and copy the URL displayed.
 2. Create a webhook in the Github repository (https://github.com/{owner}/{name}/settings/hooks/new).
-3. Copy the build hook URL from Netlify into the Github "Payload URL".
+3. Paste the URL from step 1 into the Github webhook's "Payload URL".
 4. In the Github webhook under "Which events would you like to trigger this webhook?", select "Let me select individual events." and "Releases".
 
 You're all set! Now your changelog page and widget will rebuild whenever a new release is published.
