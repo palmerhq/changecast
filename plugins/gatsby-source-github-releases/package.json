@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "color-thief-node": "^1.0.2",
+    "color-thief-node": "^1.0.3",
     "git-url-parse": "^11.1.2",
     "linkify-markdown": "^1.0.0",
     "octokat": "^0.10.0"
