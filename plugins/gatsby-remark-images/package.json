@@ -14,7 +14,7 @@
     "mdast-util-definitions": "^1.2.0",
     "slash": "^1.0.0",
     "unist-util-select": "^1.5.0",
-    "unist-util-visit-parents": "^2.0.1"
+    "unist-util-visit-parents": "^2.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
