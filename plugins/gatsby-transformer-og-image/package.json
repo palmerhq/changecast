@@ -5,7 +5,7 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "fs-extra": "^7.0.1",
-    "sharp": "^0.21.3",
+    "sharp": "^0.30.5",
     "svg2img": "^0.6.0",
     "text-to-svg": "3.1.3"
   }
